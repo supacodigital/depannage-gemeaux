@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { faBarsStaggered, faPhoneFlip, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPhoneFlip } from "@fortawesome/free-solid-svg-icons";
 import { business, mainNav } from "@/data/site";
 import { cx } from "@/lib/cx";
 import Icon from "@/components/ui/Icon";
@@ -86,7 +86,7 @@ export default function SiteHeader() {
             aria-expanded={isOpen}
             aria-controls="drawer-nav"
           >
-            <Icon icon={isOpen ? faXmark : faBarsStaggered} />
+            <BurgerLines />
           </button>
         </div>
       </header>
@@ -102,9 +102,9 @@ export default function SiteHeader() {
         inert={!isOpen}
       >
         <div className={styles.drawerHeader}>
-          <img src="/logo.svg" alt={business.name} className={styles.drawerLogo} width="177" height="40" />
+          <img src="/logo.svg" alt={business.name} className={styles.drawerLogo} width="213" height="48" />
           <button type="button" className={styles.close} onClick={close} aria-label="Fermer le menu">
-            <Icon icon={faXmark} />
+            <BurgerLines cross />
           </button>
         </div>
 
@@ -132,5 +132,15 @@ export default function SiteHeader() {
         <Icon icon={faPhoneFlip} />
       </a>
     </>
+  );
+}
+
+// Icône du menu : deux traits. Avec `cross`, les deux mêmes traits se croisent (fermeture).
+function BurgerLines({ cross = false }) {
+  return (
+    <span className={cx(styles.lines, cross && styles.linesCross)} aria-hidden="true">
+      <span />
+      <span />
+    </span>
   );
 }
