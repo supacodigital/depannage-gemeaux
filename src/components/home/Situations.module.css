@@ -1,6 +1,25 @@
+/* La feuille : monte sur le bas du hero, coins arrondis, ombre douce vers le haut,
+   et la pastille-serrure du logo en poignée. */
 .section {
+  position: relative;
+  z-index: 1;
+  margin-top: calc(-1 * var(--sheet-overlap));
   padding: var(--space-section) var(--gutter);
+  border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
   background: var(--color-white);
+  box-shadow: 0 -12px 32px rgb(var(--rgb-black) / 0.14);
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  top: clamp(1.6rem, 1.2rem + 1vw, 2.4rem);
+  left: 50%;
+  width: 3.6rem;
+  height: 1.4rem;
+  border-radius: var(--shape-pill);
+  background: var(--color-red);
+  translate: -50% 0;
 }
 
 .inner {

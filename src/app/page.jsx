@@ -39,8 +39,12 @@ export default function HomePage() {
   return (
     <main id="main-content">
       {videoJsonLd && <JsonLd data={videoJsonLd} />}
-      <HomeHero />
-      <Situations />
+      {/* Le hero reste immobile pendant que « Urgences serrurerie » glisse par-dessus.
+          Le bloc limite cet effet à ces deux sections. */}
+      <div>
+        <HomeHero />
+        <Situations />
+      </div>
       <Intervention />
       <Citations />
       <Artisan />

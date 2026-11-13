@@ -1,8 +1,13 @@
+/* Collant : il reste en place pendant que la section suivante glisse par-dessus.
+   Marge basse augmentée du chevauchement, pour que la feuille ne recouvre pas le contenu. */
 .hero {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 0;
   isolation: isolate;
   overflow: hidden;
-  padding: calc(var(--header-height) + clamp(4rem, 2rem + 4vw, 7.2rem)) var(--gutter) clamp(4.8rem, 3rem + 3vw, 6.4rem);
+  padding: calc(var(--header-height) + clamp(4rem, 2rem + 4vw, 7.2rem)) var(--gutter)
+    calc(clamp(4.8rem, 3rem + 3vw, 6.4rem) + var(--sheet-overlap));
   background: var(--color-blue);
   color: var(--color-white);
 }

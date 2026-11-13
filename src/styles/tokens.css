@@ -156,4 +156,8 @@
   /* Rythme vertical des sections */
   --space-section: clamp(6.4rem, 4rem + 6vw, 12rem);
   --width-wide: 1240px;
+
+  /* Transition hero → section suivante : la section monte sur la photo comme une feuille. */
+  --sheet-overlap: clamp(3.2rem, 2rem + 3vw, 6.4rem);
+  --sheet-radius: clamp(2.4rem, 1.6rem + 2vw, 4rem);
 }
