@@ -24,6 +24,7 @@ export function GET() {
 
 - Téléphone (urgences 24h/24, 7j/7) : ${phone.display}
 - E-mail : ${business.email}
+- Fiche Google (avis clients) : ${business.google.mapsUrl}
 - Adresse : ${address.street}, ${address.postalCode} ${address.city}
 - Entreprise : ${business.legalName}, SIREN ${business.siren}, artisan enregistré à la Chambre des métiers et de l'artisanat de Bretagne
 - Activité depuis ${business.foundingYear}, entreprise ouverte en décembre 2023

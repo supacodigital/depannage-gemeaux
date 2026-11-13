@@ -24,7 +24,7 @@ export default function AvisCarousel() {
         </div>
       </div>
       <div className={styles.cta}>
-        <a href={business.googleReviewsUrl} target="_blank" rel="noopener noreferrer" className={styles.googleButton}>
+        <a href={business.google.shareUrl} target="_blank" rel="noopener noreferrer" className={styles.googleButton}>
           <img src="/images/google-g.webp" alt="" width="20" height="20" loading="lazy" />
           Voir tous nos avis sur Google
         </a>

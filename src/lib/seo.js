@@ -56,6 +56,9 @@ export function businessJsonLd() {
         email: business.email,
         image: `${SITE_URL}/og-image.jpg`,
         logo: `${SITE_URL}/logo.svg`,
+        hasMap: business.google.mapsUrl,
+        // Relie le site à la fiche Google : Google et les moteurs IA identifient ainsi une seule et même entreprise.
+        sameAs: [business.google.mapsUrl],
         priceRange: "€€",
         currenciesAccepted: "EUR",
         paymentAccepted: "Cash, Credit Card",

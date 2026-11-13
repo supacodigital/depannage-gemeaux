@@ -37,7 +37,13 @@ export const business = {
   openedDate: "2023-12",
   host: "O2Switch",
   webmaster: { name: "Supaco Digital", email: "contact@supaco-digital.com", url: "https://supaco-digital.com" },
-  googleReviewsUrl: "https://share.google/ITv3zeSz5upQPXqoX",
+  // Fiche Google Business Profile (identifiant Knowledge Graph /g/11wppq4zv1).
+  google: {
+    // Lien de partage fourni le 13/11/2026 : ouvre la fiche et ses avis.
+    shareUrl: "https://share.google/rXmLXtHRNlkHZR3Ga",
+    // URL Maps permanente (CID), utilisée dans les données structurées : un lien de partage peut expirer.
+    mapsUrl: "https://www.google.com/maps?cid=17825083001515732838",
+  },
   guarantee: "Fournitures et main d'œuvre garanties 10 ans.",
   registration: "Artisan enregistré à la chambre des métiers et de l'artisanat de Bretagne.",
 };
