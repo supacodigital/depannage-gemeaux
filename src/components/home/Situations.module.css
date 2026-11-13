@@ -26,9 +26,8 @@
   column-gap: 1.6rem;
   row-gap: 1.4rem;
   padding: 2.4rem;
-  border: 1px solid var(--color-line);
   border-radius: 1.2rem;
-  background: var(--color-white);
+  background: var(--color-surface);
 }
 
 /* Pictogramme blanc sur carré bleu, à la manière des panneaux d'information. */
