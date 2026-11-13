@@ -1,9 +1,18 @@
-# Dépannage Gémeaux — configuration Apache
-# À placer à la racine du site (à côté de index.html).
+# Dépannage Gémeaux — configuration Apache (O2Switch)
+# Site statique généré par Next.js (`npm run build` → dossier out/).
+# Ce fichier est copié automatiquement à la racine de out/.
 
-# Désactive la négociation de contenu : sans ça, /tarifs renvoie l'image tarifs.webp
-Options -MultiViews
+# Pas de négociation de contenu (sinon /tarifs pouvait renvoyer une image tarifs.webp),
+# pas de listing de dossiers.
+Options -MultiViews -Indexes
 DirectoryIndex index.html
+
+# Next.js génère tarifs.html ET un dossier tarifs/ (données de navigation).
+# Sans cette ligne, Apache redirigerait /tarifs vers /tarifs/.
+DirectorySlash Off
+
+ErrorDocument 404 /404.html
+AddCharset UTF-8 .html .txt .xml .css .js .json
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -18,22 +27,43 @@ DirectoryIndex index.html
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-  # 3. Ancienne page Électricité (désactivée) -> accueil
+  # 3. Anciennes adresses
   RewriteRule ^electricite/?$ https://depannage-gemeaux.fr/ [R=301,L]
+  RewriteRule ^CGVavril2026\.pdf$ https://depannage-gemeaux.fr/cgv.pdf [R=301,L]
 
-  # 4. Application React : toute URL qui n'est pas un fichier réel est servie par index.html
+  # 4. Adresse unique : pas de slash final (/tarifs/ -> /tarifs) ni d'extension (/tarifs.html -> /tarifs)
+  RewriteRule ^(.+)/$ https://depannage-gemeaux.fr/$1 [R=301,L]
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?]
+  RewriteRule ^ https://depannage-gemeaux.fr/ [R=301,L]
+  RewriteCond %{THE_REQUEST} \s/+([^\s?]+)\.html[\s?]
+  RewriteRule ^ https://depannage-gemeaux.fr/%1 [R=301,L]
+
+  # 5. Pages : /tarifs est servi par tarifs.html
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^ index.html [L]
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+)$ $1.html [L]
 </IfModule>
 
 <IfModule mod_headers.c>
-  # Fichiers générés par le build (nom contenant un hash) : cache long
-  <FilesMatch "-[A-Za-z0-9_-]{8}\.(js|css)$">
-    Header set Cache-Control "public, max-age=31536000, immutable"
-  </FilesMatch>
-  # index.html : toujours revalidé, pour que les mises à jour soient visibles tout de suite
-  <FilesMatch "^index\.html$">
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Pages et données de navigation : toujours revalidées, les mises à jour sont visibles immédiatement.
+  <FilesMatch "\.(html|txt|xml)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
+  # Images et documents
+  <FilesMatch "\.(webp|jpg|png|svg|ico)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  <FilesMatch "\.pdf$">
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
+</IfModule>
+
+# Fichiers du build Next.js (nom avec empreinte) : mis en cache un an.
+<IfModule mod_headers.c>
+  <If "%{REQUEST_URI} =~ m#^/_next/static/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
 </IfModule>

@@ -1,0 +1,123 @@
+/* ==========================================================================
+   Tokens — Dépannage Gémeaux
+   Source unique des valeurs de design. Les modules CSS n'utilisent que ces variables.
+   1rem = 10px (html { font-size: 62.5% }).
+
+   Points de rupture (les variables CSS ne fonctionnent pas dans les media queries) :
+     540px  grilles 2 colonnes (formulaires, fournitures)
+     640px  grilles 4 colonnes (chiffres clés, valeurs)
+     768px  bandeaux en ligne, footer en colonnes
+     900px  navigation desktop, sections texte + image côte à côte
+   ========================================================================== */
+
+:root {
+  /* --- Couleurs de marque (canaux RGB pour les variantes transparentes) --- */
+  --rgb-red: 191 36 50;
+  --rgb-blue: 42 63 88;
+  --rgb-orange: 201 92 0;
+  --rgb-black: 0 0 0;
+  --rgb-white: 255 255 255;
+
+  --color-red: rgb(var(--rgb-red));
+  --color-red-hover: #a01e2a;
+  --color-red-bright: #e03444;
+  --color-blue: rgb(var(--rgb-blue));
+  --color-blue-hover: #1e2f42;
+  --color-navy: #1a2b3c;
+  --color-night: #0e1e2e;
+  --color-orange: rgb(var(--rgb-orange));
+
+  /* --- Neutres --- */
+  --color-white: #fff;
+  --color-surface-soft: #f7f8fa;
+  --color-heading: #111;
+  --color-text-strong: #222;
+  --color-text-dark: #333;
+  --color-text-body: #444;
+  --color-text: #555;
+  --color-text-note: #595959;
+  --color-text-muted: #666;
+  --color-text-subtle: #777;
+  --color-text-faint: #999;
+  --color-text-ghost: #aaa;
+
+  /* --- Bordures et fonds teintés --- */
+  --border-blue-faint: rgb(var(--rgb-blue) / 0.07);
+  --border-blue-soft: rgb(var(--rgb-blue) / 0.08);
+  --border-blue: rgb(var(--rgb-blue) / 0.1);
+  --border-blue-strong: rgb(var(--rgb-blue) / 0.15);
+  --border-on-dark: rgb(var(--rgb-white) / 0.08);
+  --tint-red: rgb(var(--rgb-red) / 0.08);
+  --tint-red-strong: rgb(var(--rgb-red) / 0.1);
+  --tint-blue: rgb(var(--rgb-blue) / 0.06);
+
+  /* --- Statuts (formulaire) --- */
+  --color-success-bg: #e8f5e9;
+  --color-success-text: #1b5e20;
+  --color-success-border: #c8e6c9;
+  --color-error-bg: #fdecea;
+  --color-error-text: #b71c1c;
+  --color-error-border: #ffcdd2;
+
+  /* --- Cartes d'avis (reprennent les codes visuels de Google) --- */
+  --color-google-name: #202124;
+  --color-google-text: #3c4043;
+  --color-google-meta: #70757a;
+  --color-google-link: #1a73e8;
+  --color-star: #fbbc04;
+  --color-star-empty: #dadce0;
+
+  /* --- Typographie (Poppins est injectée par next/font dans le layout) --- */
+  --font-body: var(--font-poppins), system-ui, sans-serif;
+  /* Titres : police système (Helvetica / Arial / Roboto selon l'appareil), comme sur le site d'origine
+     qui déclarait Inter sans la charger. Aucun téléchargement de police supplémentaire. */
+  --font-heading: "Inter", sans-serif;
+  --font-review: "Google Sans", Roboto, system-ui, sans-serif;
+
+  /* --- Rayons --- */
+  --radius-xs: 4px;
+  --radius-btn: 6px;
+  --radius-sm: 0.6rem;
+  --radius-md: 0.8rem;
+  --radius-icon: 1rem;
+  --radius-lg: 1.2rem;
+  --radius-xl: 1.6rem;
+  --radius-pill: 99px;
+
+  /* --- Ombres --- */
+  --shadow-card: 0 1px 4px rgb(var(--rgb-black) / 0.12), 0 2px 8px rgb(var(--rgb-black) / 0.08);
+  --shadow-media: 0 8px 32px rgb(var(--rgb-black) / 0.1);
+  --shadow-panel: 0 4px 24px rgb(var(--rgb-black) / 0.06);
+  --shadow-lift: 0 8px 24px rgb(var(--rgb-black) / 0.07);
+  --shadow-button: 0 2px 8px rgb(var(--rgb-black) / 0.07);
+  --shadow-button-hover: 0 4px 16px rgb(var(--rgb-black) / 0.12);
+  --shadow-fab: 0 4px 16px rgb(var(--rgb-red) / 0.4);
+  --shadow-drawer: -8px 0 32px rgb(var(--rgb-black) / 0.12);
+
+  /* --- Mise en page --- */
+  --header-height: 7.2rem;
+  --gutter: 2.4rem;
+  --section-padding: 8rem;
+  --width-page: 1280px;
+  --width-content: 1100px;
+  --width-narrow: 860px;
+
+  /* --- Mouvement --- */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --duration-press: 160ms;
+  --duration-hover: 200ms;
+  --duration-ui: 250ms;
+  --duration-drawer: 400ms;
+  --duration-reveal: 600ms;
+  --reveal-distance: 24px;
+  --stagger: 70ms;
+
+  /* --- Plans --- */
+  --z-header: 200;
+  --z-fab: 250;
+  --z-overlay: 300;
+  --z-drawer: 400;
+  --z-skip: 500;
+}

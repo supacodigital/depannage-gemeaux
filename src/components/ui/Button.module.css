@@ -1,0 +1,83 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1.2rem 2.4rem;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.6;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-hover) ease,
+    border-color var(--duration-hover) ease,
+    color var(--duration-hover) ease,
+    transform var(--duration-press) var(--ease-out);
+}
+
+/* Retour tactile immédiat à l'appui, sur tous les écrans. */
+.button:active {
+  transform: scale(0.97);
+}
+
+.primary {
+  background-color: var(--color-red);
+  color: var(--color-white);
+}
+
+.secondary {
+  background-color: var(--color-blue);
+  color: var(--color-white);
+}
+
+.outline,
+.outlineBlue {
+  padding-block: 1.1rem;
+  background-color: transparent;
+  border: 1.5px solid rgb(var(--rgb-white) / 0.5);
+  color: var(--color-white);
+}
+
+.outlineBlue {
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+
+.inverse {
+  background-color: var(--color-white);
+  color: var(--color-red);
+}
+
+/* Survol réservé aux souris : sur mobile, le « survol » collerait après un tap. */
+@media (hover: hover) and (pointer: fine) {
+  .primary:hover {
+    background-color: var(--color-red-hover);
+    transform: translateY(-1px);
+  }
+
+  .secondary:hover {
+    background-color: var(--color-blue-hover);
+  }
+
+  .outline:hover {
+    border-color: var(--color-white);
+    background-color: rgb(var(--rgb-white) / 0.08);
+  }
+
+  .outlineBlue:hover {
+    border-color: var(--color-blue-hover);
+    background-color: var(--border-blue-soft);
+    color: var(--color-blue-hover);
+  }
+
+  .inverse:hover {
+    background-color: rgb(var(--rgb-white) / 0.9);
+  }
+
+  .button:active {
+    transform: scale(0.97);
+  }
+}

@@ -1,0 +1,132 @@
+.faq {
+  padding: var(--section-padding) var(--gutter);
+  background: var(--color-surface-soft);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 4.8rem;
+  max-width: var(--width-content);
+  margin: 0 auto;
+}
+
+.heading {
+  flex-shrink: 0;
+}
+
+.heading h2 {
+  margin-bottom: 1.2rem;
+  color: var(--color-blue);
+  font-size: 3rem;
+  line-height: 1.25;
+}
+
+.heading h2 span {
+  color: var(--color-red);
+}
+
+.heading p {
+  color: var(--color-text-subtle);
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+.list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.item {
+  border-bottom: 1px solid var(--border-blue);
+}
+
+.item:first-child {
+  border-top: 1px solid var(--border-blue);
+}
+
+/* Le h3 structure la page pour les moteurs ; le bouton porte le style. */
+.questionHeading {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  width: 100%;
+  padding: 2rem 0;
+  border: none;
+  background: none;
+  color: var(--color-blue);
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--duration-hover) ease;
+}
+
+.open .question {
+  color: var(--color-red);
+}
+
+.icon {
+  color: var(--color-red);
+  font-size: 1.2rem;
+}
+
+/* Ouverture fluide sans hauteur maximale arbitraire : la ligne de grille passe de 0fr à 1fr. */
+.answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-ui) var(--ease-out);
+}
+
+.open .answer {
+  grid-template-rows: 1fr;
+}
+
+.answerInner {
+  overflow: hidden;
+}
+
+.answer p {
+  padding-bottom: 2rem;
+  color: var(--color-text);
+  font-size: 1.4rem;
+  line-height: 1.75;
+  opacity: 0;
+  transition: opacity var(--duration-ui) ease;
+}
+
+.open .answer p {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .question:hover {
+    color: var(--color-red);
+  }
+}
+
+@media (min-width: 900px) {
+  .inner {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 6.4rem;
+  }
+
+  .heading {
+    width: 30rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answer {
+    transition: none;
+  }
+}

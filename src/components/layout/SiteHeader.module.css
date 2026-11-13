@@ -1,0 +1,323 @@
+/* --- Barre fixe --- */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-header);
+  width: 100%;
+  border-bottom: 1px solid var(--border-blue);
+  background: var(--color-white);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--width-page);
+  height: var(--header-height);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.logo {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.logo img {
+  width: auto;
+  height: 4.8rem;
+}
+
+/* --- Navigation desktop, centrée --- */
+
+.nav {
+  display: none;
+}
+
+.link {
+  position: relative;
+  padding-bottom: 0.3rem;
+  color: var(--color-blue);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: color var(--duration-hover) ease;
+}
+
+/* Soulignement qui se déploie depuis la gauche (transform plutôt que width : pas de recalcul de mise en page). */
+.link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-ui) var(--ease-out);
+}
+
+.link.active {
+  color: var(--color-red);
+}
+
+.link.active::after {
+  transform: scaleX(1);
+}
+
+/* --- Bouton d'appel desktop --- */
+
+.cta {
+  display: none;
+}
+
+/* --- Burger mobile --- */
+
+.burger,
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+  border: none;
+  background: none;
+  color: var(--color-blue);
+  font-size: 2.2rem;
+  cursor: pointer;
+  transition: color var(--duration-hover) ease;
+}
+
+/* --- Menu mobile (tiroir depuis la droite) --- */
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: var(--z-drawer);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  padding: 0 var(--gutter) 3.2rem;
+  background: var(--color-white);
+  box-shadow: var(--shadow-drawer);
+  transform: translateX(100%);
+  transition: transform var(--duration-drawer) var(--ease-drawer);
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+.drawerHeader {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  border-bottom: 1px solid var(--border-blue);
+}
+
+.drawerLogo {
+  width: auto;
+  height: 4rem;
+}
+
+.drawerNav {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: var(--gutter) 0;
+}
+
+.drawerLink {
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border-blue-faint);
+  color: var(--color-blue);
+  font-size: 1.6rem;
+  font-weight: 500;
+  /* Décalage par padding (et non translate) : seul le texte bouge, pas la bordure du dessous. */
+  transition:
+    color var(--duration-hover) ease,
+    padding-left var(--duration-hover) var(--ease-out);
+}
+
+.drawerLink.active {
+  padding-left: 0.8rem;
+  color: var(--color-red);
+}
+
+.drawerCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  padding: 1.2rem 1.6rem;
+  border-radius: var(--radius-btn);
+  background: var(--color-red);
+  color: var(--color-white);
+  transition:
+    background-color var(--duration-hover) ease,
+    transform var(--duration-press) var(--ease-out);
+}
+
+.drawerCta:active {
+  transform: scale(0.97);
+}
+
+.drawerCta > svg {
+  font-size: 1.6rem;
+}
+
+.drawerCta > span {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.drawerCtaLabel {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.drawerCtaTel {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: rgb(var(--rgb-black) / 0.45);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-ui) ease;
+}
+
+.overlayVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- Bouton d'appel flottant (mobile) --- */
+
+.fab {
+  position: fixed;
+  right: 2.4rem;
+  bottom: 2.4rem;
+  z-index: var(--z-fab);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  background: var(--color-red);
+  box-shadow: var(--shadow-fab);
+  color: var(--color-white);
+  font-size: 2.2rem;
+  transition:
+    background-color var(--duration-hover) ease,
+    transform var(--duration-press) var(--ease-out);
+}
+
+.fab:active {
+  transform: scale(0.94);
+}
+
+/* --- Survols (souris uniquement) --- */
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    color: var(--color-red);
+  }
+
+  .link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .burger:hover,
+  .close:hover {
+    color: var(--color-red);
+  }
+
+  .drawerLink:hover {
+    padding-left: 0.8rem;
+    color: var(--color-red);
+  }
+
+  .drawerCta:hover,
+  .fab:hover {
+    background-color: var(--color-red-hover);
+  }
+}
+
+/* --- Desktop --- */
+
+@media (min-width: 900px) {
+  .nav {
+    position: absolute;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 3.2rem;
+    transform: translateX(-50%);
+  }
+
+  .cta {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-btn);
+    background: var(--color-red);
+    color: var(--color-white);
+    font-size: 1.4rem;
+    font-weight: 600;
+    transition:
+      background-color var(--duration-hover) ease,
+      transform var(--duration-press) var(--ease-out);
+  }
+
+  .cta > svg {
+    font-size: 1.3rem;
+  }
+
+  .cta:active {
+    transform: scale(0.97);
+  }
+
+  .burger,
+  .fab {
+    display: none;
+  }
+}
+
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+  .cta:hover {
+    background-color: var(--color-red-hover);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer {
+    transition-duration: 1ms;
+  }
+
+  .link::after,
+  .drawerLink {
+    transition: color var(--duration-hover) ease;
+  }
+}

@@ -1,0 +1,134 @@
+.footer {
+  padding: 5.6rem var(--gutter) var(--gutter);
+  background: var(--color-night);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.2rem;
+  max-width: var(--width-page);
+  margin: 0 auto;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--border-on-dark);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.logo {
+  width: auto;
+  height: 4.8rem;
+}
+
+.tagline {
+  max-width: 24rem;
+  color: rgb(var(--rgb-white) / 0.5);
+  font-size: 1.3rem;
+  line-height: 1.6;
+}
+
+.tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--color-red);
+  font-size: 1.4rem;
+  font-weight: 600;
+  transition: color var(--duration-hover) ease;
+}
+
+.tel > svg {
+  font-size: 1.3rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Titres de colonnes : h2 pour une hiérarchie valide, mais style discret. */
+.title {
+  margin-bottom: 0.4rem;
+  color: rgb(var(--rgb-white) / 0.6);
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.link {
+  color: rgb(var(--rgb-white) / 0.7);
+  font-size: 1.3rem;
+  transition: color var(--duration-hover) ease;
+}
+
+.link.active {
+  color: var(--color-white);
+}
+
+.pdfHint {
+  font-size: 1.1rem;
+  opacity: 0.6;
+}
+
+.siren {
+  margin-top: 0.8rem;
+  color: rgb(var(--rgb-white) / 0.55);
+  font-size: 1.2rem;
+}
+
+.siren strong {
+  color: rgb(var(--rgb-white) / 0.7);
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: var(--width-page);
+  margin: 0 auto;
+  padding-top: var(--gutter);
+  text-align: center;
+}
+
+.copyright,
+.powered {
+  color: rgb(var(--rgb-white) / 0.3);
+  font-size: 1.2rem;
+}
+
+.powered a {
+  color: var(--color-red);
+  font-weight: 500;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tel:hover {
+    color: var(--color-red-bright);
+  }
+
+  .link:hover {
+    color: var(--color-white);
+  }
+
+  .powered a:hover {
+    text-decoration: underline;
+  }
+}
+
+@media (min-width: 768px) {
+  .inner {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .bottom {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

@@ -25,3 +25,11 @@ dist-ssr
 
 # Documents client (contrat signé, sources PDF) : hors du dépôt
 nouveaudoc/
+
+# Next.js
+.next
+out
+next-env.d.ts
+
+# Captures des tests navigateur
+.playwright-mcp
