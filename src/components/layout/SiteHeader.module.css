@@ -1,13 +1,45 @@
-/* --- Barre fixe --- */
+/* --- Barre du haut ---
+   En haut de page, elle défile normalement avec le contenu (absolute).
+   Quand on descend, elle est masquée ; dès qu'on remonte, elle redescend et reste accrochée (fixed).
+   Les pages gardent leur marge haute : le header ne prend jamais de place dans le flux. */
 
 .header {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: var(--z-header);
   width: 100%;
   border-bottom: 1px solid var(--border-blue);
   background: var(--color-white);
+}
+
+.header[data-mode="pinned"],
+.header[data-mode="hidden"] {
+  position: fixed;
+}
+
+/* Retour : glisse depuis le haut, courbe ease-out. */
+.header[data-mode="pinned"] {
+  box-shadow: 0 4px 20px rgb(var(--rgb-black) / 0.08);
+  transition:
+    transform 320ms var(--ease-out),
+    box-shadow var(--duration-ui) ease;
+}
+
+/* Sortie plus rapide que l'entrée : on libère l'écran sans traîner. */
+.header[data-mode="hidden"] {
+  transform: translateY(-100%);
+  transition: transform var(--duration-hover) var(--ease-in-out);
+}
+
+/* De "top" à "hidden", le header est déjà hors de l'écran : pas d'animation. */
+.header[data-instant] {
+  transition: none;
+}
+
+/* Navigation au clavier : le header masqué réapparaît dès qu'un de ses liens a le focus. */
+.header:focus-within {
+  transform: none;
 }
 
 /* Mobile : grille à 3 colonnes, logo au centre, burger à droite (colonne de gauche vide, de même largeur). */
@@ -415,6 +447,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .header[data-mode] {
+    transition: none;
+  }
+
   .drawer {
     transition-duration: 1ms;
   }
