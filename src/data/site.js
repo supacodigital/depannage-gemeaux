@@ -16,19 +16,23 @@ export const business = {
   },
   // Adresse confirmée par les CGV du 15/10/2026 (les anciennes versions avec un tiret étaient invalides : Gmail n'accepte pas les tirets).
   email: "depannage.gemeaux@gmail.com",
-  // ⚠ Les CGV du 15/10/2026 indiquent une domiciliation à Lannion (15 rue de Pen Kerivon, 22300).
-  // L'adresse ci-dessous est celle du site et du tampon du contrat de maintenance : à confirmer avec le client.
+  // Siège social depuis l'automne 2026 (CGV du 15/10/2026, confirmé par Jérémy Morelle le 13/11/2026).
   address: {
-    street: "40 rue du Dr Corson, bât C",
-    postalCode: "22200",
-    city: "Guingamp",
+    street: "15 rue de Pen Kerivon, Espace Synerbat 22",
+    postalCode: "22300",
+    city: "Lannion",
     region: "Bretagne",
     regionCode: "FR-22",
     country: "FR",
   },
-  geo: { latitude: 48.5627, longitude: -3.1524 },
+  // Coordonnées de l'adresse (Base adresse nationale).
+  geo: { latitude: 48.7499, longitude: -3.4564 },
   interventionRadiusKm: 60,
-  cities: ["Guingamp", "Lannion", "Saint-Brieuc", "Paimpol", "Callac"],
+  // Secteurs à mettre en avant dans la communication, par ordre d'importance (demande du client).
+  sectors: {
+    main: ["Lannion", "Guingamp"],
+    secondary: ["Callac", "Paimpol", "Binic", "Saint-Brieuc"],
+  },
   foundingYear: 2016,
   openedDate: "2023-12",
   host: "O2Switch",
@@ -37,6 +41,14 @@ export const business = {
   guarantee: "Fournitures et main d'œuvre garanties 10 ans.",
   registration: "Artisan enregistré à la chambre des métiers et de l'artisanat de Bretagne.",
 };
+
+// Toutes les villes desservies, principales en tête.
+export const cities = [...business.sectors.main, ...business.sectors.secondary];
+
+// « Lannion, Guingamp et Callac » : liste française avec « et » final.
+export function listeVilles(villes = cities) {
+  return villes.length < 2 ? villes.join("") : `${villes.slice(0, -1).join(", ")} et ${villes.at(-1)}`;
+}
 
 export const documents = {
   tarifs: "/tarif.pdf",

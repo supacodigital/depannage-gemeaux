@@ -1,13 +1,16 @@
 // Tarifs en vigueur : « Tableaux tarifaires » et CGV du 15/10/2026.
 // Utilisés par la page Tarifs, son JSON-LD et llms.txt.
 
+import { cities } from "./site";
+
 export const forfait = {
   min: 165,
   max: 330,
   // Zone définie à l'article 2 des CGV.
   zone:
     "Côtes-d'Armor (22), dans le périmètre délimité par la mer au nord, la limite du département à l'ouest, la N164 au sud, la D790 au sud-est et Saint-Brieuc (incluse) à l'est.",
-  zoneCities: ["Guingamp", "Lannion", "Paimpol", "Callac", "Saint-Brieuc"],
+  // Les six secteurs communiqués par le client sont tous dans la zone forfaitaire.
+  zoneCities: cities,
   columns: [
     { id: "ouvres", label: "Jours ouvrés", sub: "Du lundi au vendredi" },
     { id: "autres", label: "Autres jours", sub: "Week-end et jours fériés" },

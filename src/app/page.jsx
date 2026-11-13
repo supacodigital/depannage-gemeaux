@@ -1,21 +1,20 @@
 import { faBell, faChevronRight, faKey, faLockOpen, faPhoneFlip } from "@fortawesome/free-solid-svg-icons";
-import { business } from "@/data/site";
+import { business, cities, listeVilles } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
 import Hero, { Accent } from "@/components/ui/Hero";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import SplitSection, { SplitImage } from "@/components/ui/SplitSection";
 import ArtisanNote from "@/components/ui/ArtisanNote";
+import Villes from "@/components/ui/Villes";
 import AvisCarousel from "@/components/home/AvisCarousel";
 import styles from "./page.module.css";
 
 export const metadata = pageMetadata({
-  title: "Dépannage Gémeaux — Serrurier urgence Guingamp 24h/24",
-  description:
-    "Serrurier urgence à Guingamp, Lannion, Saint-Brieuc, Paimpol et Callac. Dépannage Gémeaux intervient 24h/24 et 7j/7 pour ouverture de porte, changement de serrure et sécurisation.",
+  title: "Dépannage Gémeaux — Serrurier urgence Lannion et Guingamp 24h/24",
+  description: `Serrurier urgence à ${listeVilles(business.sectors.main)}, ainsi qu'à ${listeVilles(business.sectors.secondary)}. Dépannage Gémeaux intervient 24h/24 et 7j/7 : ouverture de porte, changement de serrure, sécurisation.`,
   path: "/",
-  ogDescription:
-    "Serrurier urgence à Guingamp, Lannion, Saint-Brieuc, Paimpol et Callac. Intervention 24h/24, 7j/7. Artisan local.",
+  ogDescription: `Serrurier urgence à ${listeVilles(cities)}. Intervention 24h/24, 7j/7. Artisan local.`,
 });
 
 export default function HomePage() {
@@ -35,7 +34,7 @@ export default function HomePage() {
             <Accent>serrurerie</Accent> de confiance
           </>
         }
-        text="Artisan local basé à Guingamp, nous intervenons rapidement dans les Côtes-d'Armor pour toutes vos urgences serrurerie."
+        text="Artisan local basé à Lannion, nous intervenons rapidement de Lannion à Guingamp et dans les Côtes-d'Armor pour toutes vos urgences serrurerie."
         actions={
           <>
             <Button href={business.phone.href} aria-label={callLabel}>
@@ -109,8 +108,8 @@ export default function HomePage() {
       >
         <p>
           Chez {business.name}, la sécurité de votre domicile est notre priorité. <strong>Serrurier expérimenté</strong>,
-          nous intervenons rapidement à <strong>Guingamp</strong> et dans les villes voisines telles que{" "}
-          <strong>Lannion</strong>, <strong>Saint-Brieuc</strong>, <strong>Paimpol</strong> et <strong>Callac</strong>.
+          nous intervenons rapidement à <Villes list={business.sectors.main} />, ainsi que dans les villes voisines
+          telles que <Villes list={business.sectors.secondary} />.
         </p>
         <p>
           Que vous soyez confronté à une porte claquée, une serrure endommagée ou une effraction, nous assurons un

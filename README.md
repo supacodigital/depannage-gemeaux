@@ -1,6 +1,6 @@
 # Dépannage Gémeaux — site vitrine
 
-Site de [depannage-gemeaux.fr](https://depannage-gemeaux.fr), serrurier d'urgence à Guingamp.
+Site de [depannage-gemeaux.fr](https://depannage-gemeaux.fr), serrurier d'urgence à Lannion et Guingamp.
 Next.js 16 (App Router) en **export statique** : chaque page est un fichier HTML complet, lisible par Google et par les moteurs IA sans exécuter de JavaScript.
 Hébergement : O2Switch (Apache).
 

@@ -21,10 +21,10 @@ import JsonLd from "@/components/seo/JsonLd";
 import styles from "./page.module.css";
 
 export const metadata = pageMetadata({
-  title: "Tarifs serrurerie Guingamp — Dépannage Gémeaux",
-  description: `Tarifs de Dépannage Gémeaux : forfait dépannage serrurerie de ${forfait.min} € à ${forfait.max} € à Guingamp, Lannion, Saint-Brieuc, Paimpol et Callac. Prix des ouvertures de porte et des fournitures. Devis gratuit, intervention 24h/24.`,
+  title: "Tarifs serrurerie Lannion et Guingamp — Dépannage Gémeaux",
+  description: `Tarifs de Dépannage Gémeaux à Lannion, Guingamp et alentours : forfait dépannage serrurerie de ${forfait.min} € à ${forfait.max} €, prix des ouvertures de porte et des fournitures. Devis gratuit, intervention 24h/24.`,
   path: "/tarifs",
-  ogDescription: `Forfait dépannage de ${forfait.min} € à ${forfait.max} €, prix des ouvertures et des fournitures. Serrurier à Guingamp et dans l'ouest des Côtes-d'Armor.`,
+  ogDescription: `Forfait dépannage de ${forfait.min} € à ${forfait.max} €, prix des ouvertures et des fournitures. Serrurier à Lannion, Guingamp et dans l'ouest des Côtes-d'Armor.`,
 });
 
 const ICONS = { key: faKey, lock: faLock, shield: faShield };
@@ -38,7 +38,7 @@ const priceSpec = (prix, fromPrice) =>
     : { price: prix, priceCurrency: "EUR" };
 
 // Catalogue des prix en données structurées : permet aux moteurs de répondre
-// directement à « combien coûte un serrurier à Guingamp ».
+// directement à « combien coûte un serrurier à Lannion ».
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "OfferCatalog",

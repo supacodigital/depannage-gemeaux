@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 
 export const metadata = pageMetadata({
   title: "Mentions légales — Dépannage Gémeaux",
-  description: `Mentions légales du site depannage-gemeaux.fr — ${business.legalName}, serrurier à Guingamp. SIREN : ${business.siren}.`,
+  description: `Mentions légales du site depannage-gemeaux.fr — ${business.legalName}, serrurier à ${business.address.city}. SIREN : ${business.siren}.`,
   path: "/mentions",
   noindex: true,
 });

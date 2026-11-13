@@ -1,3 +1,4 @@
+import { business } from "./site";
 import { forfait, horsForfait } from "./tarifs";
 
 // Questions fréquentes de la page Serrurerie.
@@ -16,7 +17,7 @@ export const faq = [
   },
   {
     question: "Quels sont vos secteurs d'intervention ?",
-    answer: `Nous intervenons principalement dans l'ouest des Côtes-d'Armor : ${forfait.zoneCities.join(", ")} et leurs alentours. Le forfait dépannage s'applique au nord-ouest du département, de la côte jusqu'à la N164, Saint-Brieuc inclus. Au-delà, le déplacement est facturé au kilomètre.`,
+    answer: `Nous intervenons principalement à Lannion, où se trouve notre siège, et à Guingamp. Nous couvrons aussi ${business.sectors.secondary.join(", ")} et leurs alentours. Le forfait dépannage s'applique au nord-ouest du département, de la côte jusqu'à la N164, Saint-Brieuc inclus. Au-delà, le déplacement est facturé au kilomètre.`,
   },
   {
     question: "Quels sont les tarifs pour une intervention d'urgence ?",

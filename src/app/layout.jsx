@@ -1,5 +1,5 @@
 import { Poppins } from "next/font/google";
-import { SITE_URL, business } from "@/data/site";
+import { SITE_URL, business, listeVilles } from "@/data/site";
 import { businessJsonLd, pageMetadata } from "@/lib/seo";
 import SiteHeader from "@/components/layout/SiteHeader";
 import SiteFooter from "@/components/layout/SiteFooter";
@@ -21,9 +21,8 @@ const poppins = Poppins({
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   ...pageMetadata({
-    title: "Dépannage Gémeaux — Serrurier urgence Guingamp 24h/24",
-    description:
-      "Serrurier urgence à Guingamp et Côtes-d'Armor. Dépannage Gémeaux intervient 24h/24 et 7j/7 pour ouverture de porte, changement de serrure et sécurisation. Devis gratuit.",
+    title: "Dépannage Gémeaux — Serrurier urgence Lannion et Guingamp 24h/24",
+    description: `Serrurier urgence à ${listeVilles(business.sectors.main)} et dans les Côtes-d'Armor. Dépannage Gémeaux intervient 24h/24 et 7j/7 pour ouverture de porte, changement de serrure et sécurisation. Devis gratuit.`,
     path: "/",
   }),
   applicationName: business.name,

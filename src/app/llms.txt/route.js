@@ -1,4 +1,4 @@
-import { SITE_URL, business, documents } from "@/data/site";
+import { SITE_URL, business, documents, listeVilles } from "@/data/site";
 import { conditions, formatPrix, forfait, fournitures, horsForfait, ouvertures, paiement } from "@/data/tarifs";
 import { faq } from "@/data/faq";
 
@@ -12,7 +12,13 @@ export function GET() {
 
   const body = `# ${business.name}
 
-> Serrurier d'urgence disponible 24h/24 et 7j/7, basé à ${address.city} (Côtes-d'Armor, Bretagne). Ouverture de porte, changement de serrure et de cylindre, sécurisation après effraction. Intervention à ${business.cities.join(", ")} et dans l'ouest des Côtes-d'Armor.
+> Serrurier d'urgence disponible 24h/24 et 7j/7, basé à ${address.city} (Côtes-d'Armor, Bretagne). Ouverture de porte, changement de serrure et de cylindre, sécurisation après effraction.
+
+## Secteurs d'intervention
+
+- Secteurs principaux : ${listeVilles(business.sectors.main)} (siège à ${address.city})
+- Secteurs secondaires : ${listeVilles(business.sectors.secondary)}
+- Plus largement : l'ouest des Côtes-d'Armor
 
 ## Contact
 

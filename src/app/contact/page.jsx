@@ -1,5 +1,5 @@
 import { faClock, faEnvelope, faLocationDot, faPhoneFlip } from "@fortawesome/free-solid-svg-icons";
-import { SITE_URL, business } from "@/data/site";
+import { SITE_URL, business, cities, listeVilles } from "@/data/site";
 import { BUSINESS_ID, pageMetadata } from "@/lib/seo";
 import Icon from "@/components/ui/Icon";
 import ArtisanNote from "@/components/ui/ArtisanNote";
@@ -8,9 +8,8 @@ import JsonLd from "@/components/seo/JsonLd";
 import styles from "./page.module.css";
 
 export const metadata = pageMetadata({
-  title: "Contact — Serrurier urgence Guingamp — Dépannage Gémeaux",
-  description:
-    "Contactez Dépannage Gémeaux pour une urgence serrurerie à Guingamp, Lannion, Saint-Brieuc, Paimpol et Callac. Disponible 24h/24 au 07 69 69 72 79. Formulaire de contact en ligne.",
+  title: "Contact — Serrurier urgence Lannion et Guingamp — Dépannage Gémeaux",
+  description: `Contactez Dépannage Gémeaux pour une urgence serrurerie à ${listeVilles(cities)}. Disponible 24h/24 au ${business.phone.display}. Formulaire de contact en ligne.`,
   path: "/contact",
   ogDescription: "Urgence serrurerie 24h/24 au 07 69 69 72 79. Formulaire de contact en ligne.",
 });
@@ -35,7 +34,7 @@ const infos = [
     ),
   },
   { icon: faClock, titre: "Disponibilité", contenu: <span>24h/24 — 7j/7</span> },
-  { icon: faLocationDot, titre: "Zone d'intervention", contenu: <span>Guingamp et ouest des Côtes d&apos;Armor</span> },
+  { icon: faLocationDot, titre: "Zone d'intervention", contenu: <span>Lannion, Guingamp et ouest des Côtes d&apos;Armor</span> },
   { icon: faEnvelope, titre: "Formulaire", contenu: <span>Réponse sous 24h</span> },
 ];
 

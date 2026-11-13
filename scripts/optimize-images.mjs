@@ -61,7 +61,7 @@ for (const job of jobs) {
   const text = Buffer.from(`
     <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
       <rect x="0" y="0" width="1200" height="14" fill="#bf2432"/>
-      <text x="600" y="452" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="38" fill="#2a3f58">Serrurier d'urgence 24h/24 et 7j/7 · Guingamp et Côtes-d'Armor</text>
+      <text x="600" y="452" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="38" fill="#2a3f58">Serrurier d'urgence 24h/24 · Lannion, Guingamp et Côtes-d'Armor</text>
       <text x="600" y="530" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="54" font-weight="700" fill="#bf2432">07 69 69 72 79</text>
     </svg>`);
   await sharp({ create: { width: 1200, height: 630, channels: 3, background: "#ffffff" } })

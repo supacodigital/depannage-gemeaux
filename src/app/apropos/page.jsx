@@ -7,22 +7,21 @@ import {
   faPhoneFlip,
   faShield,
 } from "@fortawesome/free-solid-svg-icons";
-import { business } from "@/data/site";
+import { business, cities, listeVilles } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
 import Hero, { Accent } from "@/components/ui/Hero";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import SplitSection from "@/components/ui/SplitSection";
 import ArtisanNote from "@/components/ui/ArtisanNote";
+import Villes from "@/components/ui/Villes";
 import styles from "./page.module.css";
 
 export const metadata = pageMetadata({
-  title: "À propos — Artisan serrurier Guingamp — Dépannage Gémeaux",
-  description:
-    "Jérémy MORELLE, artisan serrurier certifié à Guingamp depuis 2016. Dépannage Gémeaux intervient à Guingamp, Lannion, Saint-Brieuc, Paimpol et Callac, 24h/24 et 7j/7.",
+  title: "À propos — Artisan serrurier à Lannion — Dépannage Gémeaux",
+  description: `Jérémy MORELLE, artisan serrurier certifié depuis 2016, basé à Lannion. Dépannage Gémeaux intervient à ${listeVilles(cities)}, 24h/24 et 7j/7.`,
   path: "/apropos",
-  ogDescription:
-    "Artisan serrurier certifié depuis 2016, basé à Guingamp. Intervention à Guingamp, Lannion, Saint-Brieuc, Paimpol et Callac, 24h/24.",
+  ogDescription: `Artisan serrurier certifié depuis 2016, basé à Lannion. Intervention à ${listeVilles(cities)}, 24h/24.`,
 });
 
 const chiffres = [
@@ -36,7 +35,7 @@ const valeurs = [
   { icon: faClock, titre: "Disponibilité", texte: "24h/24 et 7j/7, nous répondons à toutes vos urgences sans exception." },
   { icon: faShield, titre: "Fiabilité", texte: "Artisan diplômé, enregistré à la Chambre des Métiers de Bretagne." },
   { icon: faHandshake, titre: "Transparence", texte: "Tarifs clairs annoncés avant toute intervention, sans frais cachés." },
-  { icon: faLocationDot, titre: "Proximité", texte: "Basé à Guingamp, nous connaissons le territoire et ses habitants." },
+  { icon: faLocationDot, titre: "Proximité", texte: "Basés à Lannion, nous connaissons le territoire et ses habitants." },
 ];
 
 const ContactActions = ({ tarifsLabel = "Nos tarifs" }) => (
@@ -99,8 +98,8 @@ export default function AproposPage() {
         }
       >
         <p>
-          {business.name}, c&apos;est avant tout une entreprise artisanale implantée à <strong>Guingamp</strong>, au cœur
-          des Côtes d&apos;Armor. Serrurier diplômé et répertorié auprès de la{" "}
+          {business.name}, c&apos;est avant tout une entreprise artisanale implantée à <strong>Lannion</strong>, dans les
+          Côtes d&apos;Armor. Serrurier diplômé et répertorié auprès de la{" "}
           <strong>Chambre des Métiers et de l&apos;Artisanat de Bretagne</strong>, notre intervenant exerce son métier
           avec passion et professionnalisme depuis {business.foundingYear}.
         </p>
@@ -148,9 +147,9 @@ export default function AproposPage() {
         }
       >
         <p>
-          Nous couvrons principalement la moitié ouest des Côtes d&apos;Armor, avec des interventions dans des villes
-          comme <strong>Guingamp</strong>, <strong>Lannion</strong>, <strong>Saint-Brieuc</strong>,{" "}
-          <strong>Paimpol</strong> et <strong>Callac</strong>.
+          Nous couvrons principalement la moitié ouest des Côtes d&apos;Armor. Nos secteurs principaux sont{" "}
+          <Villes list={business.sectors.main} />, et nous intervenons aussi à{" "}
+          <Villes list={business.sectors.secondary} />.
         </p>
         <p>
           Notre engagement est de fournir des prestations de qualité, à des tarifs compétitifs, tout en assurant la

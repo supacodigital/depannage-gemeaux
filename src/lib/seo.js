@@ -1,4 +1,4 @@
-import { SITE_URL, business } from "@/data/site";
+import { SITE_URL, business, cities, listeVilles } from "@/data/site";
 import { avis, noteMoyenne } from "@/data/avis";
 
 export const BUSINESS_ID = `${SITE_URL}/#business`;
@@ -8,7 +8,7 @@ const OG_IMAGE = {
   url: "/og-image.jpg",
   width: 1200,
   height: 630,
-  alt: `${business.name} — serrurier d'urgence 24h/24 à Guingamp`,
+  alt: `${business.name} — serrurier d'urgence 24h/24 à ${listeVilles(business.sectors.main)}`,
 };
 
 // Métadonnées complètes d'une page : titre, description, canonical, Open Graph, Twitter.
@@ -38,7 +38,7 @@ export function pageMetadata({ title, description, path, ogTitle = title, ogDesc
 }
 
 // Fiche de l'entreprise (schema.org Locksmith), présente sur toutes les pages.
-// C'est elle que Google et les moteurs IA lisent pour répondre à « serrurier à Guingamp ».
+// C'est elle que Google et les moteurs IA lisent pour répondre à « serrurier à Lannion ».
 export function businessJsonLd() {
   const { address, geo, phone } = business;
 
@@ -50,8 +50,7 @@ export function businessJsonLd() {
         "@id": BUSINESS_ID,
         name: business.name,
         legalName: business.legalName,
-        description:
-          "Serrurier d'urgence disponible 24h/24 et 7j/7 à Guingamp et dans l'ouest des Côtes-d'Armor : ouverture de porte, changement de serrure et de cylindre, sécurisation après effraction.",
+        description: `Serrurier d'urgence disponible 24h/24 et 7j/7, basé à ${business.address.city}. Intervient principalement à ${listeVilles(business.sectors.main)}, ainsi qu'à ${listeVilles(business.sectors.secondary)} : ouverture de porte, changement de serrure et de cylindre, sécurisation après effraction.`,
         url: SITE_URL,
         telephone: phone.e164,
         email: business.email,
@@ -81,7 +80,7 @@ export function businessJsonLd() {
         },
         geo: { "@type": "GeoCoordinates", latitude: geo.latitude, longitude: geo.longitude },
         areaServed: [
-          ...business.cities.map((name) => ({ "@type": "City", name })),
+          ...cities.map((name) => ({ "@type": "City", name })),
           {
             "@type": "GeoCircle",
             geoMidpoint: { "@type": "GeoCoordinates", latitude: geo.latitude, longitude: geo.longitude },

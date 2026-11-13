@@ -1,5 +1,5 @@
 import { faChevronRight, faPhoneFlip } from "@fortawesome/free-solid-svg-icons";
-import { SITE_URL, business } from "@/data/site";
+import { SITE_URL, business, cities, listeVilles } from "@/data/site";
 import { faq } from "@/data/faq";
 import { BUSINESS_ID, pageMetadata } from "@/lib/seo";
 import Hero, { Accent } from "@/components/ui/Hero";
@@ -8,16 +8,15 @@ import Icon from "@/components/ui/Icon";
 import Bando from "@/components/ui/Bando";
 import SplitSection, { SplitImage } from "@/components/ui/SplitSection";
 import ArtisanNote from "@/components/ui/ArtisanNote";
+import Villes from "@/components/ui/Villes";
 import Faq from "@/components/serrurerie/Faq";
 import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata = pageMetadata({
-  title: "Serrurerie urgence Guingamp — Dépannage Gémeaux",
-  description:
-    "Serrurier à Guingamp, Lannion, Saint-Brieuc, Paimpol et Callac : ouverture de porte claquée, changement de serrure, sécurisation après effraction. Intervention rapide 24h/24 et 7j/7.",
+  title: "Serrurerie urgence Lannion et Guingamp — Dépannage Gémeaux",
+  description: `Serrurier d'urgence 24h/24 à ${listeVilles(business.sectors.main)} : ouverture de porte claquée, changement de serrure, sécurisation après effraction. Intervient aussi à ${listeVilles(business.sectors.secondary)}.`,
   path: "/serrurerie",
-  ogDescription:
-    "Ouverture de porte, changement de serrure, sécurisation. Intervention 24h/24 à Guingamp, Lannion, Saint-Brieuc, Paimpol et Callac.",
+  ogDescription: `Ouverture de porte, changement de serrure, sécurisation. Intervention 24h/24 à ${listeVilles(cities)}.`,
 });
 
 // Service + FAQ en données structurées : les moteurs IA s'appuient beaucoup sur ces paires question/réponse.
@@ -30,7 +29,7 @@ const jsonLd = {
       name: "Dépannage serrurerie d'urgence",
       serviceType: "Serrurerie",
       provider: { "@id": BUSINESS_ID },
-      areaServed: business.cities.map((name) => ({ "@type": "City", name })),
+      areaServed: cities.map((name) => ({ "@type": "City", name })),
       availableChannel: {
         "@type": "ServiceChannel",
         servicePhone: { "@type": "ContactPoint", telephone: business.phone.e164, contactType: "Dépannage 24h/24" },
@@ -68,7 +67,7 @@ export default function SerrureriePage() {
             Dépannage <Accent>serrurerie</Accent>
           </>
         }
-        text="Intervention rapide et sécurisée pour tous vos problèmes de serrurerie à Guingamp et dans les villes voisines. Porte bloquée, serrure endommagée — nous sommes là à tout moment."
+        text="Intervention rapide et sécurisée pour tous vos problèmes de serrurerie à Lannion, Guingamp et dans les villes voisines. Porte bloquée, serrure endommagée — nous sommes là à tout moment."
         actions={
           <>
             <Button href={business.phone.href} aria-label={`Appeler le ${business.phone.display}`}>
@@ -94,7 +93,7 @@ export default function SerrureriePage() {
         <p>
           Que vous ayez claqué votre porte en laissant les clés à l&apos;intérieur ou que votre serrure ait été
           endommagée, <strong>{business.name} intervient rapidement</strong> pour résoudre vos urgences. Basés à
-          Guingamp, nous garantissons des interventions efficaces et professionnelles dans tout l&apos;ouest des Côtes
+          Lannion, nous garantissons des interventions efficaces et professionnelles dans tout l&apos;ouest des Côtes
           d&apos;Armor.
         </p>
         <p>
@@ -126,8 +125,7 @@ export default function SerrureriePage() {
         <p>
           Nos tarifs sont calculés en fonction de votre localisation et de la complexité de l&apos;intervention. Nous vous
           garantissons une transparence totale, sans frais cachés, avec un forfait dépannage unique sur tout notre
-          secteur : <strong>Guingamp</strong>, <strong>Lannion</strong>, <strong>Saint-Brieuc</strong>,{" "}
-          <strong>Paimpol</strong> et <strong>Callac</strong>.
+          secteur : <Villes list={cities} />.
         </p>
         <p>
           Fort de plusieurs années d&apos;expérience, {business.name} s&apos;engage à vous offrir un service
