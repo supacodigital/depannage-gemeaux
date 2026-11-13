@@ -59,30 +59,6 @@
   margin-top: 1.2rem;
 }
 
-.call {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.2rem;
-  min-height: 5.6rem;
-  padding: 1.4rem 3.2rem;
-  border-radius: var(--shape-pill);
-  background: var(--color-red);
-  color: var(--color-white);
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  transition:
-    background-color var(--duration-hover) ease,
-    transform var(--duration-press) var(--ease-out);
-}
-
-.call:active {
-  transform: scale(0.97);
-}
-
 /* Le bouton contour reprend la forme pastille des autres boutons de la refonte. */
 .actions > a:last-child {
   min-height: 5.6rem;
@@ -94,10 +70,6 @@
 @media (hover: hover) and (pointer: fine) {
   .number:hover {
     color: rgb(var(--rgb-white) / 0.85);
-  }
-
-  .call:hover {
-    background-color: var(--color-red-hover);
   }
 }
 

@@ -4,7 +4,7 @@ import { BUSINESS_ID, pageMetadata } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
 import HomeHero from "@/components/home/HomeHero";
 import Intervention from "@/components/home/Intervention";
-import Prix from "@/components/home/Prix";
+import Situations from "@/components/home/Situations";
 import Citations from "@/components/home/Citations";
 import Artisan from "@/components/home/Artisan";
 import Secteurs from "@/components/home/Secteurs";
@@ -32,14 +32,16 @@ const videoJsonLd = video && {
   ...(video.transcription && { transcript: video.transcription }),
 };
 
-// Parcours d'urgence : chaque section répond à une question du visiteur, de la plus pressante à la moins pressante.
+// Parcours d'urgence : on part de la situation du visiteur (porte claquée, serrure bloquée…),
+// puis comment ça se passe, les preuves (avis, l'artisan), les secteurs et l'appel.
+// Les tarifs restent sur la page Tarifs : ici, ils ne sont qu'une réassurance.
 export default function HomePage() {
   return (
     <main id="main-content">
       {videoJsonLd && <JsonLd data={videoJsonLd} />}
       <HomeHero />
+      <Situations />
       <Intervention />
-      <Prix />
       <Citations />
       <Artisan />
       <Secteurs />

@@ -1,25 +1,22 @@
-import { horsForfait } from "./tarifs";
-
 // Déroulé d'une intervention, affiché sur l'accueil à côté de la vidéo.
-// Chaque étape s'appuie sur les CGV du 15/10/2026 : ne rien promettre de plus.
+// Centré sur ce que vit le client ; chaque étape reste fidèle aux CGV du 15/10/2026.
 export const etapes = [
   {
     titre: "Vous appelez",
     texte:
-      "Jérémy décroche, de jour comme de nuit. Avant de partir, il vous annonce le forfait selon le jour et l'heure.",
+      "Jérémy décroche, de jour comme de nuit. Vous lui décrivez la situation, il vous dit ce qu'il va faire et ce que ça coûtera.",
   },
   {
     titre: "Il arrive",
-    texte:
-      "Dans la zone du forfait (Lannion, Guingamp et alentours), le déplacement est compris. Au-delà, il est facturé au kilomètre.",
+    texte: "Il se déplace à Lannion, Guingamp et alentours, y compris la nuit, le week-end et les jours fériés.",
   },
   {
-    titre: "Il intervient",
+    titre: "Il vous ouvre",
     texte:
-      "Ouverture de porte, réparation ou remplacement de serrure, en limitant les dégâts. Il vous explique ce qu'il fait.",
+      "Ouverture de porte, déblocage ou remplacement de serrure, en limitant les dégâts. Il vous explique ce qu'il fait.",
   },
   {
-    titre: "Vous réglez",
-    texte: `Le forfait annoncé, plus le temps (${horsForfait.mainOeuvreHeure} € l'heure) et les fournitures éventuels, au prix de la grille. Paiement à la prestation, chèques non acceptés.`,
+    titre: "Vous êtes à l'abri",
+    texte: "Votre porte ferme à nouveau. Fournitures et main-d'œuvre sont garanties 10 ans.",
   },
 ];

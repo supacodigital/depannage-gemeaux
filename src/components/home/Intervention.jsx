@@ -17,7 +17,7 @@ export default function Intervention() {
           id="intervention-title"
           eyebrow="Comment ça se passe"
           title="Une intervention, étape par étape"
-          intro="De l'appel au paiement, vous savez à chaque étape ce qui se passe et ce que ça coûte."
+          intro="De votre appel à la porte ouverte, voici comment se passe un dépannage."
         />
 
         <div className={cx(styles.body, video && styles.withVideo)}>

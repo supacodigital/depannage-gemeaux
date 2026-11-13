@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { faPhoneFlip } from "@fortawesome/free-solid-svg-icons";
 import { business, mainNav } from "@/data/site";
-import { forfait, formatPrix } from "@/data/tarifs";
 import { cx } from "@/lib/cx";
 import Icon from "@/components/ui/Icon";
 import NavLink from "./NavLink";
@@ -124,7 +123,7 @@ export default function SiteHeader() {
             Dépannage 24h/24 · 7j/7
           </span>
           <span className={styles.drawerNumber}>{business.phone.display}</span>
-          <span className={styles.drawerNote}>Dès {formatPrix(forfait.min)} · prix annoncé avant de se déplacer</span>
+          <span className={styles.drawerNote}>Porte claquée, serrure bloquée ? On vient vous ouvrir.</span>
           <span className={styles.drawerButton}>
             <Icon icon={faPhoneFlip} />
             Appeler maintenant

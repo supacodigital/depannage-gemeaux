@@ -14,7 +14,7 @@ export default function Secteurs() {
           id="secteurs-title"
           eyebrow="Secteurs d'intervention"
           title="De Lannion à Saint-Brieuc"
-          intro="Le forfait dépannage s'applique dans tout le nord-ouest des Côtes-d'Armor : de la côte à la N164, de la limite du Finistère jusqu'à Saint-Brieuc inclus."
+          intro="Jérémy intervient dans tout le nord-ouest des Côtes-d'Armor, de la côte à la N164 et de la limite du Finistère jusqu'à Saint-Brieuc."
         />
 
         <div className={styles.signs}>
@@ -35,8 +35,8 @@ export default function Secteurs() {
         </div>
 
         <p className={styles.note}>
-          Siège à {business.address.city}. En dehors de la zone, le déplacement est facturé au kilomètre et annoncé avant
-          l&apos;intervention.
+          Basé à {business.address.city}. Vous êtes un peu plus loin ? Appelez : il vous dit tout de suite s&apos;il peut
+          venir.
         </p>
       </div>
     </section>

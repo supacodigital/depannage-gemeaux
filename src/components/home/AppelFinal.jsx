@@ -1,7 +1,6 @@
-import { faPhoneFlip } from "@fortawesome/free-solid-svg-icons";
 import { business } from "@/data/site";
 import Button from "@/components/ui/Button";
-import Icon from "@/components/ui/Icon";
+import CallButton from "@/components/ui/CallButton";
 import styles from "./AppelFinal.module.css";
 
 // Dernier écran de l'accueil : la question du visiteur, puis le numéro en grand.
@@ -22,10 +21,7 @@ export default function AppelFinal() {
           {phone.display}
         </a>
         <div className={styles.actions}>
-          <a href={phone.href} className={styles.call}>
-            <Icon icon={faPhoneFlip} />
-            Appeler maintenant
-          </a>
+          <CallButton stretch />
           <Button href="/contact" variant="outline">
             Écrire un message
           </Button>

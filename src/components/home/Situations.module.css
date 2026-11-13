@@ -1,0 +1,103 @@
+.section {
+  padding: var(--space-section) var(--gutter);
+  background: var(--color-white);
+}
+
+.inner {
+  display: grid;
+  gap: clamp(3.2rem, 2rem + 3vw, 5.6rem);
+  max-width: var(--width-wide);
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  list-style: none;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 5.6rem minmax(0, 1fr);
+  column-gap: 1.6rem;
+  row-gap: 0.6rem;
+  align-content: start;
+  padding: 2.4rem;
+  border: 1px solid var(--color-line);
+  border-radius: 1.2rem;
+  background: var(--color-white);
+}
+
+/* Pictogramme blanc sur carré bleu, à la manière des panneaux d'information. */
+.icon {
+  display: grid;
+  grid-row: span 2;
+  place-items: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 1rem;
+  background: var(--color-blue);
+  color: var(--color-white);
+  font-size: 2.4rem;
+}
+
+.card h3 {
+  align-self: end;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.card p {
+  color: var(--color-ink-soft);
+  font-size: 1.6rem;
+  line-height: 1.45;
+}
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem 3.2rem;
+  padding: 2.4rem 2.8rem;
+  border-radius: 1.6rem;
+  background: var(--color-surface);
+}
+
+.cta p {
+  max-width: 44ch;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .icon {
+    grid-row: auto;
+    margin-bottom: 1.4rem;
+  }
+
+  .card h3 {
+    align-self: auto;
+  }
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

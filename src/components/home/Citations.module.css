@@ -1,6 +1,6 @@
 .section {
   padding: var(--space-section) var(--gutter);
-  background: var(--color-surface);
+  background: var(--color-white);
 }
 
 .inner {
@@ -65,7 +65,7 @@
   height: 100%;
   padding: 3.2rem 2.8rem;
   border-radius: 1.2rem;
-  background: var(--color-white);
+  background: var(--color-surface);
 }
 
 .quote blockquote p {

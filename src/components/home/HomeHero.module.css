@@ -2,7 +2,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: calc(var(--header-height) + clamp(4rem, 2rem + 6vw, 9.6rem)) var(--gutter) clamp(4.8rem, 3rem + 4vw, 8rem);
+  padding: calc(var(--header-height) + clamp(4rem, 2rem + 4vw, 7.2rem)) var(--gutter) clamp(4.8rem, 3rem + 3vw, 6.4rem);
   background: var(--color-blue);
   color: var(--color-white);
 }
@@ -65,30 +65,36 @@
   background: var(--color-red);
 }
 
+/* Titre : la situation vécue en très gros, la réponse en dessous. */
 .title {
-  max-width: 20ch;
-  margin-top: 1.6rem;
-  color: var(--color-white);
-  font-family: var(--font-display);
-  font-size: clamp(2.8rem, 1.9rem + 2.4vw, 4.4rem);
-  font-weight: 700;
-  line-height: 1;
+  display: grid;
+  gap: 1.6rem;
+  margin-top: 2rem;
 }
 
-/* Le numéro, élément principal : lien d'appel en très grand. */
-.number {
-  display: inline-block;
-  margin-top: clamp(1.6rem, 1rem + 1.6vw, 3.2rem);
+.pain {
+  max-width: 16ch;
   color: var(--color-white);
   font-family: var(--font-display);
-  font-size: var(--step-display);
+  font-size: clamp(4rem, 2rem + 5.4vw, 8.8rem);
   font-weight: 800;
-  font-variant-numeric: tabular-nums;
-  line-height: 0.86;
+  line-height: 0.92;
   letter-spacing: -0.01em;
+}
+
+/* Chaque question reste d'un seul tenant ; les retours à la ligne se font entre les questions. */
+.pain > span {
+  display: inline-block;
   white-space: nowrap;
-  text-decoration: none;
-  transition: color var(--duration-hover) ease;
+}
+
+.answer {
+  max-width: 40ch;
+  color: var(--color-on-dark-soft);
+  font-family: var(--font-body);
+  font-size: clamp(1.8rem, 1.5rem + 0.8vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 .actions {
@@ -96,32 +102,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 1.6rem 2.8rem;
-  margin-top: clamp(2.4rem, 1.6rem + 2vw, 4rem);
-}
-
-/* Bouton d'appel : la pastille du logo, seul élément rouge plein du hero. */
-.call {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.2rem;
-  min-height: 5.6rem;
-  padding: 1.4rem 3.2rem;
-  border-radius: var(--shape-pill);
-  background: var(--color-red);
-  color: var(--color-white);
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  transition:
-    background-color var(--duration-hover) ease,
-    transform var(--duration-press) var(--ease-out);
-}
-
-.call:active {
-  transform: scale(0.97);
+  margin-top: clamp(2.8rem, 2rem + 2vw, 4.4rem);
 }
 
 .link {
@@ -149,7 +130,7 @@
   display: grid;
   grid-template-columns: 1fr;
   max-width: 96rem;
-  margin-top: clamp(4rem, 2.4rem + 4vw, 7.2rem);
+  margin-top: clamp(4rem, 2.4rem + 3vw, 5.6rem);
   border-top: 1px solid rgb(var(--rgb-white) / 0.16);
   list-style: none;
 }
@@ -194,14 +175,6 @@
 /* --- Interactions (souris uniquement) --- */
 
 @media (hover: hover) and (pointer: fine) {
-  .number:hover {
-    color: rgb(var(--rgb-white) / 0.85);
-  }
-
-  .call:hover {
-    background-color: var(--color-red-hover);
-  }
-
   .link:hover {
     text-decoration-color: var(--color-white);
   }
@@ -238,10 +211,6 @@
     right: -38vw;
     width: 110vw;
     translate: none;
-  }
-
-  .call {
-    width: 100%;
   }
 }
 

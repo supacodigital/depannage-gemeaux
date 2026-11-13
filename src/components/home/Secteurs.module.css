@@ -1,6 +1,6 @@
 .section {
   padding: var(--space-section) var(--gutter);
-  background: var(--color-surface);
+  background: var(--color-white);
 }
 
 .inner {

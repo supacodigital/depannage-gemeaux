@@ -278,7 +278,7 @@
   font-size: 1.6rem;
 }
 
-/* Écrans très courts : on retire la ligne de prix pour garder le bouton visible sans défiler. */
+/* Écrans très courts : on retire la ligne sous le numéro pour garder le bouton visible sans défiler. */
 @media (max-height: 640px) {
   .drawerNote {
     display: none;

@@ -1,17 +1,15 @@
 import Link from "next/link";
-import { faArrowRight, faPhoneFlip } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { business, listeVilles } from "@/data/site";
-import { forfait, formatPrix } from "@/data/tarifs";
 import { avis, noteMoyenne } from "@/data/avis";
 import Icon from "@/components/ui/Icon";
+import CallButton from "@/components/ui/CallButton";
 import LogoSymbol from "@/components/ui/LogoSymbol";
 import styles from "./HomeHero.module.css";
 
-// Hero de l'accueil, direction « signalétique » :
-// le numéro de téléphone est l'élément principal, lisible en une seconde sur mobile.
-// Il répond d'emblée aux trois questions du visiteur : secteur, prix, confiance.
+// Hero de l'accueil : on part de la situation du visiteur (porte claquée, clés perdues…),
+// puis la réponse (un serrurier vient vous ouvrir, jour et nuit) et le bouton d'appel.
 export default function HomeHero() {
-  const { phone } = business;
   const note = noteMoyenne.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
   return (
@@ -21,32 +19,31 @@ export default function HomeHero() {
       <div className={styles.inner}>
         <p className={styles.label} style={{ "--i": 0 }}>
           <span className={styles.pill} aria-hidden="true" />
-          Dépannage 24h/24 · 7j/7
+          Serrurier d&apos;urgence · 24h/24 · 7j/7
         </p>
 
+        {/* Le titre porte la situation vécue ; la seconde ligne garde les mots-clés (serrurier, villes). */}
         <h1 id="hero-title" className={styles.title} style={{ "--i": 1 }}>
-          Serrurier d&apos;urgence à {listeVilles(business.sectors.main)}
+          <span className={styles.pain}>
+            <span>Porte claquée&nbsp;?</span> <span>Clés perdues&nbsp;?</span> <span>Serrure bloquée&nbsp;?</span>
+          </span>{" "}
+          <span className={styles.answer}>
+            Un serrurier vient vous ouvrir à {listeVilles(business.sectors.main)}, de jour comme de nuit.
+          </span>
         </h1>
 
-        <a href={phone.href} className={styles.number} style={{ "--i": 2 }} aria-label={`Appeler le ${phone.display}`}>
-          {phone.display}
-        </a>
-
-        <div className={styles.actions} style={{ "--i": 3 }}>
-          <a href={phone.href} className={styles.call}>
-            <Icon icon={faPhoneFlip} />
-            Appeler maintenant
-          </a>
-          <Link href="/tarifs" className={styles.link}>
-            Voir tous les tarifs
+        <div className={styles.actions} style={{ "--i": 2 }}>
+          <CallButton stretch />
+          <Link href="/serrurerie" className={styles.link}>
+            Toutes nos interventions
             <Icon icon={faArrowRight} />
           </Link>
         </div>
 
-        <ul className={styles.facts} style={{ "--i": 4 }}>
+        <ul className={styles.facts} style={{ "--i": 3 }}>
           <li>
-            <strong>Dès {formatPrix(forfait.min)}</strong>
-            <span>prix annoncé avant de se déplacer</span>
+            <strong>24h/24</strong>
+            <span>nuits, week-ends et jours fériés compris</span>
           </li>
           <li>
             <strong>
