@@ -14,12 +14,11 @@ const SCROLL_DELTA = 8;
 
 export default function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
-  // "top" : en haut de page, le header défile normalement avec le contenu.
-  // "hidden" : on descend, il est masqué au-dessus de l'écran.
-  // "pinned" : on remonte, il redescend et reste accroché en haut.
+  // Le header est toujours fixe en haut de l'écran :
+  // "top"    : premier écran (tant que la première section n'est pas dépassée), visible, sans ombre ;
+  // "hidden" : on descend dans le contenu, il glisse hors de l'écran ;
+  // "pinned" : on remonte, il redescend avec une ombre légère.
   const [mode, setMode] = useState("top");
-  // Passage sans animation (de "top" à "hidden" : le header est déjà sorti de l'écran).
-  const [instant, setInstant] = useState(false);
   const headerRef = useRef(null);
   const drawerRef = useRef(null);
   const burgerRef = useRef(null);
@@ -36,13 +35,14 @@ export default function SiteHeader() {
       ticking = false;
       const y = Math.max(0, window.scrollY);
       const height = headerRef.current?.offsetHeight ?? 72;
+      // Zone du premier écran : jusqu'au bas de la première section (le hero sur l'accueil).
+      // Le header y reste en place, pendant que la section suivante glisse sur la photo.
+      const first = document.querySelector("main section");
+      const firstScreen = Math.max(height, (first?.offsetHeight ?? 0) - height);
       const dy = y - lastY;
       let next = current;
 
-      if (y <= 0) {
-        next = "top";
-      } else if (current === "top" && y <= height) {
-        // Encore dans la zone du header : il défile simplement avec la page.
+      if (y <= firstScreen) {
         next = "top";
       } else if (dy > SCROLL_DELTA) {
         next = "hidden";
@@ -50,9 +50,8 @@ export default function SiteHeader() {
         next = "pinned";
       }
 
-      if (Math.abs(dy) > SCROLL_DELTA || y <= 0) lastY = y;
+      if (Math.abs(dy) > SCROLL_DELTA || y <= firstScreen) lastY = y;
       if (next !== current) {
-        setInstant(current === "top");
         setMode(next);
         current = next;
       }
@@ -111,7 +110,7 @@ export default function SiteHeader() {
 
   return (
     <>
-      <header ref={headerRef} className={styles.header} data-mode={mode} data-instant={instant || undefined}>
+      <header ref={headerRef} className={styles.header} data-mode={mode}>
         <div className={styles.inner}>
           <Link href="/" onClick={close} className={styles.logo} aria-label={`${business.name} — Accueil`}>
             <img src="/logo.svg" alt="" width="213" height="48" />
