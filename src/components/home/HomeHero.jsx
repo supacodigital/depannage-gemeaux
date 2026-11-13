@@ -4,7 +4,6 @@ import { business, listeVilles } from "@/data/site";
 import { avis, noteMoyenne } from "@/data/avis";
 import Icon from "@/components/ui/Icon";
 import CallButton from "@/components/ui/CallButton";
-import LogoSymbol from "@/components/ui/LogoSymbol";
 import styles from "./HomeHero.module.css";
 
 // Hero de l'accueil : on part de la situation du visiteur (porte claquée, clés perdues…),
@@ -14,7 +13,23 @@ export default function HomeHero() {
 
   return (
     <section className={styles.hero} aria-labelledby="hero-title">
-      <LogoSymbol className={styles.symbol} />
+      {/* Photo de fond : paysage sur ordinateur, recadrage vertical sur la serrure pour le mobile. */}
+      <picture className={styles.media}>
+        <source
+          media="(max-width: 767px)"
+          srcSet="/images/hero-porte-mobile-480.webp 480w, /images/hero-porte-mobile-800.webp 800w"
+          sizes="100vw"
+        />
+        <img
+          className={styles.photo}
+          src="/images/hero-porte-1672.webp"
+          srcSet="/images/hero-porte-640.webp 640w, /images/hero-porte-1024.webp 1024w, /images/hero-porte-1672.webp 1672w"
+          sizes="100vw"
+          alt=""
+          fetchPriority="high"
+          decoding="async"
+        />
+      </picture>
 
       <div className={styles.inner}>
         <p className={styles.label} style={{ "--i": 0 }}>

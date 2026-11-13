@@ -19,7 +19,6 @@ const HERO_WIDTHS = [640, 1024, 1600, 2400];
 const CONTENT_WIDTHS = [480, 960];
 
 const jobs = [
-  { src: "hero-accueil.webp", name: "hero-accueil", widths: HERO_WIDTHS, quality: 60 },
   { src: "hero-serrurerie.webp", name: "hero-serrurerie", widths: HERO_WIDTHS, quality: 60 },
   { src: "hero-apropos.webp", name: "hero-apropos", widths: HERO_WIDTHS, quality: 60 },
   { src: "cles.jpg", name: "cles", widths: CONTENT_WIDTHS, quality: 72 },
@@ -39,6 +38,25 @@ for (const job of jobs) {
       .resize({ width, withoutEnlargement: true })
       .webp({ quality: job.quality, effort: 6 })
       .toFile(file);
+    console.log(`${path.relative(ROOT, file).padEnd(42)} ${await kb(file)}`);
+  }
+}
+
+// Photo du hero de l'accueil (1672×941) : version paysage pour ordinateur,
+// et recadrage vertical 4:5 sur la serrure et la main pour le mobile (direction artistique via <picture>).
+{
+  const src = path.join(SRC, "hero-porte.png");
+  for (const width of [640, 1024, 1672]) {
+    const file = path.join(OUT, `hero-porte-${width}.webp`);
+    await sharp(src).resize({ width, withoutEnlargement: true }).webp({ quality: 74, effort: 6 }).toFile(file);
+    console.log(`${path.relative(ROOT, file).padEnd(42)} ${await kb(file)}`);
+  }
+  const { width: w, height: h } = await sharp(src).metadata();
+  const cropWidth = Math.round(h * 0.8); // 4:5
+  const crop = { left: w - cropWidth, top: 0, width: cropWidth, height: h };
+  for (const width of [480, 800]) {
+    const file = path.join(OUT, `hero-porte-mobile-${width}.webp`);
+    await sharp(src).extract(crop).resize({ width }).webp({ quality: 72, effort: 6 }).toFile(file);
     console.log(`${path.relative(ROOT, file).padEnd(42)} ${await kb(file)}`);
   }
 }
