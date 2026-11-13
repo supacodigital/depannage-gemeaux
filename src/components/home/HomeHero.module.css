@@ -223,6 +223,31 @@
       rgb(var(--rgb-blue) / 0.72) 100%
     );
   }
+
+  /* Mobile : tout le contenu du hero est centré. */
+  .inner {
+    text-align: center;
+  }
+
+  .label,
+  .actions {
+    justify-content: center;
+  }
+
+  .title {
+    justify-items: center;
+  }
+
+  /* Preuves : valeur au-dessus, explication en dessous, centrées. */
+  .facts li {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .facts strong {
+    min-width: 0;
+  }
 }
 
 /* --- Animations --- */
