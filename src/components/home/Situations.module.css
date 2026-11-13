@@ -17,12 +17,14 @@
   list-style: none;
 }
 
+/* Carte : pictogramme et titre côte à côte, description en dessous sur toute la largeur. */
 .card {
   display: grid;
-  grid-template-columns: 5.6rem minmax(0, 1fr);
-  column-gap: 1.6rem;
-  row-gap: 0.6rem;
+  grid-template-columns: auto minmax(0, 1fr);
   align-content: start;
+  align-items: center;
+  column-gap: 1.6rem;
+  row-gap: 1.4rem;
   padding: 2.4rem;
   border: 1px solid var(--color-line);
   border-radius: 1.2rem;
@@ -32,7 +34,6 @@
 /* Pictogramme blanc sur carré bleu, à la manière des panneaux d'information. */
 .icon {
   display: grid;
-  grid-row: span 2;
   place-items: center;
   width: 5.6rem;
   height: 5.6rem;
@@ -43,15 +44,16 @@
 }
 
 .card h3 {
-  align-self: end;
   color: var(--color-ink);
   font-family: var(--font-display);
   font-size: var(--step-2);
   font-weight: 700;
   line-height: 1;
+  text-wrap: balance;
 }
 
 .card p {
+  grid-column: 1 / -1;
   color: var(--color-ink-soft);
   font-size: 1.6rem;
   line-height: 1.45;
@@ -80,19 +82,6 @@
 @media (min-width: 640px) {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .card {
-    grid-template-columns: 1fr;
-  }
-
-  .icon {
-    grid-row: auto;
-    margin-bottom: 1.4rem;
-  }
-
-  .card h3 {
-    align-self: auto;
   }
 }
 
