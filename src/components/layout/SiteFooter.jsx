@@ -78,9 +78,9 @@ export default function SiteFooter() {
           © {new Date().getFullYear()} {business.name}. Tous droits réservés.
         </p>
         <p className={styles.powered}>
-          Powered by{" "}
+          Site réalisé par{" "}
           <a href={business.webmaster.url} target="_blank" rel="noopener noreferrer">
-            Supaco.
+            SupacoDigital
           </a>
         </p>
       </div>

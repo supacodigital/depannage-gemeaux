@@ -114,9 +114,14 @@
   font-size: 1.2rem;
 }
 
+/* Blanc et non rouge : le rouge sur ce fond nuit ne donne que 2,7:1. */
 .powered a {
-  color: var(--color-red);
-  font-weight: 500;
+  color: var(--color-white);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--rgb-white) / 0.35);
+  text-underline-offset: 0.25em;
+  transition: text-decoration-color var(--duration-hover) ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -129,7 +134,7 @@
   }
 
   .powered a:hover {
-    text-decoration: underline;
+    text-decoration-color: var(--color-white);
   }
 }
 
