@@ -216,14 +216,15 @@
 
 @media (max-width: 767px) {
   /* Voile le plus léger qui garde chaque texte lisible : contraste mesuré sur les pixels les plus clairs
-     de la photo derrière chaque texte (pire cas 4,6:1 sur le grand titre, ≥ 4,5:1 sur les petits textes).
-     En dessous (0,62 / 0,50 / 0,40), le lien « Toutes nos interventions » tombe à 4,3:1. */
+     de la photo derrière chaque texte (pire cas 5,1:1, petits textes compris).
+     Plus léger (0,70 / 0,58 / 0,48), la poignée et les clés claires font passer l'étiquette,
+     le sous-titre et le lien sous 4,5:1 depuis que le hero mobile est raccourci. */
   .hero::after {
     background: linear-gradient(
       180deg,
-      rgb(var(--rgb-blue) / 0.7) 0%,
-      rgb(var(--rgb-blue) / 0.58) 55%,
-      rgb(var(--rgb-blue) / 0.48) 100%
+      rgb(var(--rgb-blue) / 0.76) 0%,
+      rgb(var(--rgb-blue) / 0.68) 55%,
+      rgb(var(--rgb-blue) / 0.68) 100%
     );
   }
 
@@ -241,15 +242,9 @@
     justify-items: center;
   }
 
-  /* Preuves : valeur au-dessus, explication en dessous, centrées. */
-  .facts li {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .facts strong {
-    min-width: 0;
+  /* Mobile : les preuves (24h/24, note Google, garantie) sont masquées pour garder un hero court. */
+  .facts {
+    display: none;
   }
 }
 
