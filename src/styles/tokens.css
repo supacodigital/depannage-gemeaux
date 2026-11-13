@@ -67,11 +67,12 @@
   --color-star: #fbbc04;
   --color-star-empty: #dadce0;
 
-  /* --- Typographie (Poppins est injectée par next/font dans le layout) --- */
-  --font-body: var(--font-poppins), system-ui, sans-serif;
-  /* Titres : police système (Helvetica / Arial / Roboto selon l'appareil), comme sur le site d'origine
-     qui déclarait Inter sans la charger. Aucun téléchargement de police supplémentaire. */
-  --font-heading: "Inter", sans-serif;
+  /* --- Typographie (familles injectées par next/font dans le layout) ---
+     Barlow Condensed : titres, numéro de téléphone, prix, étiquettes (héritage de la signalétique routière).
+     Atkinson Hyperlegible Next : texte courant, conçue pour la lisibilité (lecture sur mobile, dans l'urgence). */
+  --font-body: var(--font-atkinson), system-ui, sans-serif;
+  --font-heading: var(--font-barlow), "Arial Narrow", sans-serif;
+  --font-display: var(--font-barlow), "Arial Narrow", sans-serif;
   --font-review: "Google Sans", Roboto, system-ui, sans-serif;
 
   /* --- Rayons --- */
@@ -120,4 +121,39 @@
   --z-overlay: 300;
   --z-drawer: 400;
   --z-skip: 500;
+
+  /* ======================================================================
+     Refonte 2026 — direction « signalétique »
+     Le rouge est réservé à l'action (appeler) et à l'urgence ; le bleu structure.
+     Jamais de texte rouge sur fond bleu (1,8:1).
+     ====================================================================== */
+
+  /* Neutres teintés de bleu */
+  --color-ink: #132131;
+  --color-ink-soft: #485868;
+  --color-ink-faint: #6b7a8a;
+  --color-surface: #f2f4f7;
+  --color-line: #dde3ea;
+  --color-line-strong: #c3ccd6;
+  --color-on-dark-soft: rgb(var(--rgb-white) / 0.78);
+  --color-on-dark-faint: rgb(var(--rgb-white) / 0.6);
+
+  /* Échelle typographique (1rem = 10px) : 7 tailles, plus l'affichage géant du numéro */
+  --step--1: 1.3rem;  /* étiquettes, mentions */
+  --step-0: 1.7rem;   /* texte courant */
+  --step-1: 2rem;     /* chapeaux, texte mis en avant */
+  --step-2: 2.6rem;   /* titres de blocs */
+  --step-3: clamp(3.2rem, 2.2rem + 2.6vw, 4.8rem);   /* titres de sections */
+  --step-4: clamp(4rem, 2.4rem + 4.4vw, 7.2rem);     /* citations, chiffres */
+  /* Numéro de téléphone : le numéro mesure 5,86 em de large ; 17vw - 1rem le garde dans les marges
+     de 320 px jusqu'au plafond de 150 px (marge de sécurité incluse). */
+  --step-display: min(calc(16.6vw - 1rem), 15rem);
+
+  /* Formes tirées du logo : la porte (arrondie à gauche, droite à droite) et la pastille-serrure */
+  --shape-door: 999px 0 0 999px;
+  --shape-pill: 999px;
+
+  /* Rythme vertical des sections */
+  --space-section: clamp(6.4rem, 4rem + 6vw, 12rem);
+  --width-wide: 1240px;
 }

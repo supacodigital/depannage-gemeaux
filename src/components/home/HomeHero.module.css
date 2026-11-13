@@ -1,0 +1,277 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: calc(var(--header-height) + clamp(4rem, 2rem + 6vw, 9.6rem)) var(--gutter) clamp(4.8rem, 3rem + 4vw, 8rem);
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+.inner {
+  position: relative;
+  max-width: var(--width-wide);
+  margin: 0 auto;
+}
+
+/* Entrée en cascade au chargement : une seule séquence orchestrée sur la page. */
+.inner > * {
+  animation: enter 640ms var(--ease-out) calc(var(--i, 0) * var(--stagger)) both;
+}
+
+/* --- Symbole du logo en fond, débordant à droite --- */
+
+/* Pastille en blanc translucide et non en rouge : dans le hero, le rouge est réservé à l'action. */
+.symbol {
+  --door: rgb(var(--rgb-white) / 0.05);
+  --glyph: rgb(var(--rgb-white) / 0.09);
+  --keyhole: rgb(var(--rgb-white) / 0.16);
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: -30vw;
+  width: 62vw;
+  max-width: 1080px;
+  height: auto;
+  translate: 0 -46%;
+  pointer-events: none;
+}
+
+/* La pastille-serrure pivote une fois, comme une clé qui déverrouille. */
+.symbol rect {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: unlock 900ms var(--ease-out) 520ms both;
+}
+
+/* --- Contenu --- */
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-on-dark-soft);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pill {
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 1rem;
+  border-radius: var(--shape-pill);
+  background: var(--color-red);
+}
+
+.title {
+  max-width: 20ch;
+  margin-top: 1.6rem;
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 1.9rem + 2.4vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Le numéro, élément principal : lien d'appel en très grand. */
+.number {
+  display: inline-block;
+  margin-top: clamp(1.6rem, 1rem + 1.6vw, 3.2rem);
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: var(--step-display);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 0.86;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color var(--duration-hover) ease;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.6rem 2.8rem;
+  margin-top: clamp(2.4rem, 1.6rem + 2vw, 4rem);
+}
+
+/* Bouton d'appel : la pastille du logo, seul élément rouge plein du hero. */
+.call {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  min-height: 5.6rem;
+  padding: 1.4rem 3.2rem;
+  border-radius: var(--shape-pill);
+  background: var(--color-red);
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    background-color var(--duration-hover) ease,
+    transform var(--duration-press) var(--ease-out);
+}
+
+.call:active {
+  transform: scale(0.97);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--color-white);
+  font-size: var(--step-0);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--rgb-white) / 0.4);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.35em;
+  transition: text-decoration-color var(--duration-hover) ease;
+}
+
+.link > svg {
+  font-size: 1.4rem;
+  transition: translate var(--duration-hover) var(--ease-out);
+}
+
+/* --- Preuves --- */
+
+.facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 96rem;
+  margin-top: clamp(4rem, 2.4rem + 4vw, 7.2rem);
+  border-top: 1px solid rgb(var(--rgb-white) / 0.16);
+  list-style: none;
+}
+
+.facts li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid rgb(var(--rgb-white) / 0.16);
+}
+
+.facts strong {
+  flex-shrink: 0;
+  min-width: 10rem;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.star {
+  margin-left: 0.15em;
+  font-size: 0.8em;
+}
+
+.facts li > span {
+  color: var(--color-on-dark-soft);
+  font-size: 1.5rem;
+  line-height: 1.35;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --- Interactions (souris uniquement) --- */
+
+@media (hover: hover) and (pointer: fine) {
+  .number:hover {
+    color: rgb(var(--rgb-white) / 0.85);
+  }
+
+  .call:hover {
+    background-color: var(--color-red-hover);
+  }
+
+  .link:hover {
+    text-decoration-color: var(--color-white);
+  }
+
+  .link:hover > svg {
+    translate: 0.3rem 0;
+  }
+}
+
+/* --- Points de rupture --- */
+
+@media (min-width: 768px) {
+  .facts {
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid rgb(var(--rgb-white) / 0.16);
+  }
+
+  .facts li {
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 2rem 2.4rem 2rem 0;
+    border-bottom: none;
+  }
+
+  .facts li + li {
+    padding-left: 2.4rem;
+    border-left: 1px solid rgb(var(--rgb-white) / 0.16);
+  }
+}
+
+@media (max-width: 767px) {
+  .symbol {
+    top: 4%;
+    right: -38vw;
+    width: 110vw;
+    translate: none;
+  }
+
+  .call {
+    width: 100%;
+  }
+}
+
+/* --- Animations --- */
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+}
+
+@keyframes unlock {
+  from {
+    rotate: -90deg;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inner > * {
+    animation: fade 300ms ease both;
+  }
+
+  .symbol rect {
+    animation: none;
+  }
+}

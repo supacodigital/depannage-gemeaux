@@ -1,0 +1,51 @@
+.head {
+  display: grid;
+  gap: 1.6rem;
+  max-width: 64rem;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-ink-soft);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* La pastille rouge du logo, en marqueur d'étiquette. */
+.pill {
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 1rem;
+  border-radius: var(--shape-pill);
+  background: var(--color-red);
+}
+
+.title {
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.005em;
+}
+
+.intro {
+  max-width: 52ch;
+  color: var(--color-ink-soft);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.dark .eyebrow,
+.dark .intro {
+  color: var(--color-on-dark-soft);
+}
+
+.dark .title {
+  color: var(--color-white);
+}

@@ -42,6 +42,13 @@ Le `.htaccess` (dans `public/`) est indispensable :
 Une donnée modifiée dans `src/data/` se répercute partout : pages, footer, mentions légales, JSON-LD et `/llms.txt`.
 Après une modification de contenu, mettre à jour `lastModified` de la page concernée dans `src/data/site.js` (sitemap).
 
+## Accueil : vidéo et photo à venir
+
+- **Vidéo motion design** (section « Une intervention, étape par étape ») : déposer les fichiers dans `public/videos/`, puis remplir `src/data/video.js` (exemple commenté dans le fichier).
+  - Tant que `video` vaut `null`, la section affiche les 4 étapes seules.
+  - Une fois la vidéo renseignée : lecture muette quand elle devient visible, version 720p sur mobile, sous-titres, données structurées VideoObject.
+- **Photo de Jérémy** (section « Votre artisan ») : renseigner `portrait` dans `src/data/site.js` (format portrait 4:5). En attendant, le cadre affiche le symbole du logo.
+
 ## Référencement (SEO et GEO)
 
 - Métadonnées par page (titre, description, canonical, Open Graph) : `src/lib/seo.js`, appelé en tête de chaque `page.jsx`.
@@ -52,6 +59,10 @@ Après une modification de contenu, mettre à jour `lastModified` de la page con
 ## Conventions
 
 - **CSS Modules + variables CSS** (`src/styles/tokens.css`). Pas de Tailwind.
+- Charte de la refonte (direction « signalétique ») :
+  - polices : Barlow Condensed pour les titres, le numéro et les prix ; Atkinson Hyperlegible Next pour le texte ;
+  - le rouge est réservé à l'action (appeler), jamais de texte rouge sur fond bleu ;
+  - formes tirées du logo : la pastille-serrure, la porte.
 - Animations en CSS uniquement (pas de framer-motion) :
   - entrées des heros au chargement ;
   - apparition au scroll via l'attribut `data-reveal` (voir `src/app/globals.css` et `src/lib/reveal-script.js`).

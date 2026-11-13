@@ -1,4 +1,4 @@
-import { Poppins } from "next/font/google";
+import { Atkinson_Hyperlegible_Next, Barlow_Condensed } from "next/font/google";
 import { SITE_URL, business, listeVilles } from "@/data/site";
 import { businessJsonLd, pageMetadata } from "@/lib/seo";
 import SiteHeader from "@/components/layout/SiteHeader";
@@ -9,13 +9,19 @@ import { REVEAL_SETUP, REVEAL_START } from "@/lib/reveal-script";
 import "@/styles/tokens.css";
 import "./globals.css";
 
-// Polices auto-hébergées par next/font : plus de requête bloquante vers Google Fonts,
+// Polices auto-hébergées par next/font : pas de requête vers Google Fonts,
 // et des polices de secours calibrées pour éviter les sauts de mise en page.
-const poppins = Poppins({
+const barlow = Barlow_Condensed({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["600", "700", "800"],
   display: "swap",
-  variable: "--font-poppins",
+  variable: "--font-barlow",
+});
+
+const atkinson = Atkinson_Hyperlegible_Next({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-atkinson",
 });
 
 export const metadata = {
@@ -40,7 +46,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="fr" className={poppins.variable} suppressHydrationWarning>
+    <html lang="fr" className={`${barlow.variable} ${atkinson.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: REVEAL_SETUP }} />
       </head>

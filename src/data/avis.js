@@ -15,3 +15,14 @@ export const avis = [
 ];
 
 export const noteMoyenne = avis.reduce((sum, a) => sum + a.note, 0) / avis.length;
+
+// Extraits mis en avant sur l'accueil : phrases reprises mot pour mot des avis ci-dessus.
+// Chacun illustre une des trois promesses : rapidité, prix clair, soin.
+export const citations = [
+  { nom: "Noël Parent", texte: "Disponible, efficace et rapide (40 min après l'appel il était déjà là)." },
+  { nom: "Sophie Dottin", texte: "Les tarifs sont clairs, pas de surprise." },
+  {
+    nom: "Gauthier Mouillet",
+    texte: "Il nous a sorti de la panade avec une serrure bloquée sans aucun dommage à la menuiserie.",
+  },
+].map((c) => ({ ...c, date: avis.find((a) => a.nom === c.nom)?.date }));

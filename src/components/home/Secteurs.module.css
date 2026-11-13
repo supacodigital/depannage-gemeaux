@@ -1,0 +1,85 @@
+.section {
+  padding: var(--space-section) var(--gutter);
+  background: var(--color-surface);
+}
+
+.inner {
+  display: grid;
+  gap: clamp(3.2rem, 2rem + 3vw, 5.6rem);
+  max-width: var(--width-wide);
+  margin: 0 auto;
+}
+
+.signs {
+  display: grid;
+  gap: 1.6rem;
+}
+
+.main,
+.secondary {
+  display: grid;
+  gap: 1.6rem;
+  list-style: none;
+}
+
+.main {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 32rem), 1fr));
+}
+
+.secondary {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+}
+
+/* Panneau d'entrée d'agglomération : fond blanc, liseré rouge intérieur, marge blanche. */
+.sign {
+  display: grid;
+  place-items: center;
+  padding: 2.4rem 2rem;
+  border: 0.6rem solid var(--color-red);
+  border-radius: 1rem;
+  background: var(--color-white);
+  box-shadow:
+    0 0 0 0.5rem var(--color-white),
+    0 0 0 calc(0.5rem + 1px) var(--color-line-strong);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.main .sign {
+  min-height: 14rem;
+  font-size: clamp(4rem, 2.6rem + 3.6vw, 7.2rem);
+}
+
+.secondary .sign {
+  min-height: 9.6rem;
+  font-size: clamp(2.6rem, 2rem + 1.4vw, 3.6rem);
+}
+
+/* Mobile : secteurs secondaires sur deux colonnes, panneaux plus compacts. */
+@media (max-width: 539px) {
+  .main .sign {
+    min-height: 11rem;
+  }
+
+  .secondary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .secondary .sign {
+    min-height: 7.2rem;
+    padding: 1.6rem 0.8rem;
+    font-size: 2rem;
+  }
+}
+
+.note {
+  max-width: 64ch;
+  color: var(--color-ink-soft);
+  font-size: var(--step-0);
+  line-height: 1.5;
+}

@@ -31,6 +31,11 @@ export default function SiteFooter() {
             <img src="/logo-fond-sombre.svg" alt="" className={styles.logo} width="68" height="48" />
           </Link>
           <p className={styles.tagline}>Dépannage serrurerie disponible 24h/24 et 7j/7.</p>
+          <address className={styles.address}>
+            {business.address.street}
+            <br />
+            {business.address.postalCode} {business.address.city}
+          </address>
           <a href={business.phone.href} className={styles.tel} aria-label={`Appeler le ${business.phone.display}`}>
             <Icon icon={faPhoneFlip} />
             {business.phone.display}

@@ -1,0 +1,16 @@
+.symbol {
+  display: block;
+  overflow: visible;
+}
+
+.door {
+  fill: var(--door, var(--color-blue));
+}
+
+.glyph {
+  fill: var(--glyph, var(--color-white));
+}
+
+.keyhole {
+  fill: var(--keyhole, var(--color-red));
+}

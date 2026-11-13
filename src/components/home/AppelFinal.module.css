@@ -1,0 +1,109 @@
+.section {
+  padding: var(--space-section) var(--gutter);
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+.inner {
+  display: grid;
+  justify-items: start;
+  gap: 2rem;
+  max-width: var(--width-wide);
+  margin: 0 auto;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-on-dark-soft);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pill {
+  width: 2.4rem;
+  height: 1rem;
+  border-radius: var(--shape-pill);
+  background: var(--color-red);
+}
+
+.title {
+  max-width: 22ch;
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-weight: 800;
+  line-height: 0.95;
+}
+
+.number {
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: var(--step-display);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 0.86;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: color var(--duration-hover) ease;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  margin-top: 1.2rem;
+}
+
+.call {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  min-height: 5.6rem;
+  padding: 1.4rem 3.2rem;
+  border-radius: var(--shape-pill);
+  background: var(--color-red);
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    background-color var(--duration-hover) ease,
+    transform var(--duration-press) var(--ease-out);
+}
+
+.call:active {
+  transform: scale(0.97);
+}
+
+/* Le bouton contour reprend la forme pastille des autres boutons de la refonte. */
+.actions > a:last-child {
+  min-height: 5.6rem;
+  padding-inline: 2.8rem;
+  border-radius: var(--shape-pill);
+  font-size: 1.6rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .number:hover {
+    color: rgb(var(--rgb-white) / 0.85);
+  }
+
+  .call:hover {
+    background-color: var(--color-red-hover);
+  }
+}
+
+@media (max-width: 539px) {
+  .actions,
+  .actions > a {
+    width: 100%;
+  }
+}

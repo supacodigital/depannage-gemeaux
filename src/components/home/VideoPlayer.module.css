@@ -1,0 +1,72 @@
+.player {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.6rem;
+  background: var(--color-blue);
+  aspect-ratio: 16 / 9;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.controls {
+  position: absolute;
+  left: 1.2rem;
+  bottom: 1.2rem;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.control,
+.bigPlay {
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: var(--shape-pill);
+  color: var(--color-white);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-hover) ease,
+    transform var(--duration-press) var(--ease-out);
+}
+
+.control {
+  width: 4.4rem;
+  height: 4.4rem;
+  background: rgb(var(--rgb-black) / 0.55);
+  font-size: 1.6rem;
+  backdrop-filter: blur(4px);
+}
+
+/* Bouton central visible tant que la vidéo n'est pas lancée (et toujours en mouvement réduit). */
+.bigPlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8rem;
+  height: 8rem;
+  background: var(--color-red);
+  font-size: 2.6rem;
+  translate: -50% -50%;
+  box-shadow: 0 8px 24px rgb(var(--rgb-black) / 0.25);
+}
+
+.control:active,
+.bigPlay:active {
+  transform: scale(0.94);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .control:hover {
+    background: rgb(var(--rgb-black) / 0.75);
+  }
+
+  .bigPlay:hover {
+    background: var(--color-red-hover);
+  }
+}
