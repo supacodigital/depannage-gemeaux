@@ -3,9 +3,10 @@ import { avis, citations, noteMoyenne } from "@/data/avis";
 import { business } from "@/data/site";
 import SectionHead from "@/components/ui/SectionHead";
 import Icon from "@/components/ui/Icon";
+import CitationsTrack from "./CitationsTrack";
 import styles from "./Citations.module.css";
 
-// Trois extraits d'avis Google, fixes et lisibles (remplacent l'ancien carrousel).
+// Trois extraits d'avis Google : carrousel à faire glisser sur mobile, grille de 3 colonnes sur ordinateur.
 export default function Citations() {
   const note = noteMoyenne.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
@@ -28,21 +29,7 @@ export default function Citations() {
           </p>
         </div>
 
-        <ul className={styles.quotes}>
-          {citations.map((c) => (
-            <li key={c.nom}>
-              <figure className={styles.quote}>
-                <blockquote>
-                  <p>« {c.texte} »</p>
-                </blockquote>
-                <figcaption>
-                  <strong>{c.nom}</strong>
-                  <span>{c.date}</span>
-                </figcaption>
-              </figure>
-            </li>
-          ))}
-        </ul>
+        <CitationsTrack citations={citations} />
 
         <a href={business.google.shareUrl} target="_blank" rel="noopener noreferrer" className={styles.all}>
           Lire les {avis.length} avis sur Google
