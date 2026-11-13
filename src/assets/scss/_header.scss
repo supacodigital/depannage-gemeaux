@@ -1,0 +1,295 @@
+// === HEADER ===
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 200;
+  background: #fff;
+  border-bottom: 1px solid rgba(42, 63, 88, 0.1);
+  transition: box-shadow 0.25s ease;
+
+  &.menu-open {
+    box-shadow: none;
+  }
+
+  &__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2.4rem;
+    height: 7.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // Logo
+  &__logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    img {
+      height: 4.8rem;
+      width: auto;
+    }
+  }
+
+  // Nav desktop — centré
+  &__nav {
+    display: none;
+
+    @media (min-width: 900px) {
+      display: flex;
+      align-items: center;
+      gap: 3.2rem;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__link {
+    position: relative;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #2a3f58;
+    text-decoration: none;
+    padding-bottom: 0.3rem;
+    letter-spacing: 0.01em;
+    transition: color 0.2s ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #bf2432;
+      border-radius: 2px;
+      transition: width 0.25s ease;
+    }
+
+    &:hover,
+    &.active {
+      color: #bf2432;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  // CTA desktop
+  &__cta {
+    display: none;
+
+    @media (min-width: 900px) {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: #bf2432;
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 600;
+      padding: 1rem 2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.15s ease;
+      flex-shrink: 0;
+
+      svg {
+        font-size: 1.3rem;
+      }
+
+      &:hover {
+        background: #a01e2a;
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  // Burger mobile
+  &__burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: #2a3f58;
+    cursor: pointer;
+    padding: 0.4rem;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #bf2432;
+    }
+
+    @media (min-width: 900px) {
+      display: none;
+    }
+  }
+}
+
+// === DRAWER MOBILE ===
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2.4rem 3.2rem;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.12);
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 7.2rem;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(42, 63, 88, 0.1);
+  }
+
+  &__logo {
+    height: 4rem;
+    width: auto;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: #2a3f58;
+    cursor: pointer;
+    padding: 0.4rem;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #bf2432;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 2.4rem 0;
+    flex: 1;
+  }
+
+  &__link {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #2a3f58;
+    text-decoration: none;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(42, 63, 88, 0.07);
+    transition: color 0.2s ease, padding-left 0.2s ease;
+
+    &:hover,
+    &.active {
+      color: #bf2432;
+      padding-left: 0.8rem;
+    }
+  }
+
+  &__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    background: #bf2432;
+    color: #fff;
+    padding: 1.2rem 1.6rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+
+    svg {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    span {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &:hover {
+      background: #a01e2a;
+    }
+  }
+
+  &__cta-label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  &__cta-tel {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 300;
+    backdrop-filter: blur(2px);
+  }
+}
+
+// === FAB TÉLÉPHONE MOBILE ===
+
+.fab-tel {
+  position: fixed;
+  bottom: 2.4rem;
+  right: 2.4rem;
+  z-index: 250;
+  width: 5.6rem;
+  height: 5.6rem;
+  background: #bf2432;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  box-shadow: 0 4px 16px rgba(191, 36, 50, 0.4);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background: #a01e2a;
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(191, 36, 50, 0.5);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  @media (min-width: 900px) {
+    display: none;
+  }
+}

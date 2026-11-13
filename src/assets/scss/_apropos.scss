@@ -1,0 +1,341 @@
+// === À PROPOS ===
+
+.apropos {
+
+  // ── HERO ─────────────────────────────────────────────
+  &__hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12rem 2.4rem 6rem;
+    background-color: #1a2b3c;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+      url("/tarifs.webp");
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+  }
+
+  &__hero-content {
+    max-width: 72rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__hero-badge {
+    display: inline-block;
+    background: rgba(191, 36, 50, 0.85);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.4rem;
+    border-radius: 99px;
+  }
+
+  &__hero h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+
+    @media (min-width: 768px) { font-size: 6.4rem; }
+  }
+
+  &__hero-accent { color: #bf2432; }
+
+  &__hero p {
+    font-size: 1.6rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 56rem;
+    line-height: 1.7;
+  }
+
+  &__hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+    margin-top: 0.8rem;
+  }
+
+  // ── CHIFFRES CLÉS ─────────────────────────────────────
+  &__chiffres {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background: #2a3f58;
+
+    @media (min-width: 640px) { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  &__chiffre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 3.2rem 2rem;
+    text-align: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    &:nth-child(2n) { border-right: none; }
+
+    @media (min-width: 640px) {
+      border-bottom: none;
+      &:nth-child(2n) { border-right: 1px solid rgba(255, 255, 255, 0.08); }
+      &:last-child { border-right: none; }
+    }
+  }
+
+  &__chiffre-val {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #bf2432;
+    line-height: 1;
+  }
+
+  &__chiffre-label {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  // ── PRÉSENTATION ──────────────────────────────────────
+  &__presentation {
+    padding: 8rem 2.4rem;
+    background: #fff;
+
+    &-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4.8rem;
+      align-items: center;
+
+      @media (min-width: 900px) {
+        flex-direction: row;
+        gap: 6.4rem;
+      }
+    }
+
+    &-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+
+      h2 {
+        font-size: 2.6rem;
+        font-weight: 700;
+        color: #2a3f58;
+        border-left: 4px solid #bf2432;
+        padding-left: 1.6rem;
+        line-height: 1.3;
+
+        @media (min-width: 768px) { font-size: 3.2rem; }
+      }
+
+      p {
+        font-size: 1.5rem;
+        color: #555;
+        line-height: 1.75;
+      }
+    }
+
+    &-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-top: 0.8rem;
+    }
+
+    &-logo {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__logo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    img {
+      width: 24rem;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  &__logo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: #f7f8fa;
+    border: 1.5px solid rgba(42, 63, 88, 0.1);
+    border-radius: 99px;
+    padding: 0.8rem 1.6rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2a3f58;
+
+    svg { color: #bf2432; font-size: 1.4rem; }
+  }
+
+  // ── VALEURS ────────────────────────────────────────────
+  &__valeurs {
+    padding: 8rem 2.4rem;
+    background: #f7f8fa;
+
+    &-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    &-header {
+      text-align: center;
+
+      h2 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #2a3f58;
+        margin-bottom: 1.2rem;
+      }
+
+      p {
+        font-size: 1.5rem;
+        color: #666;
+      }
+    }
+
+    &-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+
+      @media (min-width: 640px) { grid-template-columns: repeat(2, 1fr); }
+      @media (min-width: 900px) { grid-template-columns: repeat(4, 1fr); }
+    }
+  }
+
+  &__valeur-card {
+    background: #fff;
+    border: 1.5px solid rgba(42, 63, 88, 0.08);
+    border-radius: 1.2rem;
+    padding: 2.8rem 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+      transform: translateY(-2px);
+    }
+
+    h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #2a3f58;
+    }
+
+    p {
+      font-size: 1.4rem;
+      color: #666;
+      line-height: 1.7;
+    }
+  }
+
+  &__valeur-icon {
+    width: 4.8rem;
+    height: 4.8rem;
+    background: rgba(191, 36, 50, 0.08);
+    border-radius: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      font-size: 2rem;
+      color: #bf2432;
+    }
+  }
+
+  // ── ZONE INTERVENTION ──────────────────────────────────
+  &__zone {
+    padding: 8rem 2.4rem;
+    background: #fff;
+
+    &-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4.8rem;
+      align-items: center;
+
+      @media (min-width: 900px) {
+        flex-direction: row;
+        gap: 6.4rem;
+      }
+    }
+
+    &-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+
+      h2 {
+        font-size: 2.6rem;
+        font-weight: 700;
+        color: #2a3f58;
+        border-left: 4px solid #bf2432;
+        padding-left: 1.6rem;
+        line-height: 1.3;
+
+        @media (min-width: 768px) { font-size: 3.2rem; }
+      }
+
+      p {
+        font-size: 1.5rem;
+        color: #555;
+        line-height: 1.75;
+      }
+    }
+
+    &-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-top: 0.8rem;
+    }
+
+    &-map {
+      flex: 1;
+      width: 100%;
+      height: 40rem;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    }
+  }
+}
