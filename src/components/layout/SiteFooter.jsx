@@ -28,7 +28,7 @@ export default function SiteFooter() {
       <div className={styles.inner}>
         <div className={styles.brand}>
           <Link href="/" aria-label={`${business.name} — Accueil`}>
-            <img src="/logo2.svg" alt="" className={styles.logo} width="68" height="48" />
+            <img src="/logo-fond-sombre.svg" alt="" className={styles.logo} width="68" height="48" />
           </Link>
           <p className={styles.tagline}>Dépannage serrurerie disponible 24h/24 et 7j/7.</p>
           <a href={business.phone.href} className={styles.tel} aria-label={`Appeler le ${business.phone.display}`}>

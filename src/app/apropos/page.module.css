@@ -22,8 +22,9 @@
   border-right: none;
 }
 
+/* Blanc et non rouge : le rouge sur ce bleu ne donne que 1,8:1. */
 .chiffreVal {
-  color: var(--color-red);
+  color: var(--color-white);
   font-size: 3.2rem;
   font-weight: 700;
   line-height: 1;
