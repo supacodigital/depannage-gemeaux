@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { faPhoneFlip } from "@fortawesome/free-solid-svg-icons";
 import { business, mainNav } from "@/data/site";
+import { forfait, formatPrix } from "@/data/tarifs";
 import { cx } from "@/lib/cx";
 import Icon from "@/components/ui/Icon";
 import NavLink from "./NavLink";
@@ -116,11 +117,17 @@ export default function SiteHeader() {
           ))}
         </nav>
 
-        <a href={business.phone.href} className={styles.drawerCta} aria-label={callLabel}>
-          <Icon icon={faPhoneFlip} />
-          <span>
-            <span className={styles.drawerCtaLabel}>Appel dépannage</span>
-            <span className={styles.drawerCtaTel}>{business.phone.display}</span>
+        {/* Bloc d'appel : un seul lien sur toute la surface, la plus grande cible possible dans l'urgence. */}
+        <a href={business.phone.href} className={styles.drawerCall} aria-label={`${callLabel}, dépannage 24h/24`}>
+          <span className={styles.drawerLabel}>
+            <span className={styles.drawerPill} />
+            Dépannage 24h/24 · 7j/7
+          </span>
+          <span className={styles.drawerNumber}>{business.phone.display}</span>
+          <span className={styles.drawerNote}>Dès {formatPrix(forfait.min)} · prix annoncé avant de se déplacer</span>
+          <span className={styles.drawerButton}>
+            <Icon icon={faPhoneFlip} />
+            Appeler maintenant
           </span>
         </a>
       </div>

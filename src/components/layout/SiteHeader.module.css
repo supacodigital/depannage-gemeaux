@@ -147,7 +147,9 @@
   width: 100%;
   height: 100vh;
   height: 100dvh;
-  padding: 0 var(--gutter) 3.2rem;
+  padding: 0 var(--gutter) 2.4rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: var(--color-white);
   box-shadow: var(--shadow-drawer);
   transform: translateX(100%);
@@ -178,7 +180,7 @@
   flex: 1;
   flex-direction: column;
   gap: 0.4rem;
-  padding: var(--gutter) 0;
+  padding: 1.6rem 0 2.4rem;
 }
 
 .drawerLink {
@@ -188,6 +190,7 @@
   font-family: var(--font-display);
   font-size: 2.6rem;
   font-weight: 700;
+  line-height: 1.2;
   /* Décalage par padding (et non translate) : seul le texte bouge, pas la bordure du dessous. */
   transition:
     color var(--duration-hover) ease,
@@ -199,45 +202,87 @@
   color: var(--color-red);
 }
 
-.drawerCta {
+/* --- Bloc d'appel du menu : un hero en miniature --- */
+
+.drawerCall {
+  display: grid;
+  flex-shrink: 0;
+  gap: 1.2rem;
+  padding: 2.4rem 2rem 2rem;
+  border-radius: 1.6rem;
+  background: var(--color-blue);
+  color: var(--color-white);
+  transition: transform var(--duration-press) var(--ease-out);
+}
+
+.drawerCall:active {
+  transform: scale(0.98);
+}
+
+.drawerLabel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-on-dark-soft);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.drawerPill {
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 1rem;
+  border-radius: var(--shape-pill);
+  background: var(--color-red);
+}
+
+/* Le numéro mesure 5,86 em : 13vw - 0,4rem le garde dans le bloc dès 320 px. */
+.drawerNumber {
+  font-family: var(--font-display);
+  font-size: min(calc(13vw - 0.4rem), 5.6rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.drawerNote {
+  color: var(--color-on-dark-soft);
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+.drawerButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.2rem;
-  padding: 1.2rem 1.6rem;
+  gap: 1rem;
+  min-height: 5.6rem;
+  margin-top: 0.4rem;
   border-radius: var(--shape-pill);
   background: var(--color-red);
-  color: var(--color-white);
-  transition:
-    background-color var(--duration-hover) ease,
-    transform var(--duration-press) var(--ease-out);
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: background-color var(--duration-hover) ease;
 }
 
-.drawerCta:active {
-  transform: scale(0.97);
-}
-
-.drawerCta > svg {
+.drawerButton > svg {
   font-size: 1.6rem;
 }
 
-.drawerCta > span {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.drawerCtaLabel {
-  font-size: 1.1rem;
-  font-weight: 500;
-  opacity: 0.85;
-}
-
-.drawerCtaTel {
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+/* Écrans très courts : on retire la ligne de prix pour garder le bouton visible sans défiler. */
+@media (max-height: 640px) {
+  .drawerNote {
+    display: none;
+  }
 }
 
 .overlay {
@@ -303,7 +348,7 @@
     color: var(--color-red);
   }
 
-  .drawerCta:hover,
+  .drawerCall:hover .drawerButton,
   .fab:hover {
     background-color: var(--color-red-hover);
   }
