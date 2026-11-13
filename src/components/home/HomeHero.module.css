@@ -215,12 +215,15 @@
 }
 
 @media (max-width: 767px) {
+  /* Voile le plus léger qui garde chaque texte lisible : contraste mesuré sur les pixels les plus clairs
+     de la photo derrière chaque texte (pire cas 4,6:1 sur le grand titre, ≥ 4,5:1 sur les petits textes).
+     En dessous (0,62 / 0,50 / 0,40), le lien « Toutes nos interventions » tombe à 4,3:1. */
   .hero::after {
     background: linear-gradient(
       180deg,
-      rgb(var(--rgb-blue) / 0.94) 0%,
-      rgb(var(--rgb-blue) / 0.86) 55%,
-      rgb(var(--rgb-blue) / 0.72) 100%
+      rgb(var(--rgb-blue) / 0.7) 0%,
+      rgb(var(--rgb-blue) / 0.58) 55%,
+      rgb(var(--rgb-blue) / 0.48) 100%
     );
   }
 
