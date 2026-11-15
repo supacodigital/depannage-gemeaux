@@ -46,7 +46,7 @@
 }
 
 /* ==========================================================================
-   Forfait dépannage (la feuille qui glisse sur le hero)
+   Forfait dépannage
    ========================================================================== */
 
 .forfait {
@@ -119,6 +119,16 @@
 .nuit td {
   background: var(--color-blue);
   color: var(--color-white);
+}
+
+/* Largeurs de colonnes fractionnaires : un liseré clair peut apparaître entre deux cellules.
+   Une ombre d'un pixel, de la couleur du fond, le comble. */
+.jour :is(th, td):not(:last-child) {
+  box-shadow: 1px 0 0 var(--color-surface);
+}
+
+.nuit :is(th, td):not(:last-child) {
+  box-shadow: 1px 0 0 var(--color-blue);
 }
 
 .table tbody th {
