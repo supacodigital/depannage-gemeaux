@@ -36,11 +36,12 @@
   list-style: none;
 }
 
-/* Carte : pictogramme et titre côte à côte, description en dessous sur toute la largeur. */
+/* Carte : pictogramme et titre côte à côte, description en dessous sur toute la largeur,
+   lien vers les tarifs en pied de carte (aligné d'une carte à l'autre grâce à la ligne 1fr). */
 .card {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  align-content: start;
+  grid-template-rows: auto 1fr auto;
   align-items: center;
   column-gap: 1.6rem;
   row-gap: 1.4rem;
@@ -72,9 +73,45 @@
 
 .card p {
   grid-column: 1 / -1;
+  align-self: start;
   color: var(--color-ink-soft);
   font-size: 1.6rem;
   line-height: 1.45;
+}
+
+/* Lien discret vers les tarifs : encre et soulignement, pas de rouge (réservé à l'appel). */
+.more {
+  display: inline-flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-self: start;
+  gap: 0.6rem;
+  /* Zone tactile de 44 px de haut, sans changer l'espacement visible (marges négatives). */
+  min-height: 4.4rem;
+  margin-block: -0.9rem -1.1rem;
+  color: var(--color-ink);
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-line-strong);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color var(--duration-hover) ease;
+}
+
+.more > svg {
+  font-size: 1.2rem;
+  transition: translate var(--duration-hover) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .more:hover {
+    text-decoration-color: var(--color-ink);
+  }
+
+  .more:hover > svg {
+    translate: 0.3rem 0;
+  }
 }
 
 .cta {

@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { situations } from "@/data/situations";
 import SectionHead from "@/components/ui/SectionHead";
 import Icon from "@/components/ui/Icon";
@@ -25,6 +27,10 @@ export default function Situations() {
               </span>
               <h3>{s.titre}</h3>
               <p>{s.texte}</p>
+              <Link href="/tarifs" className={styles.more}>
+                Voir les tarifs
+                <Icon icon={faArrowRight} />
+              </Link>
             </li>
           ))}
         </ul>
