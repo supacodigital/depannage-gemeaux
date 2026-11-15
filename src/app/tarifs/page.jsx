@@ -1,22 +1,30 @@
 import {
-  faChevronRight,
   faCircleInfo,
   faFileArrowDown,
-  faKey,
   faLocationDot,
-  faLock,
-  faPhoneFlip,
-  faShield,
+  faMoon,
+  faSun,
   faWrench,
 } from "@fortawesome/free-solid-svg-icons";
-import { SITE_URL, business, documents } from "@/data/site";
-import { conditions, formatPrix, forfait, fournitures, horsForfait, ouvertures, paiement } from "@/data/tarifs";
+import { SITE_URL, business, documents, listeVilles } from "@/data/site";
+import {
+  conditions,
+  formatMontant,
+  formatPrix,
+  forfait,
+  fournitures,
+  horsForfait,
+  ouvertures,
+  paiement,
+} from "@/data/tarifs";
 import { BUSINESS_ID, pageMetadata } from "@/lib/seo";
 import { cx } from "@/lib/cx";
-import Button from "@/components/ui/Button";
+import PageHero, { HeroLink } from "@/components/ui/PageHero";
+import Sheet from "@/components/ui/Sheet";
+import SectionHead from "@/components/ui/SectionHead";
+import CallButton from "@/components/ui/CallButton";
+import AppelFinal from "@/components/ui/AppelFinal";
 import Icon from "@/components/ui/Icon";
-import Bando from "@/components/ui/Bando";
-import ArtisanNote from "@/components/ui/ArtisanNote";
 import JsonLd from "@/components/seo/JsonLd";
 import styles from "./page.module.css";
 
@@ -27,10 +35,8 @@ export const metadata = pageMetadata({
   ogDescription: `Forfait dépannage de ${forfait.min} € à ${forfait.max} €, prix des ouvertures et des fournitures. Serrurier à Lannion, Guingamp et dans l'ouest des Côtes-d'Armor.`,
 });
 
-const ICONS = { key: faKey, lock: faLock, shield: faShield };
-
-// Niveau de prix du forfait, pour le code couleur du tableau.
-const LEVELS = { [forfait.min]: "base", [forfait.max]: "max" };
+// Pictogramme de chaque ligne du forfait : la journée, le soir et la nuit.
+const ROW_ICONS = { jour: faSun, nuit: faMoon };
 
 const priceSpec = (prix, fromPrice) =>
   fromPrice
@@ -79,67 +85,54 @@ const jsonLd = {
   ],
 };
 
-export default function TarifsPage() {
-  const callLabel = `Appeler le ${business.phone.display}`;
+// Prix composé en Barlow : le montant en grand, le symbole € plus petit.
+function Prix({ value, from = false, unit, className }) {
+  return (
+    <span className={cx(styles.prix, className)}>
+      {from && <span className={styles.from}>À partir de </span>}
+      <span className={styles.amount}>{formatMontant(value)}</span>
+      <span className={styles.unit}>
+        {" €"}
+        {unit}
+      </span>
+    </span>
+  );
+}
 
+// Page Tarifs : le visiteur vient pour le prix. On répond à sa question (combien ça coûte, quand le prix
+// est annoncé), puis le forfait en grand, les compléments (ouvertures, fournitures) et les documents officiels.
+export default function TarifsPage() {
   return (
     <main id="main-content">
       <JsonLd data={jsonLd} />
 
-      {/* INTRO */}
-      <section className={styles.intro}>
-        <div className={styles.introInner}>
-          <div className={styles.badge} style={{ "--i": 0 }}>
-            Tarifs transparents — sans surprise
-          </div>
-          <h1 style={{ "--i": 1 }}>
-            Forfait dépannage&nbsp;: <span className={styles.accent}>dès {formatPrix(forfait.min)}</span>
-          </h1>
-          <p style={{ "--i": 2 }}>
-            Un forfait unique sur tout notre secteur, de {formatPrix(forfait.min)} à {formatPrix(forfait.max)} selon le
-            jour et l&apos;heure. Sans frais cachés.
-          </p>
-          <div className={styles.details} style={{ "--i": 3 }}>
-            <div className={styles.detail}>
-              <Icon icon={faWrench} />
-              <span>
-                Main d&apos;œuvre supp.&nbsp;: <strong>{formatPrix(horsForfait.mainOeuvreHeure)}/h</strong>
-              </span>
-            </div>
-            <div className={styles.detail}>
-              <Icon icon={faLocationDot} />
-              <span>
-                Hors zone&nbsp;: <strong>{formatPrix(horsForfait.deplacementKm)}/km</strong>
-              </span>
-            </div>
-          </div>
-          <div className={styles.introActions} style={{ "--i": 4 }}>
-            <Button href={business.phone.href} aria-label={callLabel}>
-              <Icon icon={faPhoneFlip} />
-              Appeler maintenant
-            </Button>
-            <Button href="/contact" variant="outlineBlue">
-              Demander un devis
-              <Icon icon={faChevronRight} />
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Le hero reste immobile pendant que le forfait glisse par-dessus. */}
+      <div>
+        <PageHero
+          id="tarifs-title"
+          label="Tarifs · Devis gratuit"
+          title="Combien coûte le serrurier ?"
+          answer={`Le prix vous est annoncé au téléphone, avant le déplacement. Voici nos tarifs à ${listeVilles(business.sectors.main)} et alentours.`}
+          actions={
+            <>
+              <CallButton stretch />
+              <HeroLink href={documents.tarifs} icon={faFileArrowDown} aria-label="Grille tarifaire complète (PDF, nouvel onglet)">
+                Grille tarifaire (PDF)
+              </HeroLink>
+            </>
+          }
+        />
 
-      <Bando />
+        {/* --- Forfait dépannage --- */}
+        <Sheet className={styles.forfait} aria-labelledby="forfait-title">
+          <div className={styles.inner}>
+            <SectionHead
+              id="forfait-title"
+              eyebrow="Forfait dépannage"
+              title="Un seul forfait, selon le jour et l'heure"
+              intro="Le même prix sur toute la zone, de Lannion à Saint-Brieuc. Le tarif de nuit s'applique dès que l'appel ou l'intervention a lieu entre 19h et 9h."
+            />
 
-      {/* FORFAIT */}
-      <section className={styles.section} aria-labelledby="forfait-title" data-reveal>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <h2 id="forfait-title">Forfait dépannage</h2>
-            <p>
-              Le tarif dépend du jour et de l&apos;heure. Le tarif de nuit s&apos;applique dès que l&apos;appel ou
-              l&apos;intervention a lieu entre 19h et 9h.
-            </p>
-          </div>
-
-          <div className={styles.tableWrap}>
             <table className={styles.table}>
               <caption className={styles.srOnly}>Forfait dépannage selon le jour et l&apos;heure</caption>
               <thead>
@@ -147,156 +140,157 @@ export default function TarifsPage() {
                   <td />
                   {forfait.columns.map((col) => (
                     <th key={col.id} scope="col">
-                      <span className={styles.tableTime}>{col.label}</span>
-                      <span className={styles.tableSub}>{col.sub}</span>
+                      <span className={styles.colLabel}>{col.label}</span>
+                      <span className={styles.colSub}>{col.sub}</span>
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {forfait.rows.map((row) => (
-                  <tr key={row.id}>
+                  <tr key={row.id} className={styles[row.id]}>
                     <th scope="row">
-                      <span className={styles.tableLabel}>{row.label}</span>
-                      <span className={styles.tableRowSub}>{row.sub}</span>
+                      <span className={styles.rowHead}>
+                        <span className={styles.rowIcon} aria-hidden="true">
+                          <Icon icon={ROW_ICONS[row.id]} />
+                        </span>
+                        <span className={styles.rowText}>
+                          <span className={styles.rowLabel}>{row.sub}</span>
+                          <span className={styles.rowHours}>{row.label}</span>
+                        </span>
+                      </span>
                     </th>
-                    {forfait.columns.map((col) => {
-                      const prix = row.prices[col.id];
-                      const level = LEVELS[prix] ?? "high";
-                      return (
-                        <td key={col.id}>
-                          <span className={cx(styles.price, styles[level])}>{formatPrix(prix)}</span>
-                        </td>
-                      );
-                    })}
+                    {forfait.columns.map((col) => (
+                      <td key={col.id}>
+                        <Prix value={row.prices[col.id]} className={styles.forfaitPrix} />
+                      </td>
+                    ))}
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
 
-          <div className={styles.zone}>
-            <div className={styles.zoneBlock}>
-              <h3>
-                <Icon icon={faLocationDot} />
-                Zone du forfait
-              </h3>
-              <p>{forfait.zone}</p>
-              <p>
-                Notamment <strong>{forfait.zoneCities.join(", ")}</strong>.
-              </p>
-            </div>
-            <div className={styles.zoneBlock}>
-              <h3>
-                <Icon icon={faWrench} />
-                En dehors du forfait
-              </h3>
-              <ul>
-                <li>
-                  Main d&apos;œuvre&nbsp;: <strong>{formatPrix(horsForfait.mainOeuvreHeure)} de l&apos;heure</strong>
-                </li>
-                <li>
-                  Déplacement hors zone&nbsp;: <strong>{formatPrix(horsForfait.deplacementKm)} par km</strong> routier
-                  parcouru (aller et retour), avec un minimum de {formatPrix(horsForfait.deplacementMinimum)}
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* OUVERTURES */}
-      <section className={cx(styles.section, styles.sectionAlt)} aria-labelledby="ouvertures-title" data-reveal>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <h2 id="ouvertures-title">Ouvertures</h2>
-            <p>Tarifs des prestations d&apos;ouverture, en complément du forfait dépannage.</p>
-          </div>
-
-          <ul className={styles.list}>
-            {ouvertures.map((o) => (
-              <li key={o.label} className={styles.listRow}>
-                <span className={styles.listLeft}>
-                  <span className={styles.listIcon}>
-                    <Icon icon={ICONS[o.icon]} />
+            <div className={styles.cards}>
+              <div className={styles.card}>
+                <h3>
+                  <span className={styles.cardIcon} aria-hidden="true">
+                    <Icon icon={faLocationDot} />
                   </span>
-                  {o.label}
-                </span>
-                <span className={styles.listPrix}>{formatPrix(o.prix, { from: o.fromPrice })}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+                  Zone du forfait
+                </h3>
+                <p>{forfait.zone}</p>
+                <p className={styles.villes}>Notamment {listeVilles(forfait.zoneCities)}.</p>
+              </div>
 
-      {/* FOURNITURES */}
-      <section className={styles.section} aria-labelledby="fournitures-title" data-reveal>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <h2 id="fournitures-title">Fournitures courantes</h2>
-            <p>Tarifs des fournitures posées lors de l&apos;intervention. Autres fournitures disponibles sur demande.</p>
-          </div>
-
-          <ul className={styles.fournitures}>
-            {fournitures.map((f, i) => (
-              <li key={f.label} className={styles.card} data-reveal style={{ "--reveal-delay": `${i * 60}ms` }}>
-                <Icon icon={faKey} className={styles.cardIcon} />
-                <span className={styles.cardLabel}>{f.label}</span>
-                <span className={styles.cardPrix}>{formatPrix(f.prix, { from: f.fromPrice })}</span>
-                {f.note && <span className={styles.cardNote}>{f.note}</span>}
-              </li>
-            ))}
-          </ul>
-
-          <div className={styles.note}>
-            <Icon icon={faCircleInfo} />
-            <div>
-              {conditions.map((c) => (
-                <p key={c}>{c}</p>
-              ))}
-              <p>
-                <strong>{paiement}</strong>
-              </p>
+              <div className={styles.card}>
+                <h3>
+                  <span className={styles.cardIcon} aria-hidden="true">
+                    <Icon icon={faWrench} />
+                  </span>
+                  En dehors du forfait
+                </h3>
+                <dl className={styles.extras}>
+                  <div>
+                    <dt>Heure de main-d&apos;œuvre supplémentaire</dt>
+                    <dd>
+                      <Prix value={horsForfait.mainOeuvreHeure} unit=" / h" />
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>
+                      Déplacement hors zone
+                      <span className={styles.dtNote}>
+                        Par km routier, aller et retour, minimum {formatPrix(horsForfait.deplacementMinimum)}
+                      </span>
+                    </dt>
+                    <dd>
+                      <Prix value={horsForfait.deplacementKm} unit=" / km" />
+                    </dd>
+                  </div>
+                </dl>
+              </div>
             </div>
           </div>
+        </Sheet>
+      </div>
 
-          <div className={styles.pdf}>
-            <Icon icon={faFileArrowDown} />
-            <div>
-              <strong>Grille tarifaire complète</strong>
-              <p>Téléchargez notre document officiel au format PDF.</p>
+      {/* --- Ouvertures et fournitures --- */}
+      <section className={styles.complements} aria-labelledby="complements-title">
+        <div className={styles.inner}>
+          <SectionHead
+            id="complements-title"
+            eyebrow="En complément du forfait"
+            title="Ouvertures de porte et fournitures"
+            intro="Selon la porte à ouvrir et le matériel à poser, ces prestations s'ajoutent au forfait dépannage."
+          />
+
+          <div className={styles.lists}>
+            <PriceList id="ouvertures-title" title="Ouvertures" items={ouvertures} />
+            <PriceList id="fournitures-title" title="Fournitures courantes" items={fournitures} />
+          </div>
+
+          <div className={styles.fineprint}>
+            <div className={styles.conditions}>
+              <Icon icon={faCircleInfo} />
+              <div>
+                {conditions.map((c) => (
+                  <p key={c}>{c}</p>
+                ))}
+                <p className={styles.paiement}>{paiement}</p>
+              </div>
             </div>
-            <Button
-              href={documents.tarifs}
-              variant="secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Télécharger la grille tarifaire (PDF, nouvel onglet)"
-            >
-              Télécharger (PDF)
-            </Button>
+
+            <ul className={styles.docs} aria-label="Documents officiels">
+              <li>
+                <a href={documents.tarifs} target="_blank" rel="noopener noreferrer" className={styles.doc}>
+                  <Icon icon={faFileArrowDown} />
+                  <span>
+                    Grille tarifaire complète
+                    <span className={styles.docMeta}>PDF · nouvel onglet</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href={documents.cgv} target="_blank" rel="noopener noreferrer" className={styles.doc}>
+                  <Icon icon={faFileArrowDown} />
+                  <span>
+                    Conditions générales de vente
+                    <span className={styles.docMeta}>
+                      PDF du {documents.cgvDate} · nouvel onglet
+                    </span>
+                  </span>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className={styles.cta} aria-labelledby="cta-title" data-reveal>
-        <div className={styles.ctaInner}>
-          <h2 id="cta-title">Un doute sur le tarif&nbsp;?</h2>
-          <p>Appelez-nous directement, nous vous donnons un devis clair avant toute intervention.</p>
-          <div className={styles.ctaActions}>
-            <Button href={business.phone.href} variant="inverse" aria-label={callLabel}>
-              <Icon icon={faPhoneFlip} />
-              {business.phone.display}
-            </Button>
-            <Button href="/contact" variant="outline">
-              Formulaire de contact
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <ArtisanNote />
+      <AppelFinal
+        label="Devis gratuit · 24h/24"
+        title="Un doute sur le prix ?"
+        text="Appelez avant toute intervention : Jérémy vous dit ce qu'il va faire et ce que ça coûtera, avant de se déplacer."
+      />
     </main>
+  );
+}
+
+// Liste de prix : libellé à gauche, montant à droite, une ligne par prestation.
+function PriceList({ id, title, items }) {
+  return (
+    <section className={styles.list} aria-labelledby={id}>
+      <h3 id={id}>{title}</h3>
+      <ul>
+        {items.map((item) => (
+          <li key={item.label}>
+            <span className={styles.itemLabel}>
+              {item.label}
+              {item.note && <span className={styles.itemNote}>{item.note}</span>}
+            </span>
+            <Prix value={item.prix} from={item.fromPrice} className={styles.itemPrix} />
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }

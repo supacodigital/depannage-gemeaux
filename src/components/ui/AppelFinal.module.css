@@ -40,6 +40,13 @@
   line-height: 0.95;
 }
 
+.text {
+  max-width: 52ch;
+  color: var(--color-on-dark-soft);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
 .number {
   color: var(--color-white);
   font-family: var(--font-display);

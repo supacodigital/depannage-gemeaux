@@ -28,12 +28,12 @@ export const horsForfait = {
 };
 
 export const ouvertures = [
-  { label: "Manuelle", prix: 15, icon: "key" },
-  { label: "Mécanique porte standard", prix: 30, icon: "lock" },
-  { label: "Mécanique porte standard dégradée", prix: 51, icon: "lock" },
-  { label: "Mécanique porte sécurisée", prix: 51, icon: "shield" },
-  { label: "Mécanique porte sécurisée dégradée", prix: 81, icon: "shield" },
-  { label: "Coffre-fort", prix: 480, fromPrice: true, icon: "lock" },
+  { label: "Manuelle", prix: 15 },
+  { label: "Mécanique porte standard", prix: 30 },
+  { label: "Mécanique porte standard dégradée", prix: 51 },
+  { label: "Mécanique porte sécurisée", prix: 51 },
+  { label: "Mécanique porte sécurisée dégradée", prix: 81 },
+  { label: "Coffre-fort", prix: 480, fromPrice: true },
 ];
 
 export const fournitures = [
@@ -52,11 +52,15 @@ export const conditions = [
 
 export const paiement = "Paiement à la prestation. Les chèques ne sont pas acceptés.";
 
-// « 1 234,5 € » → format français, sans décimales inutiles.
-export function formatPrix(value, { from = false } = {}) {
-  const amount = new Intl.NumberFormat("fr-FR", {
-    minimumFractionDigits: Number.isInteger(value) ? 0 : 1,
+// « 1 234,50 » : montant au format français, sans centimes pour un prix rond.
+export function formatMontant(value) {
+  return new Intl.NumberFormat("fr-FR", {
+    minimumFractionDigits: Number.isInteger(value) ? 0 : 2,
     maximumFractionDigits: 2,
   }).format(value);
-  return `${from ? "À partir de " : ""}${amount} €`;
+}
+
+// « 1 234,50 € », précédé de « À partir de » pour un prix plancher.
+export function formatPrix(value, { from = false } = {}) {
+  return `${from ? "À partir de " : ""}${formatMontant(value)} €`;
 }

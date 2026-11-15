@@ -144,7 +144,8 @@
   --step-1: 2rem;     /* chapeaux, texte mis en avant */
   --step-2: 2.6rem;   /* titres de blocs */
   --step-3: clamp(3.2rem, 2.2rem + 2.6vw, 4.8rem);   /* titres de sections */
-  --step-4: clamp(4rem, 2.4rem + 4.4vw, 7.2rem);     /* citations, chiffres */
+  --step-4: clamp(4rem, 2.4rem + 4.4vw, 7.2rem);     /* citations, chiffres, titres des heros intérieurs */
+  --step-lead: clamp(1.8rem, 1.5rem + 0.8vw, 2.4rem); /* réponse sous le titre d'un hero */
   /* Numéro de téléphone : le numéro mesure 5,86 em de large ; 17vw - 1rem le garde dans les marges
      de 320 px jusqu'au plafond de 150 px (marge de sécurité incluse). */
   --step-display: min(calc(16.6vw - 1rem), 15rem);

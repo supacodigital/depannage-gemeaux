@@ -106,7 +106,7 @@
   max-width: 40ch;
   color: var(--color-on-dark-soft);
   font-family: var(--font-body);
-  font-size: clamp(1.8rem, 1.5rem + 0.8vw, 2.4rem);
+  font-size: var(--step-lead);
   font-weight: 600;
   line-height: 1.35;
 }

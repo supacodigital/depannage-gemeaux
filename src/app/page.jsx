@@ -8,7 +8,7 @@ import Situations from "@/components/home/Situations";
 import Citations from "@/components/home/Citations";
 import Artisan from "@/components/home/Artisan";
 import Secteurs from "@/components/home/Secteurs";
-import AppelFinal from "@/components/home/AppelFinal";
+import AppelFinal from "@/components/ui/AppelFinal";
 
 export const metadata = pageMetadata({
   title: "Dépannage Gémeaux — Serrurier urgence Lannion et Guingamp 24h/24",
