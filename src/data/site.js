@@ -79,8 +79,8 @@ export const mainNav = [
 // Les mentions légales (noindex) n'y figurent pas : un sitemap ne liste que des pages à indexer.
 export const pages = [
   { path: "/", priority: 1.0, changeFrequency: "monthly", lastModified: "2026-11-13" },
-  { path: "/serrurerie", priority: 0.9, changeFrequency: "monthly", lastModified: "2026-11-13" },
-  { path: "/tarifs", priority: 0.8, changeFrequency: "monthly", lastModified: "2026-11-13" },
-  { path: "/contact", priority: 0.7, changeFrequency: "yearly", lastModified: "2026-11-13" },
-  { path: "/apropos", priority: 0.6, changeFrequency: "yearly", lastModified: "2026-11-13" },
+  { path: "/serrurerie", priority: 0.9, changeFrequency: "monthly", lastModified: "2026-11-15" },
+  { path: "/tarifs", priority: 0.8, changeFrequency: "monthly", lastModified: "2026-11-15" },
+  { path: "/contact", priority: 0.7, changeFrequency: "yearly", lastModified: "2026-11-15" },
+  { path: "/apropos", priority: 0.6, changeFrequency: "yearly", lastModified: "2026-11-15" },
 ];

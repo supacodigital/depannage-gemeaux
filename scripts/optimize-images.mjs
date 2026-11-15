@@ -14,16 +14,15 @@ const SRC = path.join(ROOT, "assets-src");
 const OUT = path.join(ROOT, "public/images");
 const APP = path.join(ROOT, "src/app");
 
-// Les heros sont assombris à 75-78 % : une qualité modérée y est invisible.
-const HERO_WIDTHS = [640, 1024, 1600, 2400];
 const CONTENT_WIDTHS = [480, 960];
 
 const jobs = [
-  { src: "hero-serrurerie.webp", name: "hero-serrurerie", widths: HERO_WIDTHS, quality: 60 },
-  { src: "hero-apropos.webp", name: "hero-apropos", widths: HERO_WIDTHS, quality: 60 },
+  // Photo paysage recadrée dans le cadre en arche du hero « À propos » : affichée sur 75rem de large au plus.
+  { src: "hero-apropos.webp", name: "hero-apropos", widths: [640, 1024, 1600], quality: 60 },
+  // Cadre en arche du hero « Serrurerie ».
   { src: "cles.jpg", name: "cles", widths: CONTENT_WIDTHS, quality: 72 },
+  // Photo de la section « Un artisan qui décroche » (page Serrurerie).
   { src: "intervention.jpg", name: "intervention", widths: CONTENT_WIDTHS, quality: 72 },
-  { src: "serrurerie-pro.jpg", name: "serrurerie-pro", widths: [480, 600], quality: 75 },
 ];
 
 const kb = async (file) => `${((await stat(file)).size / 1024).toFixed(0)} Ko`;
