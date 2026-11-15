@@ -17,8 +17,6 @@ const APP = path.join(ROOT, "src/app");
 const CONTENT_WIDTHS = [480, 960];
 
 const jobs = [
-  // Photo paysage recadrée dans le cadre en arche du hero « À propos » : affichée sur 75rem de large au plus.
-  { src: "hero-apropos.webp", name: "hero-apropos", widths: [640, 1024, 1600], quality: 60 },
   // Photo de la section « Un artisan qui décroche » (page Serrurerie).
   { src: "intervention.jpg", name: "intervention", widths: CONTENT_WIDTHS, quality: 72 },
 ];
@@ -39,21 +37,74 @@ for (const job of jobs) {
   }
 }
 
-// Photos de fond plein cadre (1672×941) : hero de l'accueil (hero-porte) et de la page Serrurerie (hero-serrure).
-// Version paysage pour ordinateur, et recadrage vertical 4:5 sur le bord droit (la serrure et les mains)
-// pour le mobile (direction artistique via <picture>).
-for (const name of ["hero-porte", "hero-serrure"]) {
-  const src = path.join(SRC, `${name}.png`);
+// Photos de fond plein cadre des heros : version paysage pour ordinateur, et recadrage vertical 4:5
+// pour le mobile (direction artistique via <picture>, voir PageHero).
+// - Par défaut, le recadrage mobile prend le bord droit (la serrure et les mains sur hero-porte et hero-serrure).
+// - `flop` : photo retournée en miroir, pour que le sujet soit à droite et laisse la gauche au texte.
+// - `mobileCenter` : centre du recadrage mobile, en fraction de la largeur (après miroir).
+// Version ordinateur seulement, pour un sujet qui doit rester entier à droite dans un hero bas et large :
+// - `trimLeft` : fraction retirée au bord gauche (après miroir). Sur hero-apropos, elle contient une ombre
+//   en diagonale sur le trottoir, qui dessinerait un « V » une fois la bande répétée en miroir.
+// - `extendLeft` : fraction de largeur (après `trimLeft`) qui ne montre que le mur et le trottoir. Cette bande est
+//   répétée `repeat` fois devant la photo, en alternant miroir et endroit : chaque raccord met face à face deux
+//   colonnes identiques, invisible sur des planches verticales. Le prolongement passe sous la partie dense
+//   du dégradé, côté texte.
+const HEROS = [
+  { name: "hero-porte", src: "hero-porte.png" },
+  { name: "hero-serrure", src: "hero-serrure.png" },
+  // Porte jaune sur bardage noir (3:2) : la porte est à gauche dans l'original, la lanterne à côté.
+  {
+    name: "hero-apropos",
+    src: "hero-apropos.webp",
+    flop: true,
+    mobileCenter: 0.6,
+    trimLeft: 0.08,
+    extendLeft: 0.34,
+    repeat: 3,
+  },
+];
+
+for (const hero of HEROS) {
+  // Miroir appliqué d'abord, sans perte, pour ne pas dépendre de l'ordre des opérations de sharp.
+  const src = hero.flop
+    ? await sharp(path.join(SRC, hero.src)).rotate().flop().png().toBuffer()
+    : path.join(SRC, hero.src);
+  let desktop = src;
+  if (hero.extendLeft) {
+    const meta = await sharp(src).metadata();
+    const trim = Math.round(meta.width * (hero.trimLeft ?? 0));
+    const base = await sharp(src)
+      .extract({ left: trim, top: 0, width: meta.width - trim, height: meta.height })
+      .png()
+      .toBuffer();
+    const w = meta.width - trim;
+    const h = meta.height;
+    const stripWidth = Math.round(w * hero.extendLeft);
+    const strip = await sharp(base).extract({ left: 0, top: 0, width: stripWidth, height: h }).png().toBuffer();
+    const mirrored = await sharp(strip).flop().png().toBuffer();
+    // De droite à gauche à partir de la photo : bande en miroir, bande à l'endroit, bande en miroir…
+    const layers = [{ input: base, left: hero.repeat * stripWidth, top: 0 }];
+    for (let k = 0; k < hero.repeat; k++) {
+      layers.push({ input: k % 2 === 0 ? mirrored : strip, left: (hero.repeat - 1 - k) * stripWidth, top: 0 });
+    }
+    desktop = await sharp({ create: { width: w + hero.repeat * stripWidth, height: h, channels: 3, background: "#000" } })
+      .composite(layers)
+      .png()
+      .toBuffer();
+  }
   for (const width of [640, 1024, 1672]) {
-    const file = path.join(OUT, `${name}-${width}.webp`);
-    await sharp(src).resize({ width, withoutEnlargement: true }).webp({ quality: 74, effort: 6 }).toFile(file);
+    const file = path.join(OUT, `${hero.name}-${width}.webp`);
+    await sharp(desktop).resize({ width, withoutEnlargement: true }).webp({ quality: 74, effort: 6 }).toFile(file);
     console.log(`${path.relative(ROOT, file).padEnd(42)} ${await kb(file)}`);
   }
   const { width: w, height: h } = await sharp(src).metadata();
   const cropWidth = Math.round(h * 0.8); // 4:5
-  const crop = { left: w - cropWidth, top: 0, width: cropWidth, height: h };
+  const left = hero.mobileCenter
+    ? Math.min(w - cropWidth, Math.max(0, Math.round(w * hero.mobileCenter - cropWidth / 2)))
+    : w - cropWidth;
+  const crop = { left, top: 0, width: cropWidth, height: h };
   for (const width of [480, 800]) {
-    const file = path.join(OUT, `${name}-mobile-${width}.webp`);
+    const file = path.join(OUT, `${hero.name}-mobile-${width}.webp`);
     await sharp(src).extract(crop).resize({ width }).webp({ quality: 72, effort: 6 }).toFile(file);
     console.log(`${path.relative(ROOT, file).padEnd(42)} ${await kb(file)}`);
   }

@@ -154,7 +154,7 @@
   background: var(--color-blue-hover);
 }
 
-/* Toute image du cadre (<HeroPhoto> ou portrait) le remplit. */
+/* Toute image passée dans le cadre (prop `media`) le remplit. */
 .media img {
   width: 100%;
   height: 100%;

@@ -1,7 +1,7 @@
 import { faClock, faHandshake, faLocationDot, faShield } from "@fortawesome/free-solid-svg-icons";
 import { business, cities, listeVilles } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
-import PageHero, { HeroLink, HeroPhoto } from "@/components/ui/PageHero";
+import PageHero, { HeroLink } from "@/components/ui/PageHero";
 import SectionHead from "@/components/ui/SectionHead";
 import CallButton from "@/components/ui/CallButton";
 import AppelFinal from "@/components/ui/AppelFinal";
@@ -50,18 +50,7 @@ export default function AproposPage() {
             <HeroLink href="/serrurerie">Ses interventions</HeroLink>
           </>
         }
-        media={
-          business.portrait ? (
-            <img
-              src={business.portrait}
-              alt={`${business.owner}, serrurier, fondateur de ${business.name}`}
-              loading="lazy"
-              decoding="async"
-            />
-          ) : (
-            <HeroPhoto image="hero-apropos" widths={[640, 1024, 1600]} sizes="75rem" position="40% center" />
-          )
-        }
+        photo="hero-apropos"
       />
 
       {/* --- Histoire et chiffres --- */}
