@@ -14,7 +14,6 @@ import styles from "./PageHero.module.css";
 //              Sans media, le symbole du logo occupe la place, en filigrane ; `media={false}` : texte seul,
 //              sur toute la largeur.
 // - `children` : contenu libre sous le titre (numéro de téléphone sur la page Contact).
-// Le hero est collant : la section suivante (<Sheet>) glisse par-dessus, comme sur l'accueil.
 export default function PageHero({ id, label, title, answer, actions, media, children, className }) {
   return (
     <section className={cx(styles.hero, media === false && styles.textOnly, className)} aria-labelledby={id}>

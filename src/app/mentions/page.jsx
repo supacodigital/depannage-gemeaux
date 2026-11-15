@@ -1,7 +1,6 @@
 import { business } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
 import PageHero from "@/components/ui/PageHero";
-import Sheet from "@/components/ui/Sheet";
 import styles from "./page.module.css";
 
 export const metadata = pageMetadata({
@@ -190,36 +189,33 @@ const sections = [
 export default function MentionsPage() {
   return (
     <main id="main-content">
-      {/* Le hero reste immobile pendant que le texte glisse par-dessus. */}
-      <div>
-        <PageHero id="mentions-title" label="Informations légales" title="Mentions légales" media={false}>
-          <p className={styles.updated}>Dernière mise à jour : novembre 2026</p>
-        </PageHero>
+      <PageHero id="mentions-title" label="Informations légales" title="Mentions légales" media={false}>
+        <p className={styles.updated}>Dernière mise à jour : novembre 2026</p>
+      </PageHero>
 
-        <Sheet className={styles.mentions} aria-labelledby="mentions-title">
-          <div className={styles.body}>
-            <nav className={styles.nav} aria-label="Sommaire des mentions légales">
-              <p className={styles.navTitle}>Sommaire</p>
-              <ol>
-                {sections.map((s) => (
-                  <li key={s.id}>
-                    <a href={`#${s.id}`}>{s.titre}</a>
-                  </li>
-                ))}
-              </ol>
-            </nav>
-
-            <div className={styles.content}>
+      <section className={styles.mentions} aria-labelledby="mentions-title">
+        <div className={styles.body}>
+          <nav className={styles.nav} aria-label="Sommaire des mentions légales">
+            <p className={styles.navTitle}>Sommaire</p>
+            <ol>
               {sections.map((s) => (
-                <section key={s.id} id={s.id} className={styles.section}>
-                  <h2>{s.titre}</h2>
-                  {s.contenu}
-                </section>
+                <li key={s.id}>
+                  <a href={`#${s.id}`}>{s.titre}</a>
+                </li>
               ))}
-            </div>
+            </ol>
+          </nav>
+
+          <div className={styles.content}>
+            {sections.map((s) => (
+              <section key={s.id} id={s.id} className={styles.section}>
+                <h2>{s.titre}</h2>
+                {s.contenu}
+              </section>
+            ))}
           </div>
-        </Sheet>
-      </div>
+        </div>
+      </section>
     </main>
   );
 }

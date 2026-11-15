@@ -2,7 +2,6 @@ import { faClock, faLocationDot, faPhoneFlip, faReply } from "@fortawesome/free-
 import { SITE_URL, business, cities, listeVilles } from "@/data/site";
 import { BUSINESS_ID, pageMetadata } from "@/lib/seo";
 import PageHero from "@/components/ui/PageHero";
-import Sheet from "@/components/ui/Sheet";
 import SectionHead from "@/components/ui/SectionHead";
 import CallButton from "@/components/ui/CallButton";
 import Icon from "@/components/ui/Icon";
@@ -59,52 +58,49 @@ export default function ContactPage() {
     <main id="main-content">
       <JsonLd data={jsonLd} />
 
-      {/* Le hero reste immobile pendant que le formulaire glisse par-dessus. */}
-      <div>
-        <PageHero
-          id="contact-title"
-          label="Contact · 24h/24 · 7j/7"
-          title="Bloqué dehors ?"
-          answer="N'attendez pas une réponse écrite : appelez, Jérémy décroche de jour comme de nuit."
-          media={false}
-          actions={<CallButton stretch />}
-        >
-          <a href={phone.href} className={styles.number} aria-label={`Appeler le ${phone.display}`}>
-            {phone.display}
-          </a>
-        </PageHero>
+      <PageHero
+        id="contact-title"
+        label="Contact · 24h/24 · 7j/7"
+        title="Bloqué dehors ?"
+        answer="N'attendez pas une réponse écrite : appelez, Jérémy décroche de jour comme de nuit."
+        media={false}
+        actions={<CallButton stretch />}
+      >
+        <a href={phone.href} className={styles.number} aria-label={`Appeler le ${phone.display}`}>
+          {phone.display}
+        </a>
+      </PageHero>
 
-        {/* --- Formulaire --- */}
-        <Sheet className={styles.ecrire} aria-labelledby="formulaire-title">
-          <div className={styles.inner}>
-            <SectionHead
-              id="formulaire-title"
-              eyebrow="Pas urgent ?"
-              title="Écrivez-nous"
-              intro="Devis, changement de serrure, question : décrivez votre besoin, Jérémy vous répond sous 24h."
-              className={styles.head}
-            />
+      {/* --- Formulaire --- */}
+      <section className={styles.ecrire} aria-labelledby="formulaire-title">
+        <div className={styles.inner}>
+          <SectionHead
+            id="formulaire-title"
+            eyebrow="Pas urgent ?"
+            title="Écrivez-nous"
+            intro="Devis, changement de serrure, question : décrivez votre besoin, Jérémy vous répond sous 24h."
+            className={styles.head}
+          />
 
-            <div className={styles.formCard}>
-              <ContactForm />
-            </div>
-
-            <ul className={styles.infos}>
-              {infos.map((info) => (
-                <li key={info.titre}>
-                  <span className={styles.infoIcon} aria-hidden="true">
-                    <Icon icon={info.icon} />
-                  </span>
-                  <span className={styles.infoText}>
-                    <strong>{info.titre}</strong>
-                    <span>{info.contenu}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
+          <div className={styles.formCard}>
+            <ContactForm />
           </div>
-        </Sheet>
-      </div>
+
+          <ul className={styles.infos}>
+            {infos.map((info) => (
+              <li key={info.titre}>
+                <span className={styles.infoIcon} aria-hidden="true">
+                  <Icon icon={info.icon} />
+                </span>
+                <span className={styles.infoText}>
+                  <strong>{info.titre}</strong>
+                  <span>{info.contenu}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </main>
   );
 }

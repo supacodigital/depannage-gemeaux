@@ -5,7 +5,6 @@ import { faq } from "@/data/faq";
 import { services } from "@/data/services";
 import { BUSINESS_ID, pageMetadata } from "@/lib/seo";
 import PageHero, { HeroLink, HeroPhoto } from "@/components/ui/PageHero";
-import Sheet from "@/components/ui/Sheet";
 import SectionHead from "@/components/ui/SectionHead";
 import CallButton from "@/components/ui/CallButton";
 import AppelFinal from "@/components/ui/AppelFinal";
@@ -69,53 +68,50 @@ export default function SerrureriePage() {
     <main id="main-content">
       <JsonLd data={jsonLd} />
 
-      {/* Le hero reste immobile pendant que les interventions glissent par-dessus. */}
-      <div>
-        <PageHero
-          id="serrurerie-title"
-          label="Dépannage serrurerie · 24h/24"
-          title="Bloqué dehors, serrure abîmée, effraction ?"
-          answer={`Serrurier d'urgence à ${listeVilles(business.sectors.main)} : ouverture de porte, changement de serrure, sécurisation. De jour comme de nuit.`}
-          actions={
-            <>
-              <CallButton stretch />
-              <HeroLink href="/tarifs">Voir les tarifs</HeroLink>
-            </>
-          }
-          media={<HeroPhoto image="cles" position="62% center" />}
-        />
+      <PageHero
+        id="serrurerie-title"
+        label="Dépannage serrurerie · 24h/24"
+        title="Bloqué dehors, serrure abîmée, effraction ?"
+        answer={`Serrurier d'urgence à ${listeVilles(business.sectors.main)} : ouverture de porte, changement de serrure, sécurisation. De jour comme de nuit.`}
+        actions={
+          <>
+            <CallButton stretch />
+            <HeroLink href="/tarifs">Voir les tarifs</HeroLink>
+          </>
+        }
+        media={<HeroPhoto image="cles" position="62% center" />}
+      />
 
-        {/* --- Interventions --- */}
-        <Sheet className={styles.services} aria-labelledby="services-title">
-          <div className={styles.inner}>
-            <SectionHead
-              id="services-title"
-              eyebrow="Nos interventions"
-              title="Ce que Jérémy fait pour vous"
-              intro="Sur porte standard comme sur porte sécurisée, de jour comme de nuit, week-ends et jours fériés compris."
-            />
+      {/* --- Interventions --- */}
+      <section className={styles.services} aria-labelledby="services-title">
+        <div className={styles.inner}>
+          <SectionHead
+            id="services-title"
+            eyebrow="Nos interventions"
+            title="Ce que Jérémy fait pour vous"
+            intro="Sur porte standard comme sur porte sécurisée, de jour comme de nuit, week-ends et jours fériés compris."
+          />
 
-            <ul className={styles.grid}>
-              {services.map((s) => (
-                <li key={s.titre} className={styles.card}>
-                  <span className={styles.icon} aria-hidden="true">
-                    <Icon icon={s.icon} />
-                  </span>
-                  <h3>{s.titre}</h3>
-                  <p>{s.texte}</p>
-                </li>
-              ))}
-
-              {/* Dernière case : la situation qui n'est pas dans la liste. */}
-              <li className={styles.cardCall}>
-                <h3>Autre problème ?</h3>
-                <p>Décrivez-le au téléphone : Jérémy vous dit tout de suite ce qu&apos;il peut faire.</p>
-                <CallButton stretch />
+          <ul className={styles.grid}>
+            {services.map((s) => (
+              <li key={s.titre} className={styles.card}>
+                <span className={styles.icon} aria-hidden="true">
+                  <Icon icon={s.icon} />
+                </span>
+                <h3>{s.titre}</h3>
+                <p>{s.texte}</p>
               </li>
-            </ul>
-          </div>
-        </Sheet>
-      </div>
+            ))}
+
+            {/* Dernière case : la situation qui n'est pas dans la liste. */}
+            <li className={styles.cardCall}>
+              <h3>Autre problème ?</h3>
+              <p>Décrivez-le au téléphone : Jérémy vous dit tout de suite ce qu&apos;il peut faire.</p>
+              <CallButton stretch />
+            </li>
+          </ul>
+        </div>
+      </section>
 
       {/* --- Comment il travaille --- */}
       <section className={styles.metier} aria-labelledby="metier-title">
