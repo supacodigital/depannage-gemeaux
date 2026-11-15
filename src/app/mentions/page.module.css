@@ -1,161 +1,130 @@
+/* Mentions légales — direction « signalétique », version sobre : un texte à lire, pas à vendre. */
+
+.updated {
+  color: var(--color-on-dark-soft);
+  font-size: 1.5rem;
+}
+
+/* La feuille qui glisse sur le hero. */
 .mentions {
-  padding-top: 10rem;
-  padding-bottom: var(--section-padding);
-  background: var(--color-white);
-}
-
-.header {
-  max-width: var(--width-narrow);
-  margin: 0 auto 5.6rem;
-  padding-left: var(--gutter);
-  border-left: 4px solid var(--color-red);
-}
-
-.header h1 {
-  margin-bottom: 0.6rem;
-  color: var(--color-blue);
-  font-size: 3.2rem;
-}
-
-.header p {
-  color: var(--color-text-faint);
-  font-size: 1.3rem;
+  padding: var(--space-section) var(--gutter);
 }
 
 .body {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  max-width: var(--width-content);
+  display: grid;
+  gap: 4.8rem;
+  max-width: var(--width-wide);
   margin: 0 auto;
-  padding: 0 var(--gutter);
 }
 
 /* --- Sommaire --- */
 
-.nav {
-  flex-shrink: 0;
-}
-
 .navTitle {
-  margin-bottom: 1.6rem;
-  color: var(--color-text-ghost);
-  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  color: var(--color-ink-soft);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
+.nav ol {
+  border-top: 2px solid var(--color-ink);
   list-style: none;
+}
+
+.nav li {
+  border-bottom: 1px solid var(--color-line);
 }
 
 .nav a {
   display: block;
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius-sm);
-  background: rgb(var(--rgb-blue) / 0.05);
-  color: var(--color-text-muted);
-  font-size: 1.2rem;
-  transition:
-    background-color 150ms ease,
-    color 150ms ease;
+  padding: 1.2rem 0;
+  color: var(--color-ink-soft);
+  font-size: 1.5rem;
+  line-height: 1.35;
+  transition: color var(--duration-hover) ease;
 }
 
 /* --- Contenu --- */
 
 .content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 4rem;
+  display: grid;
+  gap: 4.8rem;
+  max-width: 72ch;
 }
 
+/* Sous le header fixe quand on arrive depuis le sommaire. */
 .section {
-  scroll-margin-top: 9.6rem;
+  scroll-margin-top: calc(var(--header-height) + 2.4rem);
 }
 
 .section h2 {
   margin-bottom: 1.6rem;
-  padding-bottom: 1rem;
-  border-bottom: 1.5px solid var(--border-blue);
-  color: var(--color-blue);
-  font-size: 1.8rem;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 .section p {
-  margin-bottom: 1.2rem;
-  color: var(--color-text-body);
-  font-size: 1.45rem;
-  line-height: 1.8;
+  color: var(--color-ink-soft);
+  font-size: var(--step-0);
+  line-height: 1.6;
 }
 
-.section p:last-child {
-  margin-bottom: 0;
+.section p + p,
+.section p + ul {
+  margin-top: 1.2rem;
 }
 
 .section ul {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 0.8rem;
-  margin-top: 0.8rem;
   list-style: none;
 }
 
 .section li {
   position: relative;
-  padding-left: 1.6rem;
-  color: var(--color-text-body);
-  font-size: 1.4rem;
-  line-height: 1.7;
+  padding-left: 2rem;
+  color: var(--color-ink-soft);
+  font-size: var(--step-0);
+  line-height: 1.55;
 }
 
 .section li::before {
-  content: "—";
+  content: "";
   position: absolute;
+  top: 0.75em;
   left: 0;
-  color: var(--color-red);
-  font-weight: 700;
+  width: 0.8rem;
+  height: 0.3rem;
+  border-radius: var(--shape-pill);
+  background: var(--color-ink-faint);
+}
+
+.section strong {
+  color: var(--color-ink);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .nav a:hover {
-    background: var(--tint-blue);
-    color: var(--color-blue);
+    color: var(--color-ink);
   }
 }
 
-@media (min-width: 768px) {
-  .header h1 {
-    font-size: 4rem;
-  }
-}
-
-/* Desktop : sommaire latéral collant. Sur mobile il reste en haut, sans coller au contenu. */
+/* Ordinateur : sommaire latéral collant. Sur mobile, il reste en haut, sans coller au contenu. */
 @media (min-width: 900px) {
   .body {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 6.4rem;
+    grid-template-columns: 28rem minmax(0, 1fr);
+    align-items: start;
+    gap: 8rem;
   }
 
   .nav {
     position: sticky;
-    top: 9.6rem;
-    width: 24rem;
-  }
-
-  .nav ul {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 0.4rem;
-  }
-
-  .nav a {
-    background: transparent;
-    font-size: 1.3rem;
+    top: calc(var(--header-height) + 3.2rem);
   }
 }
