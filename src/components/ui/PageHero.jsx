@@ -76,14 +76,16 @@ export function HeroLink({ href, icon = faArrowRight, children, ...rest }) {
 
 // Photo du cadre en arche. Le recadrage se règle avec `position` (object-position).
 // En chargement différé : le cadre est masqué sur mobile, la photo n'y est donc jamais téléchargée.
-export function HeroPhoto({ image, widths = [480, 960], alt = "", position = "center" }) {
+// `sizes` : largeur affichée de la photo. Une photo paysage recadrée en arche s'affiche plus large que le cadre
+// (40rem) : pour la garder nette, indiquer sa largeur réelle (ex. « 75rem » pour du 3:2).
+export function HeroPhoto({ image, widths = [480, 960], alt = "", position = "center", sizes = "40rem" }) {
   const largest = widths[widths.length - 1];
   return (
     <img
       className={styles.photo}
       src={`/images/${image}-${largest}.webp`}
       srcSet={widths.map((w) => `/images/${image}-${w}.webp ${w}w`).join(", ")}
-      sizes="40rem"
+      sizes={sizes}
       alt={alt}
       style={{ objectPosition: position }}
       loading="lazy"

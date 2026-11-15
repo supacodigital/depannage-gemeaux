@@ -1,195 +1,149 @@
-/* --- Chiffres clés --- */
+/* Page « Qui sommes-nous ? » — direction « signalétique ». */
 
+.inner {
+  display: grid;
+  gap: clamp(3.2rem, 2rem + 3vw, 5.6rem);
+  max-width: var(--width-wide);
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Histoire et chiffres (la feuille qui glisse sur le hero)
+   ========================================================================== */
+
+.histoire {
+  padding: var(--space-section) var(--gutter);
+}
+
+.split {
+  display: grid;
+  gap: 2.4rem;
+}
+
+.prose {
+  display: grid;
+  gap: 1.6rem;
+  max-width: 60ch;
+  color: var(--color-ink-soft);
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+
+/* Chiffres clés en grand, comme une ligne de panneaux. */
 .chiffres {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 2px solid var(--color-ink);
+}
+
+.chiffres > div {
+  display: grid;
+  align-content: start;
+  gap: 0.8rem;
+  padding: 2.4rem 1.6rem 2.4rem 0;
+  border-bottom: 1px solid var(--color-line-strong);
+}
+
+.chiffres dt {
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--step-4);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 0.9;
+}
+
+.chiffres dd {
+  color: var(--color-ink-soft);
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Engagements
+   ========================================================================== */
+
+.valeurs {
+  padding: var(--space-section) var(--gutter);
+  background: var(--color-surface);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  list-style: none;
+}
+
+/* Cartes blanches sur fond gris : l'inverse des cartes de l'accueil, pour la même famille. */
+.card {
+  display: grid;
+  align-content: start;
+  gap: 1.4rem;
+  padding: 2.4rem;
+  border-radius: 1.2rem;
+  background: var(--color-white);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 1rem;
   background: var(--color-blue);
-}
-
-.chiffre {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 3.2rem 2rem;
-  border-right: 1px solid var(--border-on-dark);
-  border-bottom: 1px solid var(--border-on-dark);
-  text-align: center;
-}
-
-.chiffre:nth-child(2n) {
-  border-right: none;
-}
-
-/* Blanc et non rouge : le rouge sur ce bleu ne donne que 1,8:1. */
-.chiffreVal {
   color: var(--color-white);
-  font-size: 3.2rem;
+  font-size: 2.4rem;
+}
+
+.card h3 {
+  margin-top: 0.4rem;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
   font-weight: 700;
   line-height: 1;
 }
 
-.chiffreLabel {
-  color: rgb(var(--rgb-white) / 0.6);
-  font-size: 1.2rem;
-  line-height: 1.4;
-}
-
-/* --- Logo de la section présentation --- */
-
-.logoWrap {
-  display: flex;
-  flex-shrink: 0;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
-
-.logoWrap img {
-  width: 24rem;
-  max-width: 100%;
-  height: auto;
-}
-
-.logoBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 0.8rem 1.6rem;
-  border: 1.5px solid var(--border-blue);
-  border-radius: var(--radius-pill);
-  background: var(--color-surface-soft);
-  color: var(--color-blue);
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.logoBadge > svg {
-  color: var(--color-red);
-  font-size: 1.4rem;
-}
-
-/* --- Valeurs --- */
-
-.valeurs {
-  padding: var(--section-padding) var(--gutter);
-  background: var(--color-surface-soft);
-}
-
-.valeursInner {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  max-width: var(--width-content);
-  margin: 0 auto;
-}
-
-.valeursHeader {
-  text-align: center;
-}
-
-.valeursHeader h2 {
-  margin-bottom: 1.2rem;
-  color: var(--color-blue);
-  font-size: 3rem;
-}
-
-.valeursHeader p {
-  color: var(--color-text-muted);
-  font-size: 1.5rem;
-}
-
-.valeursGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-
-.valeur {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding: 2.8rem var(--gutter);
-  border: 1.5px solid var(--border-blue-soft);
-  border-radius: var(--radius-lg);
-  background: var(--color-white);
-  transition:
-    box-shadow var(--duration-hover) ease,
-    transform var(--duration-hover) var(--ease-out);
-}
-
-.valeur h3 {
-  color: var(--color-blue);
+.card p {
+  color: var(--color-ink-soft);
   font-size: 1.6rem;
+  line-height: 1.45;
 }
 
-.valeur p {
-  color: var(--color-text-muted);
-  font-size: 1.4rem;
-  line-height: 1.7;
-}
-
-.valeurIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 4.8rem;
-  height: 4.8rem;
-  border-radius: var(--radius-lg);
-  background: var(--tint-red);
-  color: var(--color-red);
-  font-size: 2rem;
-}
-
-/* --- Carte Google Maps --- */
-
-.map {
-  flex: 1;
-  width: 100%;
-  height: 40rem;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-media);
-}
-
-.map iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .valeur:hover {
-    box-shadow: var(--shadow-lift);
-    transform: translateY(-2px);
-  }
-}
+/* ==========================================================================
+   Points de rupture
+   ========================================================================== */
 
 @media (min-width: 640px) {
-  .chiffres {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .chiffre {
-    border-bottom: none;
-  }
-
-  .chiffre:nth-child(2n) {
-    border-right: 1px solid var(--border-on-dark);
-  }
-
-  .chiffre:last-child {
-    border-right: none;
-  }
-
-  .valeursGrid {
-    grid-template-columns: repeat(2, 1fr);
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 900px) {
-  .valeursGrid {
-    grid-template-columns: repeat(4, 1fr);
+  .split {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+    gap: 8rem;
+  }
+
+  .chiffres {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .chiffres > div {
+    border-bottom: none;
+  }
+
+  .chiffres > div + div {
+    padding-left: 2.4rem;
+    border-left: 1px solid var(--color-line-strong);
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
