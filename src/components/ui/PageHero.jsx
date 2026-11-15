@@ -13,10 +13,37 @@ import styles from "./PageHero.module.css";
 // - `media`  : visuel dans un cadre en arche (forme de porte), ordinateur uniquement.
 //              Sans media, le symbole du logo occupe la place, en filigrane ; `media={false}` : texte seul,
 //              sur toute la largeur.
+// - `photo`  : nom d'une photo de fond plein cadre, comme sur l'accueil (ex. "hero-serrure").
+//              Fichiers attendus dans public/images : {photo}-640/1024/1672.webp, et {photo}-mobile-480/800.webp
+//              (recadrage vertical, voir scripts/optimize-images.mjs). Remplace `media`.
 // - `children` : contenu libre sous le titre (numéro de téléphone sur la page Contact).
-export default function PageHero({ id, label, title, answer, actions, media, children, className }) {
+export default function PageHero({ id, label, title, answer, actions, media, photo, children, className }) {
+  const textOnly = media === false || Boolean(photo);
+
   return (
-    <section className={cx(styles.hero, media === false && styles.textOnly, className)} aria-labelledby={id}>
+    <section
+      className={cx(styles.hero, textOnly && styles.textOnly, photo && styles.withPhoto, className)}
+      aria-labelledby={id}
+    >
+      {photo && (
+        // Paysage sur ordinateur, recadrage vertical pour le mobile.
+        <picture className={styles.background}>
+          <source
+            media="(max-width: 767px)"
+            srcSet={`/images/${photo}-mobile-480.webp 480w, /images/${photo}-mobile-800.webp 800w`}
+            sizes="100vw"
+          />
+          <img
+            src={`/images/${photo}-1672.webp`}
+            srcSet={[640, 1024, 1672].map((w) => `/images/${photo}-${w}.webp ${w}w`).join(", ")}
+            sizes="100vw"
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
+      )}
+
       <div className={styles.inner}>
         <div className={styles.text}>
           <p className={styles.label} style={{ "--i": 0 }}>
@@ -44,7 +71,7 @@ export default function PageHero({ id, label, title, answer, actions, media, chi
           )}
         </div>
 
-        {media !== false && (
+        {!textOnly && (
           <div className={cx(styles.media, !media && styles.symbolWrap)} style={{ "--i": 2 }}>
             {media ?? <LogoSymbol className={styles.symbol} />}
           </div>

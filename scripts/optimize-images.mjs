@@ -19,8 +19,6 @@ const CONTENT_WIDTHS = [480, 960];
 const jobs = [
   // Photo paysage recadrée dans le cadre en arche du hero « À propos » : affichée sur 75rem de large au plus.
   { src: "hero-apropos.webp", name: "hero-apropos", widths: [640, 1024, 1600], quality: 60 },
-  // Cadre en arche du hero « Serrurerie ».
-  { src: "cles.jpg", name: "cles", widths: CONTENT_WIDTHS, quality: 72 },
   // Photo de la section « Un artisan qui décroche » (page Serrurerie).
   { src: "intervention.jpg", name: "intervention", widths: CONTENT_WIDTHS, quality: 72 },
 ];
@@ -41,12 +39,13 @@ for (const job of jobs) {
   }
 }
 
-// Photo du hero de l'accueil (1672×941) : version paysage pour ordinateur,
-// et recadrage vertical 4:5 sur la serrure et la main pour le mobile (direction artistique via <picture>).
-{
-  const src = path.join(SRC, "hero-porte.png");
+// Photos de fond plein cadre (1672×941) : hero de l'accueil (hero-porte) et de la page Serrurerie (hero-serrure).
+// Version paysage pour ordinateur, et recadrage vertical 4:5 sur le bord droit (la serrure et les mains)
+// pour le mobile (direction artistique via <picture>).
+for (const name of ["hero-porte", "hero-serrure"]) {
+  const src = path.join(SRC, `${name}.png`);
   for (const width of [640, 1024, 1672]) {
-    const file = path.join(OUT, `hero-porte-${width}.webp`);
+    const file = path.join(OUT, `${name}-${width}.webp`);
     await sharp(src).resize({ width, withoutEnlargement: true }).webp({ quality: 74, effort: 6 }).toFile(file);
     console.log(`${path.relative(ROOT, file).padEnd(42)} ${await kb(file)}`);
   }
@@ -54,7 +53,7 @@ for (const job of jobs) {
   const cropWidth = Math.round(h * 0.8); // 4:5
   const crop = { left: w - cropWidth, top: 0, width: cropWidth, height: h };
   for (const width of [480, 800]) {
-    const file = path.join(OUT, `hero-porte-mobile-${width}.webp`);
+    const file = path.join(OUT, `${name}-mobile-${width}.webp`);
     await sharp(src).extract(crop).resize({ width }).webp({ quality: 72, effort: 6 }).toFile(file);
     console.log(`${path.relative(ROOT, file).padEnd(42)} ${await kb(file)}`);
   }

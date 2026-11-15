@@ -4,7 +4,7 @@ import { SITE_URL, business, cities, listeVilles } from "@/data/site";
 import { faq } from "@/data/faq";
 import { services } from "@/data/services";
 import { BUSINESS_ID, pageMetadata } from "@/lib/seo";
-import PageHero, { HeroLink, HeroPhoto } from "@/components/ui/PageHero";
+import PageHero, { HeroLink } from "@/components/ui/PageHero";
 import SectionHead from "@/components/ui/SectionHead";
 import CallButton from "@/components/ui/CallButton";
 import AppelFinal from "@/components/ui/AppelFinal";
@@ -79,7 +79,7 @@ export default function SerrureriePage() {
             <HeroLink href="/tarifs">Voir les tarifs</HeroLink>
           </>
         }
-        media={<HeroPhoto image="cles" position="62% center" />}
+        photo="hero-serrure"
       />
 
       {/* --- Interventions --- */}

@@ -1,5 +1,7 @@
 /* Bandeau bleu ; la section suivante s'enchaîne simplement en dessous (pas d'effet de feuille, contrairement à l'accueil). */
 .hero {
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
   padding: calc(var(--header-height) + clamp(3.2rem, 1.6rem + 4vw, 6.4rem)) var(--gutter)
     clamp(4.8rem, 3.2rem + 4vw, 8rem);
@@ -108,6 +110,37 @@
   }
 }
 
+/* --- Photo de fond (prop `photo`), comme sur l'accueil ---
+   Dégradé bleu de la charte plutôt qu'un voile noir : dense côté texte, léger côté photo. */
+
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.background img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: right center;
+}
+
+.withPhoto::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--rgb-blue) / 0.96) 0%,
+    rgb(var(--rgb-blue) / 0.9) 38%,
+    rgb(var(--rgb-blue) / 0.35) 72%,
+    rgb(var(--rgb-blue) / 0.12) 100%
+  );
+}
+
 /* --- Visuel (ordinateur uniquement) --- */
 
 .media {
@@ -166,6 +199,19 @@
 
 /* Mobile : contenu centré, comme le hero de l'accueil. */
 @media (max-width: 899px) {
+  /* Texte centré, donc au-dessus de la photo : voile presque uniforme.
+     Dosé par mesure sur hero-serrure (pixels les plus clairs derrière chaque texte, texte masqué) :
+     pire cas 4,86:1 à 375 px. Plus léger (0,76 / 0,68), la plaque de serrure et la fenêtre claire
+     font passer l'étiquette et la phrase sous le titre à 3,4-3,7:1. */
+  .withPhoto::after {
+    background: linear-gradient(
+      180deg,
+      rgb(var(--rgb-blue) / 0.84) 0%,
+      rgb(var(--rgb-blue) / 0.85) 60%,
+      rgb(var(--rgb-blue) / 0.72) 100%
+    );
+  }
+
   .text {
     text-align: center;
   }
