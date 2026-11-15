@@ -221,20 +221,32 @@
 
 @media (max-width: 767px) {
   /* Voile le plus léger qui garde chaque texte lisible : contraste mesuré sur les pixels les plus clairs
-     de la photo derrière chaque texte (pire cas 5,1:1, petits textes compris).
-     Plus léger (0,70 / 0,58 / 0,48), la poignée et les clés claires font passer l'étiquette,
-     le sous-titre et le lien sous 4,5:1 depuis que le hero mobile est raccourci. */
+     de la photo derrière chaque texte (texte masqué), petits textes compris.
+     Depuis le passage du hero à 100svh (15/11/2026), le texte centré tombe sur les mains : le milieu
+     est plus dense. Avec l'ancien voile (0,76 / 0,68 / 0,68), la phrase sous le titre tombait à 3,3:1. */
   .hero::after {
     background: linear-gradient(
       180deg,
-      rgb(var(--rgb-blue) / 0.76) 0%,
-      rgb(var(--rgb-blue) / 0.68) 55%,
-      rgb(var(--rgb-blue) / 0.68) 100%
+      rgb(var(--rgb-blue) / 0.8) 0%,
+      rgb(var(--rgb-blue) / 0.84) 50%,
+      rgb(var(--rgb-blue) / 0.72) 100%
     );
+  }
+
+  /* Mobile : le hero occupe tout le premier écran, contenu centré verticalement.
+     Hauteur augmentée du chevauchement : la feuille « Urgences serrurerie » commence juste sous le bas de l'écran.
+     svh = hauteur visible avec la barre du navigateur affichée (100vh déborde sous la barre sur iPhone). */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh + var(--sheet-overlap));
+    min-height: calc(100svh + var(--sheet-overlap));
   }
 
   /* Mobile : tout le contenu du hero est centré. */
   .inner {
+    width: 100%;
     text-align: center;
   }
 
