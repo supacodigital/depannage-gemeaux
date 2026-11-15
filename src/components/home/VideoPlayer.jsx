@@ -61,47 +61,53 @@ export default function VideoPlayer({ video }) {
 
   return (
     <figure className={styles.player}>
-      <video
-        ref={ref}
-        className={styles.video}
-        poster={video.affiche}
-        preload="none"
-        muted
-        playsInline
-        loop
-        onClick={togglePlay}
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        aria-label={video.titre}
-      >
-        {/* Petits écrans : version 720p, plus légère. */}
-        {sources.webm720 && <source src={sources.webm720} type="video/webm" media="(max-width: 800px)" />}
-        {sources.mp4720 && <source src={sources.mp4720} type="video/mp4" media="(max-width: 800px)" />}
-        {sources.webm1080 && <source src={sources.webm1080} type="video/webm" />}
-        {sources.mp41080 && <source src={sources.mp41080} type="video/mp4" />}
-        {video.sousTitres && <track kind="captions" src={video.sousTitres} srcLang="fr" label="Français" default />}
-      </video>
+      {/* La vidéo a sa propre barre d'étapes en bas : les commandes sont sous l'image, pas par-dessus. */}
+      <div className={styles.frame}>
+        <video
+          ref={ref}
+          className={styles.video}
+          poster={video.affiche}
+          preload="none"
+          muted
+          playsInline
+          loop
+          onClick={togglePlay}
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
+          aria-label={video.titre}
+        >
+          {/* Petits écrans : version 720p, plus légère. */}
+          {sources.webm720 && <source src={sources.webm720} type="video/webm" media="(max-width: 800px)" />}
+          {sources.mp4720 && <source src={sources.mp4720} type="video/mp4" media="(max-width: 800px)" />}
+          {sources.webm1080 && <source src={sources.webm1080} type="video/webm" />}
+          {sources.mp41080 && <source src={sources.mp41080} type="video/mp4" />}
+          {video.sousTitres && <track kind="captions" src={video.sousTitres} srcLang="fr" label="Français" default />}
+        </video>
+
+        {!playing && (
+          <button type="button" className={styles.bigPlay} onClick={togglePlay} aria-label="Lire la vidéo">
+            <Icon icon={faPlay} />
+          </button>
+        )}
+      </div>
 
       <div className={styles.controls}>
         <button type="button" className={styles.control} onClick={togglePlay} aria-label={playing ? "Mettre en pause" : "Lire la vidéo"}>
           <Icon icon={playing ? faPause : faPlay} />
         </button>
-        <button
-          type="button"
-          className={styles.control}
-          onClick={toggleSound}
-          aria-label={muted ? "Activer le son" : "Couper le son"}
-          aria-pressed={!muted}
-        >
-          <Icon icon={muted ? faVolumeXmark : faVolumeHigh} />
-        </button>
+        {/* Vidéo sans piste audio (son: false) : pas de bouton de son, il ne servirait à rien. */}
+        {video.son !== false && (
+          <button
+            type="button"
+            className={styles.control}
+            onClick={toggleSound}
+            aria-label={muted ? "Activer le son" : "Couper le son"}
+            aria-pressed={!muted}
+          >
+            <Icon icon={muted ? faVolumeXmark : faVolumeHigh} />
+          </button>
+        )}
       </div>
-
-      {!playing && (
-        <button type="button" className={styles.bigPlay} onClick={togglePlay} aria-label="Lire la vidéo">
-          <Icon icon={faPlay} />
-        </button>
-      )}
     </figure>
   );
 }

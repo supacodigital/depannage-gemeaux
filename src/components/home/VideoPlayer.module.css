@@ -1,8 +1,14 @@
 .player {
+  display: grid;
+  gap: 1.2rem;
+}
+
+/* Cadre 16:9 ; fond gris clair comme le fond de la vidéo, pour que l'affiche et la vidéo s'y fondent. */
+.frame {
   position: relative;
   overflow: hidden;
   border-radius: 1.6rem;
-  background: var(--color-blue);
+  background: var(--color-surface);
   aspect-ratio: 16 / 9;
 }
 
@@ -14,10 +20,8 @@
   cursor: pointer;
 }
 
+/* Commandes sous la vidéo (pastilles claires, sur le fond gris de la section). */
 .controls {
-  position: absolute;
-  left: 1.2rem;
-  bottom: 1.2rem;
   display: flex;
   gap: 0.8rem;
 }
@@ -26,21 +30,21 @@
 .bigPlay {
   display: grid;
   place-items: center;
-  border: none;
   border-radius: var(--shape-pill);
-  color: var(--color-white);
   cursor: pointer;
   transition:
     background-color var(--duration-hover) ease,
+    border-color var(--duration-hover) ease,
     transform var(--duration-press) var(--ease-out);
 }
 
 .control {
   width: 4.4rem;
   height: 4.4rem;
-  background: rgb(var(--rgb-black) / 0.55);
-  font-size: 1.6rem;
-  backdrop-filter: blur(4px);
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-size: 1.5rem;
 }
 
 /* Bouton central visible tant que la vidéo n'est pas lancée (et toujours en mouvement réduit). */
@@ -50,7 +54,9 @@
   left: 50%;
   width: 8rem;
   height: 8rem;
+  border: none;
   background: var(--color-red);
+  color: var(--color-white);
   font-size: 2.6rem;
   translate: -50% -50%;
   box-shadow: 0 8px 24px rgb(var(--rgb-black) / 0.25);
@@ -63,7 +69,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .control:hover {
-    background: rgb(var(--rgb-black) / 0.75);
+    border-color: var(--color-ink);
   }
 
   .bigPlay:hover {
