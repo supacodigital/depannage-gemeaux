@@ -147,7 +147,7 @@
   display: none;
 }
 
-/* Cadre en arche, comme le portrait de l'artisan sur l'accueil. */
+/* Cadre en arche (forme de porte). */
 .media:not(.symbolWrap) {
   overflow: hidden;
   border-radius: 999px 999px 1.2rem 1.2rem;

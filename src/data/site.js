@@ -33,9 +33,6 @@ export const business = {
     main: ["Lannion", "Guingamp"],
     secondary: ["Callac", "Paimpol", "Binic", "Saint-Brieuc"],
   },
-  // Photo de Jérémy pour l'accueil (format portrait 4:5, ex. "/images/jeremy-960.webp").
-  // Tant qu'elle vaut null, le cadre affiche le symbole du logo.
-  portrait: null,
   insurer: "GAN Assurances",
   foundingYear: 2016,
   openedDate: "2023-12",

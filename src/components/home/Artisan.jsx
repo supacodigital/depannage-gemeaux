@@ -1,9 +1,9 @@
 import { business } from "@/data/site";
 import SectionHead from "@/components/ui/SectionHead";
-import LogoSymbol from "@/components/ui/LogoSymbol";
 import styles from "./Artisan.module.css";
 
-// « Votre artisan » : une personne, pas un standard téléphonique.
+// « Votre artisan » : une personne, pas un standard téléphonique. Texte seul (sans photo, à la demande du client) :
+// titre à gauche, texte et chiffres à droite sur ordinateur, comme « Notre histoire » sur la page À propos.
 // ⚠ Textes à la première personne : à faire valider par Jérémy avant la mise en ligne.
 export default function Artisan() {
   const faits = [
@@ -16,21 +16,9 @@ export default function Artisan() {
   return (
     <section className={styles.section} aria-labelledby="artisan-title">
       <div className={styles.inner}>
-        <div className={styles.portrait}>
-          {business.portrait ? (
-            <img
-              src={business.portrait}
-              alt={`${business.owner}, serrurier, fondateur de ${business.name}`}
-              loading="lazy"
-              decoding="async"
-            />
-          ) : (
-            <LogoSymbol className={styles.symbol} />
-          )}
-        </div>
+        <SectionHead id="artisan-title" eyebrow="Votre artisan" title="Jérémy Morelle, serrurier à Lannion" />
 
         <div className={styles.text}>
-          <SectionHead id="artisan-title" eyebrow="Votre artisan" title="Jérémy Morelle, serrurier à Lannion" />
           <div className={styles.prose}>
             <p>
               Je suis serrurier depuis {business.foundingYear}. J&apos;ai créé {business.name} en décembre 2023 avec une
