@@ -1,0 +1,220 @@
+/* Page Serrurerie — direction « signalétique ». */
+
+.inner {
+  display: grid;
+  gap: clamp(3.2rem, 2rem + 3vw, 5.6rem);
+  max-width: var(--width-wide);
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Interventions (la feuille qui glisse sur le hero)
+   Mêmes cartes que « Urgences serrurerie » sur l'accueil.
+   ========================================================================== */
+
+.services {
+  padding: var(--space-section) var(--gutter);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  list-style: none;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: start;
+  align-items: center;
+  column-gap: 1.6rem;
+  row-gap: 1.4rem;
+  padding: 2.4rem;
+  border-radius: 1.2rem;
+  background: var(--color-surface);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 1rem;
+  background: var(--color-blue);
+  color: var(--color-white);
+  font-size: 2.4rem;
+}
+
+.card h3 {
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.card p {
+  grid-column: 1 / -1;
+  color: var(--color-ink-soft);
+  font-size: 1.6rem;
+  line-height: 1.45;
+}
+
+/* Case d'appel : bleu plein, bouton rouge (le seul rouge plein de la section). */
+.cardCall {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 1.4rem;
+  padding: 2.4rem;
+  border-radius: 1.2rem;
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+.cardCall h3 {
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.cardCall p {
+  color: var(--color-on-dark-soft);
+  font-size: 1.6rem;
+  line-height: 1.45;
+}
+
+.cardCall > a {
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   Comment il travaille : photo en arche + texte, comme « Votre artisan » sur l'accueil
+   ========================================================================== */
+
+.metier {
+  padding: var(--space-section) var(--gutter);
+  background: var(--color-surface);
+}
+
+.metierInner {
+  display: grid;
+  gap: 4.8rem;
+  max-width: var(--width-wide);
+  margin: 0 auto;
+}
+
+.photo {
+  justify-self: center;
+  width: 100%;
+  max-width: min(44rem, 80vw);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 999px 999px 1.2rem 1.2rem;
+  background: var(--color-line);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+.text {
+  display: grid;
+  align-content: center;
+  gap: 3.2rem;
+}
+
+.prose {
+  display: grid;
+  gap: 1.6rem;
+  max-width: 60ch;
+  color: var(--color-ink-soft);
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+
+.inlineLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--color-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-line-strong);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color var(--duration-hover) ease;
+}
+
+.inlineLink > svg {
+  font-size: 0.75em;
+  transition: translate var(--duration-hover) var(--ease-out);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 2px solid var(--color-ink);
+}
+
+.facts > div {
+  display: grid;
+  align-content: start;
+  gap: 0.4rem;
+  padding: 1.8rem 1.6rem 1.8rem 0;
+  border-bottom: 1px solid var(--color-line-strong);
+}
+
+.facts dt {
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.facts dd {
+  color: var(--color-ink-soft);
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .inlineLink:hover {
+    text-decoration-color: var(--color-ink);
+  }
+
+  .inlineLink:hover > svg {
+    translate: 0.3rem 0;
+  }
+}
+
+/* ==========================================================================
+   Points de rupture
+   ========================================================================== */
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .metierInner {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+    gap: 8rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

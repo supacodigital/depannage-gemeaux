@@ -1,82 +1,74 @@
 .faq {
-  padding: var(--section-padding) var(--gutter);
-  background: var(--color-surface-soft);
+  padding: var(--space-section) var(--gutter);
+  background: var(--color-white);
 }
 
 .inner {
-  display: flex;
-  flex-direction: column;
-  gap: 4.8rem;
-  max-width: var(--width-content);
+  display: grid;
+  gap: clamp(3.2rem, 2rem + 3vw, 5.6rem);
+  max-width: var(--width-wide);
   margin: 0 auto;
 }
 
-.heading {
-  flex-shrink: 0;
-}
-
-.heading h2 {
-  margin-bottom: 1.2rem;
-  color: var(--color-blue);
-  font-size: 3rem;
-  line-height: 1.25;
-}
-
-.heading h2 span {
-  color: var(--color-red);
-}
-
-.heading p {
-  color: var(--color-text-subtle);
-  font-size: 1.4rem;
-  line-height: 1.6;
-}
-
 .list {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+  border-top: 2px solid var(--color-ink);
 }
 
 .item {
-  border-bottom: 1px solid var(--border-blue);
-}
-
-.item:first-child {
-  border-top: 1px solid var(--border-blue);
+  border-bottom: 1px solid var(--color-line-strong);
 }
 
 /* Le h3 structure la page pour les moteurs ; le bouton porte le style. */
 .questionHeading {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
+  font: inherit;
 }
 
 .question {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.6rem;
+  gap: 2rem;
   width: 100%;
+  min-height: 7.2rem;
   padding: 2rem 0;
   border: none;
   background: none;
-  color: var(--color-blue);
-  font-size: 1.5rem;
-  font-weight: 600;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1.1;
   text-align: left;
   cursor: pointer;
-  transition: color var(--duration-hover) ease;
 }
 
-.open .question {
-  color: var(--color-red);
+/* Pastille ronde : le « + » pivote d'un quart de tour pour devenir « × ». */
+.toggle {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--shape-pill);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-size: 1.6rem;
+  transition:
+    background-color var(--duration-hover) ease,
+    color var(--duration-hover) ease;
 }
 
-.icon {
-  color: var(--color-red);
-  font-size: 1.2rem;
+.toggle > svg {
+  transition: rotate var(--duration-ui) var(--ease-out);
+}
+
+.open .toggle {
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+.open .toggle > svg {
+  rotate: 45deg;
 }
 
 /* Ouverture fluide sans hauteur maximale arbitraire : la ligne de grille passe de 0fr à 1fr. */
@@ -95,10 +87,11 @@
 }
 
 .answer p {
-  padding-bottom: 2rem;
-  color: var(--color-text);
-  font-size: 1.4rem;
-  line-height: 1.75;
+  max-width: 68ch;
+  padding-bottom: 2.4rem;
+  color: var(--color-ink-soft);
+  font-size: var(--step-0);
+  line-height: 1.55;
   opacity: 0;
   transition: opacity var(--duration-ui) ease;
 }
@@ -108,25 +101,32 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .question:hover {
-    color: var(--color-red);
+  .question:hover .toggle {
+    background: var(--color-line);
+  }
+
+  .open .question:hover .toggle {
+    background: var(--color-blue-hover);
   }
 }
 
 @media (min-width: 900px) {
   .inner {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 6.4rem;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+    gap: 8rem;
   }
 
+  /* L'en-tête reste visible pendant qu'on parcourt les questions. */
   .heading {
-    width: 30rem;
+    position: sticky;
+    top: calc(var(--header-height) + 3.2rem);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .answer {
+  .answer,
+  .toggle > svg {
     transition: none;
   }
 }

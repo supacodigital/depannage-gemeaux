@@ -1,16 +1,18 @@
-import { faChevronRight, faPhoneFlip } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { SITE_URL, business, cities, listeVilles } from "@/data/site";
 import { faq } from "@/data/faq";
+import { services } from "@/data/services";
 import { BUSINESS_ID, pageMetadata } from "@/lib/seo";
-import Hero, { Accent } from "@/components/ui/Hero";
-import Button from "@/components/ui/Button";
+import PageHero, { HeroLink, HeroPhoto } from "@/components/ui/PageHero";
+import Sheet from "@/components/ui/Sheet";
+import SectionHead from "@/components/ui/SectionHead";
+import CallButton from "@/components/ui/CallButton";
+import AppelFinal from "@/components/ui/AppelFinal";
 import Icon from "@/components/ui/Icon";
-import Bando from "@/components/ui/Bando";
-import SplitSection, { SplitImage } from "@/components/ui/SplitSection";
-import ArtisanNote from "@/components/ui/ArtisanNote";
-import Villes from "@/components/ui/Villes";
 import Faq from "@/components/serrurerie/Faq";
 import JsonLd from "@/components/seo/JsonLd";
+import styles from "./page.module.css";
 
 export const metadata = pageMetadata({
   title: "Serrurerie urgence Lannion et Guingamp — Dépannage Gémeaux",
@@ -53,101 +55,124 @@ const jsonLd = {
   ],
 };
 
+const faits = [
+  { valeur: "24h/24", label: "nuits, week-ends et jours fériés compris" },
+  { valeur: "10 ans", label: "de garantie, fournitures et main-d'œuvre" },
+  { valeur: "Devis gratuit", label: "le prix annoncé avant le déplacement" },
+  { valeur: `Depuis ${business.foundingYear}`, label: "serrurier de métier" },
+];
+
+// Page Serrurerie : la situation du visiteur, puis ce que Jérémy fait (les interventions),
+// comment il travaille, et les questions fréquentes.
 export default function SerrureriePage() {
   return (
     <main id="main-content">
       <JsonLd data={jsonLd} />
 
-      <Hero
-        image="hero-serrurerie"
-        label="Dépannage serrurerie"
-        badge="Disponible 24h/24 — 7j/7"
-        title={
-          <>
-            Dépannage <Accent>serrurerie</Accent>
-          </>
-        }
-        text="Intervention rapide et sécurisée pour tous vos problèmes de serrurerie à Lannion, Guingamp et dans les villes voisines. Porte bloquée, serrure endommagée — nous sommes là à tout moment."
-        actions={
-          <>
-            <Button href={business.phone.href} aria-label={`Appeler le ${business.phone.display}`}>
-              <Icon icon={faPhoneFlip} />
-              Appeler maintenant
-            </Button>
-            <Button href="/tarifs" variant="outline">
-              Nos tarifs
-              <Icon icon={faChevronRight} />
-            </Button>
-          </>
-        }
-      />
+      {/* Le hero reste immobile pendant que les interventions glissent par-dessus. */}
+      <div>
+        <PageHero
+          id="serrurerie-title"
+          label="Dépannage serrurerie · 24h/24"
+          title="Bloqué dehors, serrure abîmée, effraction ?"
+          answer={`Serrurier d'urgence à ${listeVilles(business.sectors.main)} : ouverture de porte, changement de serrure, sécurisation. De jour comme de nuit.`}
+          actions={
+            <>
+              <CallButton stretch />
+              <HeroLink href="/tarifs">Voir les tarifs</HeroLink>
+            </>
+          }
+          media={<HeroPhoto image="cles" position="62% center" />}
+        />
 
-      <Bando />
+        {/* --- Interventions --- */}
+        <Sheet className={styles.services} aria-labelledby="services-title">
+          <div className={styles.inner}>
+            <SectionHead
+              id="services-title"
+              eyebrow="Nos interventions"
+              title="Ce que Jérémy fait pour vous"
+              intro="Sur porte standard comme sur porte sécurisée, de jour comme de nuit, week-ends et jours fériés compris."
+            />
 
-      <SplitSection
-        title="Un dépannage serrurier rapide et efficace"
-        label="Dépannage rapide et efficace"
-        media={<SplitImage image="intervention" alt="Intervention de serrurerie par Dépannage Gémeaux" />}
-        actions={<SectionActions />}
-      >
-        <p>
-          Que vous ayez claqué votre porte en laissant les clés à l&apos;intérieur ou que votre serrure ait été
-          endommagée, <strong>{business.name} intervient rapidement</strong> pour résoudre vos urgences. Basés à
-          Lannion, nous garantissons des interventions efficaces et professionnelles dans tout l&apos;ouest des Côtes
-          d&apos;Armor.
-        </p>
-        <p>
-          Nous sommes <strong>disponibles 24h/24 et 7j/7</strong> pour répondre à toutes vos urgences. Que vous soyez
-          face à une <strong>effraction</strong>, une <strong>clé cassée</strong> ou une <strong>porte claquée</strong>,
-          notre priorité est de vous apporter une solution immédiate.
-        </p>
-        <p>
-          Nos prestations couvrent tous les types de dépannages, de l&apos;ouverture de porte verrouillée à la réparation
-          ou au remplacement de serrures. Notre expertise vous assure un travail propre et rapide, minimisant les
-          dommages potentiels lors des interventions.
-        </p>
-      </SplitSection>
+            <ul className={styles.grid}>
+              {services.map((s) => (
+                <li key={s.titre} className={styles.card}>
+                  <span className={styles.icon} aria-hidden="true">
+                    <Icon icon={s.icon} />
+                  </span>
+                  <h3>{s.titre}</h3>
+                  <p>{s.texte}</p>
+                </li>
+              ))}
 
-      <SplitSection
-        reverse
-        title="Des services professionnels et accessibles"
-        label="Services professionnels et accessibles"
-        media={
-          <SplitImage image="serrurerie-pro" widths={[480, 600]} alt="Serrurerie professionnelle Dépannage Gémeaux" />
-        }
-        actions={<SectionActions />}
-      >
-        <p>
-          Chez {business.name}, nous avons à cœur de proposer un service de qualité, accessible à tous. Nos
-          interventions sont non seulement rapides, mais aussi <strong>adaptées à votre budget</strong> et à la
-          spécificité de votre localisation.
-        </p>
-        <p>
-          Nos tarifs sont calculés en fonction de votre localisation et de la complexité de l&apos;intervention. Nous vous
-          garantissons une transparence totale, sans frais cachés, avec un forfait dépannage unique sur tout notre
-          secteur : <Villes list={cities} />.
-        </p>
-        <p>
-          Fort de plusieurs années d&apos;expérience, {business.name} s&apos;engage à vous offrir un service
-          irréprochable. Notre expertise couvre tous types de serrures, des modèles standards aux serrures renforcées
-          contre les effractions.
-        </p>
-      </SplitSection>
+              {/* Dernière case : la situation qui n'est pas dans la liste. */}
+              <li className={styles.cardCall}>
+                <h3>Autre problème ?</h3>
+                <p>Décrivez-le au téléphone : Jérémy vous dit tout de suite ce qu&apos;il peut faire.</p>
+                <CallButton stretch />
+              </li>
+            </ul>
+          </div>
+        </Sheet>
+      </div>
+
+      {/* --- Comment il travaille --- */}
+      <section className={styles.metier} aria-labelledby="metier-title">
+        <div className={styles.metierInner}>
+          <div className={styles.photo}>
+            <img
+              src="/images/intervention-960.webp"
+              srcSet="/images/intervention-480.webp 480w, /images/intervention-960.webp 960w"
+              sizes="(min-width: 900px) 44rem, min(44rem, 80vw)"
+              alt="Serrure de porte d'entrée avec ses clés"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div className={styles.text}>
+            <SectionHead
+              id="metier-title"
+              eyebrow={`Serrurier à ${listeVilles(business.sectors.main)}`}
+              title="Un artisan qui décroche, de jour comme de nuit"
+            />
+            <div className={styles.prose}>
+              <p>
+                Porte claquée avec les clés à l&apos;intérieur, serrure endommagée, clé cassée : {business.name}{" "}
+                intervient 24h/24 et 7j/7. Basé à {business.address.city}, Jérémy couvre le nord-ouest des
+                Côtes-d&apos;Armor, de Guingamp à Saint-Brieuc.
+              </p>
+              <p>
+                Il ouvre en limitant les dégâts, répare ou remplace ce qui doit l&apos;être et vous explique ce qu&apos;il
+                fait. Il travaille sur tous les types de serrures, des modèles standard aux serrures renforcées contre
+                les effractions.
+              </p>
+              <p>
+                Le prix vous est annoncé au téléphone, avant le déplacement : un forfait unique sur tout le secteur, sans
+                frais cachés.{" "}
+                <Link href="/tarifs" className={styles.inlineLink}>
+                  Voir les tarifs
+                  <Icon icon={faArrowRight} />
+                </Link>
+              </p>
+            </div>
+
+            <dl className={styles.facts}>
+              {faits.map((f) => (
+                <div key={f.valeur}>
+                  <dt>{f.valeur}</dt>
+                  <dd>{f.label}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
 
       <Faq items={faq} />
 
-      <ArtisanNote />
+      <AppelFinal />
     </main>
-  );
-}
-
-function SectionActions() {
-  return (
-    <>
-      <Button href="/tarifs" variant="secondary">
-        Consultez nos tarifs
-      </Button>
-      <Button href="/contact">Contactez-nous</Button>
-    </>
   );
 }
