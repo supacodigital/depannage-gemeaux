@@ -11,12 +11,13 @@ import styles from "./PageHero.module.css";
 //
 // - `answer` : seconde ligne du titre, plus petite (garde les mots-clés dans le h1).
 // - `media`  : visuel dans un cadre en arche (forme de porte), ordinateur uniquement.
-//              Sans media, le symbole du logo occupe la place, en filigrane.
+//              Sans media, le symbole du logo occupe la place, en filigrane ; `media={false}` : texte seul,
+//              sur toute la largeur.
 // - `children` : contenu libre sous le titre (numéro de téléphone sur la page Contact).
 // Le hero est collant : la section suivante (<Sheet>) glisse par-dessus, comme sur l'accueil.
 export default function PageHero({ id, label, title, answer, actions, media, children, className }) {
   return (
-    <section className={cx(styles.hero, className)} aria-labelledby={id}>
+    <section className={cx(styles.hero, media === false && styles.textOnly, className)} aria-labelledby={id}>
       <div className={styles.inner}>
         <div className={styles.text}>
           <p className={styles.label} style={{ "--i": 0 }}>
@@ -44,9 +45,11 @@ export default function PageHero({ id, label, title, answer, actions, media, chi
           )}
         </div>
 
-        <div className={cx(styles.media, !media && styles.symbolWrap)} style={{ "--i": 2 }}>
-          {media ?? <LogoSymbol className={styles.symbol} />}
-        </div>
+        {media !== false && (
+          <div className={cx(styles.media, !media && styles.symbolWrap)} style={{ "--i": 2 }}>
+            {media ?? <LogoSymbol className={styles.symbol} />}
+          </div>
+        )}
       </div>
     </section>
   );

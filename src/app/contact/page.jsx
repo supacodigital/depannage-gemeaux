@@ -1,8 +1,11 @@
-import { faClock, faEnvelope, faLocationDot, faPhoneFlip } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faLocationDot, faPhoneFlip, faReply } from "@fortawesome/free-solid-svg-icons";
 import { SITE_URL, business, cities, listeVilles } from "@/data/site";
 import { BUSINESS_ID, pageMetadata } from "@/lib/seo";
+import PageHero from "@/components/ui/PageHero";
+import Sheet from "@/components/ui/Sheet";
+import SectionHead from "@/components/ui/SectionHead";
+import CallButton from "@/components/ui/CallButton";
 import Icon from "@/components/ui/Icon";
-import ArtisanNote from "@/components/ui/ArtisanNote";
 import ContactForm from "@/components/contact/ContactForm";
 import JsonLd from "@/components/seo/JsonLd";
 import styles from "./page.module.css";
@@ -23,54 +26,85 @@ const jsonLd = {
   about: { "@id": BUSINESS_ID },
 };
 
+const { phone, address } = business;
+
 const infos = [
   {
     icon: faPhoneFlip,
     titre: "Téléphone",
     contenu: (
-      <a href={business.phone.href} aria-label={`Appeler le ${business.phone.display}`}>
-        {business.phone.display}
+      <a href={phone.href} aria-label={`Appeler le ${phone.display}`}>
+        {phone.display}
       </a>
     ),
   },
-  { icon: faClock, titre: "Disponibilité", contenu: <span>24h/24 — 7j/7</span> },
-  { icon: faLocationDot, titre: "Zone d'intervention", contenu: <span>Lannion, Guingamp et ouest des Côtes d&apos;Armor</span> },
-  { icon: faEnvelope, titre: "Formulaire", contenu: <span>Réponse sous 24h</span> },
+  { icon: faClock, titre: "Disponibilité", contenu: "24h/24, 7j/7, jours fériés compris" },
+  { icon: faReply, titre: "Formulaire", contenu: "Réponse sous 24h" },
+  {
+    icon: faLocationDot,
+    titre: "Siège",
+    contenu: (
+      <>
+        {address.street}, {address.postalCode} {address.city}
+        <span className={styles.infoNote}>Interventions à {listeVilles(cities)} et alentours</span>
+      </>
+    ),
+  },
 ];
 
+// Page Contact : dans l'urgence, le téléphone d'abord (le numéro en grand) ;
+// le formulaire ensuite, pour ce qui peut attendre (devis, changement de serrure, question).
 export default function ContactPage() {
   return (
     <main id="main-content">
       <JsonLd data={jsonLd} />
 
-      <section className={styles.main} aria-label="Formulaire et informations de contact">
-        <div className={styles.inner}>
-          <div className={styles.infos}>
-            <h1>Parlons de votre besoin</h1>
-            <p>Remplissez le formulaire ou appelez-nous directement pour toute urgence.</p>
+      {/* Le hero reste immobile pendant que le formulaire glisse par-dessus. */}
+      <div>
+        <PageHero
+          id="contact-title"
+          label="Contact · 24h/24 · 7j/7"
+          title="Bloqué dehors ?"
+          answer="N'attendez pas une réponse écrite : appelez, Jérémy décroche de jour comme de nuit."
+          media={false}
+          actions={<CallButton stretch />}
+        >
+          <a href={phone.href} className={styles.number} aria-label={`Appeler le ${phone.display}`}>
+            {phone.display}
+          </a>
+        </PageHero>
 
-            <ul className={styles.infoList}>
+        {/* --- Formulaire --- */}
+        <Sheet className={styles.ecrire} aria-labelledby="formulaire-title">
+          <div className={styles.inner}>
+            <SectionHead
+              id="formulaire-title"
+              eyebrow="Pas urgent ?"
+              title="Écrivez-nous"
+              intro="Devis, changement de serrure, question : décrivez votre besoin, Jérémy vous répond sous 24h."
+              className={styles.head}
+            />
+
+            <div className={styles.formCard}>
+              <ContactForm />
+            </div>
+
+            <ul className={styles.infos}>
               {infos.map((info) => (
-                <li key={info.titre} className={styles.infoItem}>
-                  <div className={styles.infoIcon}>
+                <li key={info.titre}>
+                  <span className={styles.infoIcon} aria-hidden="true">
                     <Icon icon={info.icon} />
-                  </div>
-                  <div className={styles.infoText}>
+                  </span>
+                  <span className={styles.infoText}>
                     <strong>{info.titre}</strong>
-                    {info.contenu}
-                  </div>
+                    <span>{info.contenu}</span>
+                  </span>
                 </li>
               ))}
             </ul>
           </div>
-
-          <div className={styles.formWrap}>
-            <ContactForm />
-          </div>
-        </div>
-      </section>
-
-      <ArtisanNote />
+        </Sheet>
+      </div>
     </main>
   );
 }

@@ -148,6 +148,10 @@
     gap: 6.4rem;
   }
 
+  .textOnly .inner {
+    grid-template-columns: 1fr;
+  }
+
   .media {
     display: block;
     justify-self: end;
