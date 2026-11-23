@@ -23,9 +23,14 @@ cd "$(dirname "$0")/.."
 source .ftp.local
 : "${FTP_HOST:?FTP_HOST manquant}" "${FTP_USER:?FTP_USER manquant}" "${FTP_PASS:?FTP_PASS manquant}"
 FTP_DIR=${FTP_DIR:-www}
+[[ $FTP_HOST == sftp://* ]] || { echo "FTP_HOST doit commencer par sftp:// (connexion chiffrée)." >&2; exit 1; }
 export LFTP_PASSWORD="$FTP_PASS"
 
-ftp() { lftp --env-password -u "$FTP_USER" "$FTP_HOST" -e "set ftp:ssl-allow yes; set sftp:auto-confirm yes; set net:max-retries 2; $1; bye"; }
+# Clé du serveur vérifiée strictement : elle doit déjà être dans ~/.ssh/known_hosts
+# (empreinte ED25519 de ftp.cluster100 : SHA256:19oK1hYJKhS20e/dDvc9ZPL9dr7UO3o7veGKM3UcBCg).
+# Sur un nouveau poste : ssh-keyscan <serveur> | ssh-keygen -lf - , comparer, puis l'ajouter.
+# Pas de nouvelle tentative automatique : après quelques échecs de connexion, OVH bloque l'IP.
+ftp() { lftp --env-password -u "$FTP_USER" "$FTP_HOST" -e "set sftp:connect-program 'ssh -a -x -o StrictHostKeyChecking=yes'; set net:max-retries 1; $1; bye"; }
 
 case "${1:-}" in
   --list-extra)
