@@ -36,7 +36,7 @@ export const business = {
   insurer: "GAN Assurances",
   foundingYear: 2016,
   openedDate: "2023-12",
-  host: "O2Switch",
+  host: "OVH SAS, 2 rue Kellermann, 59100 Roubaix, France (tél. 1007)",
   webmaster: { name: "Supaco Digital", email: "contact@supaco-digital.com", url: "https://supaco-digital.com" },
   // Fiche Google Business Profile (identifiant Knowledge Graph /g/11wppq4zv1).
   google: {

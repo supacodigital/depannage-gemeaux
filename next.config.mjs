@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Export statique : une page HTML complète par URL, déployable sur l'Apache d'O2Switch.
+  // Export statique : une page HTML complète par URL, déployable sur l'Apache d'OVH.
   output: "export",
   // URLs sans slash final (/tarifs), identiques à celles déjà connues de Google.
   trailingSlash: false,

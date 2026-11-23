@@ -2,7 +2,7 @@
 
 Site de [depannage-gemeaux.fr](https://depannage-gemeaux.fr), serrurier d'urgence à Lannion et Guingamp.
 Next.js 16 (App Router) en **export statique** : chaque page est un fichier HTML complet, lisible par Google et par les moteurs IA sans exécuter de JavaScript.
-Hébergement : O2Switch (Apache).
+Hébergement : OVH, mutualisé (Apache).
 
 ## Commandes
 
@@ -17,9 +17,12 @@ node scripts/optimize-images.mjs   # après tout ajout ou remplacement d'image
 
 ## Mettre en ligne
 
+Hébergement mutualisé OVH (Apache), accès FTP. Identifiants dans `.ftp.local` (non versionné, format en tête de `scripts/deploy-ovh.sh`).
+
 1. `npm run build`
-2. Envoyer **tout le contenu** de `out/` à la racine du site sur O2Switch (FTP ou gestionnaire de fichiers cPanel), **y compris le fichier caché `.htaccess`**.
-3. Supprimer sur le serveur les fichiers de l'ancienne version qui ne sont plus dans `out/` (par exemple l'ancien dossier `assets/`).
+2. `scripts/deploy-ovh.sh --dry-run` pour voir ce qui part, puis `scripts/deploy-ovh.sh`.
+   Le script sauvegarde d'abord le site en ligne dans `nouveaudoc/sauvegardes/`, puis envoie **tout** `out/`, y compris le fichier caché `.htaccess`.
+3. `scripts/deploy-ovh.sh --list-extra` liste les fichiers de l'ancienne version restés sur le serveur (par exemple l'ancien dossier `assets/`) : les supprimer après vérification.
 4. Vérifier : `https://depannage-gemeaux.fr/tarifs` doit afficher la page (et non une 404 ou une image).
 
 Le `.htaccess` (dans `public/`) est indispensable :

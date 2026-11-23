@@ -1,4 +1,4 @@
-# Dépannage Gémeaux — configuration Apache (O2Switch)
+# Dépannage Gémeaux — configuration Apache (OVH)
 # Site statique généré par Next.js (`npm run build` → dossier out/).
 # Ce fichier est copié automatiquement à la racine de out/.
 
@@ -23,8 +23,11 @@ AddCharset UTF-8 .html .txt .xml .css .js .json
   RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
 
   # 2. Adresse unique : http -> https
+  # Chez OVH, le HTTPS est géré en amont : la condition sur le port (règle recommandée par OVH)
+  # évite une boucle de redirection si %{HTTPS} n'est pas renseigné.
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{SERVER_PORT} ^80$
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
   # 3. Anciennes adresses
