@@ -38,6 +38,8 @@ AddCharset UTF-8 .html .txt .xml .css .js .json
   RewriteRule ^(.+)/$ https://depannage-gemeaux.fr/$1 [R=301,L]
   RewriteCond %{THE_REQUEST} \s/+index\.html[\s?]
   RewriteRule ^ https://depannage-gemeaux.fr/ [R=301,L]
+  # (sauf le fichier de vérification Google Search Console, qui doit répondre tel quel)
+  RewriteCond %{REQUEST_URI} !^/google[0-9a-f]+\.html$
   RewriteCond %{THE_REQUEST} \s/+([^\s?]+)\.html[\s?]
   RewriteRule ^ https://depannage-gemeaux.fr/%1 [R=301,L]
 
