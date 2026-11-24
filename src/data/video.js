@@ -15,7 +15,7 @@ export const video = {
   description:
     "Porte claquée un dimanche à 2h du matin : l'appel, l'arrivée de Jérémy, l'ouverture de la porte et la garantie. Un dépannage avec Dépannage Gémeaux, en quatre étapes.",
   duree: "PT12S",
-  datePublication: "2026-11-15",
+  datePublication: "2026-11-15T12:00:00+01:00",
   affiche: "/videos/intervention-affiche.webp",
   sources: {
     webm1080: "/videos/intervention-1080.webm",
